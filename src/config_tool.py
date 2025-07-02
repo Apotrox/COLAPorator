@@ -143,23 +143,19 @@ try:
                 slice_angles.append(angle)
         print(f"All values recorded: {slice_angles}")        
 
-    def commit_to_database():
+    def angles_to_database():
         db = Manager()
         db.ensure_database_availability()
         
-        topic_data = [
+        category_data = [
             (
-                f"Topic {i+1}",
-                (slice_angles[i], slice_angles[(i+1) % len(slice_angles)])
+                f"Category {i+1}", #placeholder title
+                slice_angles[i], #begin angle
+                slice_angles[(i+1) % len(slice_angles)] #end angle
             )
             for i in range(len(slice_angles))
         ]
-        db.execute_many("INSERT INTO topics (title) VALUES (?)", [(str(x),) for (x,y) in topic_data])
-        #apparently not putting it in a tuple will interpret the string letterwise, which is why it will not work
-        db.commit_changes() #committing changes to select
-        topic_ids = db.execute("SELECT ID, title FROM topics").fetchall()
-        topic_data = [(topic, begin, end, id) for ((topic, (begin, end)), (id, topic_name)) in zip(topic_data, topic_ids) if topic==topic_name]
-        db.execute_many("INSERT INTO slices (title, angle_begin, angle_end, topic_id) VALUES (?, ?, ?, ?)", topic_data)
+        db.execute_many("INSERT INTO slices (title, angle_begin, angle_end,) VALUES (?, ?, ?)", category_data)
         db.commit_changes()
         
 
@@ -190,7 +186,7 @@ try:
     else:
         print("wrong input")
     print(f"there are {len(slice_angles)} slices with a distance of {slice_angles[1]-slice_angles[0]}")        
-    commit_to_database()
+    angles_to_database()
         
 except KeyboardInterrupt:
     print("Exiting...")

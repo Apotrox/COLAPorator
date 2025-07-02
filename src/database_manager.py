@@ -24,15 +24,20 @@ class Manager:
             tables = {
                 "topics": { "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
                             "title" : "TEXT UNIQUE",
-                            "description": "TEXT"}, #no need to back-reference to category, one way lookup is fine
+                            "description": "TEXT"
+                            },
                 "slices": { "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
-                            "title": "TEXT UNIQUE", #categories will be managed with the slices themselves
+                            "title": "TEXT UNIQUE",
                             "angle_begin": "INTEGER",
-                            "angle_end": "INTEGER",
-                            "topic_id": "INTEGER NOT NULL, FOREIGN KEY (topic_id) REFERENCES topics (ID)"},
+                            "angle_end": "INTEGER"},
                 "guests": { "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
                             "name": "TEXT",
-                            "date": "TEXT"}
+                            "date": "TEXT",
+                            "img_path" : "TEXT"},
+                "topicAssignment" : {   "ID" : "INTEGER PRIMARY KEY AUTOINCREMENT",
+                                        "topic_id": "INTEGER NOT NULL FOREIGN KEY (topic_id) REFERENCES topics (ID)",
+                                        "slice_id": "INTEGER NOT NULL FOREIN KEY (sclice_id) REFERENCES slices (ID)"
+                                    }   #the relationships between topics and slices/categories will be managed here
             }
 
         #tries to create tables based on the dict above. if it already exists, that's fine
