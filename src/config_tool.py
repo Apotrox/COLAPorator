@@ -4,11 +4,8 @@ import math
 import threading
 import sys,os, time
 
-sys.path.append(os.path.abspath("~/tlv493d.py"))
-import tlv493d
-
-sys.path.append(os.path.abspath("~/database_manager.py"))
-from database_manager import Manager
+import backend.tlv493d as tlv493d
+from backend.database_manager import Manager
 
 #---init---------
 

@@ -7,7 +7,7 @@ class Manager:
     
     
     def __init__(self): 
-        db_path = "test.db"
+        db_path = ".\\src\\test.db"
         self.__con = sqlite3.connect(db_path)
         self.cur = self.__con.cursor()
 
@@ -22,21 +22,23 @@ class Manager:
         table_exists = []
         if(tables==None):
             tables = {
-                "topics": { "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
+                "topics": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
                             "title" : "TEXT UNIQUE",
                             "description": "TEXT"
                             },
-                "slices": { "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
+                "slices": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
                             "title": "TEXT UNIQUE",
                             "angle_begin": "INTEGER",
                             "angle_end": "INTEGER"},
-                "guests": { "ID": "INTEGER PRIMARY KEY AUTOINCREMENT",
+                "guests": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
                             "name": "TEXT",
                             "date": "TEXT",
                             "img_path" : "TEXT"},
-                "topicAssignment" : {   "ID" : "INTEGER PRIMARY KEY AUTOINCREMENT",
-                                        "topic_id": "INTEGER NOT NULL FOREIGN KEY (topic_id) REFERENCES topics (ID)",
-                                        "slice_id": "INTEGER NOT NULL FOREIN KEY (sclice_id) REFERENCES slices (ID)"
+                "topicAssignment" : {   "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
+                                        "topic_id": "INTEGER NOT NULL",
+                                        "slice_id": "INTEGER NOT NULL",
+                                        "" : "FOREIGN KEY (topic_id) REFERENCES topics (id), FOREIGN KEY (slice_id) REFERENCES slices (id)"
+                                        # sqlite does not like the constraints in between the column definitions :/
                                     }   #the relationships between topics and slices/categories will be managed here
             }
 
