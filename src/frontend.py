@@ -1,11 +1,13 @@
 from kivy.app import App
 from kivy.uix.button import Button
-from backend.database_manager import Manager
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.properties import StringProperty, BooleanProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.behaviors import FocusBehavior
 from kivy.core.window import Window
+from kivy.uix.label import Label
+from backend.database_manager import Manager
+from backend.tlv493d import TLV493D
 
 
 db = Manager()
@@ -51,14 +53,18 @@ class TopicDetailScreen(Screen):
     def go_back(self, *args):
         self.manager.current = 'topic_list'
 
+class StartupScreen(Screen):
+    def __init__(self, **kw):
+        super().__init__(**kw)
 
 class ColapsApp(App):
     def build(self):
         sm = ScreenManager()
         topic_list_screen = TopicListScreen(name='topic_list')
-        
         detail_screen = TopicDetailScreen(name='topic_detail')
+        startup_screen = StartupScreen(name= "startup")
         
+        sm.add_widget(startup_screen)
         sm.add_widget(topic_list_screen)
         sm.add_widget(detail_screen)
 
