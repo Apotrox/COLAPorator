@@ -7,7 +7,6 @@ import threading
 
 
 class TLV493D:
-    global mean_angle
     
     def __init__(self):
         self._stop_event = threading.Event()
@@ -15,6 +14,7 @@ class TLV493D:
         i2c = busio.I2C(board.SCL, board.SDA)
         i2c.unlock()
         self.tlv = adafruit_tlv493d.TLV493D(i2c)
+        self.mean_angle = 0
 
     def start_reading(self):
         #moving average filter to reduce noise
@@ -39,6 +39,9 @@ class TLV493D:
 
     def stop_reading(self):
         self._stop_event.set()
+
+    def get_angle(self):
+        return getattr(self,"mean_angle", 0)
 
     #------Debugging Helpers--------------
 
