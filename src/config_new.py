@@ -1,6 +1,7 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Rectangle
@@ -76,9 +77,11 @@ class StartupScreen(Screen):
 class AutoScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
+        self.data =[] 
 
         base_layout = BoxLayout(orientation = "horizontal")
         left_layout = FloatLayout()
+        right_layout = FloatLayout()
 
         back = Button(text="Back", size_hint=(0.14, 0.06), pos_hint={'x': 0.02, 'y': 0.02})
         back.bind(on_press=self.go_back)
@@ -89,12 +92,25 @@ class AutoScreen(Screen):
         enter = Button(text="Enter", size_hint=(0.15,0.075), pos_hint={'x': 0.75, 'y': 0.75})
         enter.bind(on_press=self.calculate)
 
-        angle_display = AngleDisplay()
+        table = GridLayout(cols=2, pos_hint={'x':0, 'y':-0.3}, row_force_default=True, row_default_height=40 )
+        for row in self.data:
+            for cell in row:
+                table.add_widget(Label(text=str(cell), color=(1,1,1,1)))
+
+        confirm = Button(text="Confirm", size_hint=(0.18, 0.06), pos_hint={'x':0.8, 'y':0.02})
+        #confirm.bind(on_press=None)
+
+        angle_display = AngleDisplay(pos_hint={'x':0.01, 'y':0})
+        #right_layout.add_widget(angle_display)
+        right_layout.add_widget(confirm)
+
         left_layout.add_widget(self.textinput)
         left_layout.add_widget(enter)
+        left_layout.add_widget(table)
         left_layout.add_widget(back)
+
         base_layout.add_widget(left_layout)
-        base_layout.add_widget(angle_display)
+        base_layout.add_widget(right_layout)
 
         self.add_widget(base_layout)
 
