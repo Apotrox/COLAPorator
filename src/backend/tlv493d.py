@@ -1,20 +1,21 @@
 import time, board, busio, adafruit_tlv493d
 import math
 import json
-import os
 import statistics
 import threading
 
 
 class TLV493D:
+    #global mean_angle, arctan
     
     def __init__(self):
         self._stop_event = threading.Event()
         # Initialize I2C and sensor
         i2c = busio.I2C(board.SCL, board.SDA)
-        i2c.unlock()
+        i2c.unlock() #sometimes the i2c bus is taken by a previous instance of this tool (or just bugged out) and requires manual unlocking
         self.tlv = adafruit_tlv493d.TLV493D(i2c)
-        self.mean_angle = 0
+        self.mean_angle=0
+        self.arctan=0.0000
 
     def start_reading(self):
         #moving average filter to reduce noise
@@ -41,7 +42,10 @@ class TLV493D:
         self._stop_event.set()
 
     def get_angle(self):
-        return getattr(self,"mean_angle", 0)
+        return int(self.mean_angle)
+    
+    def get_arctan(self):
+        return self.arctan
 
     #------Debugging Helpers--------------
 
