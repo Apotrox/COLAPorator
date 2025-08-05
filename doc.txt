@@ -1,0 +1,12 @@
+25.7.
+To make use of the extensive capabilities of the pi 5, the config tool will be moved to a kivy based UI. This was also done in order to remove any complications that came with drawing to the screen directly instead of using a GUI framework, as well as streamlining the entire software to be more consistent.
+The first prototype was still based on the PIL Image being drawn and shown in a Kivy GUI, but this approach was quickly abandoned due to the increased performance of native kivy gui.
+Afterwards, a simple GUI was created and the necessary methods are started to get ported over from the old config tool. The seperate dialogues for configuration selection (automatic and manual) were split into their respective screens to streamline navigation.
+
+5.8.
+A problem that persisted throughout the prototyping process was the screen for displaying the angles the sensor is reading did not display correctly, mainly with the text label not being displayed. After many itterations, this was fixed by splitting the background and foreground canvas, as well as separating the update mechanics for those. The underlying issue was the clear_canvas() call, which also cleared the label. The reason why it was not rebuild is still partly unknown.
+The Angle Display now scales dynamically with the window, giving the user the ability to resize it. 
+
+The logic port of the automatic configuration finished.
+
+Eventually, the table part of the automatic configuration screen was moved to its own class, to be reused with the manual screen.
