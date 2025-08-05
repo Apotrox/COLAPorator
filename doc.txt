@@ -10,3 +10,8 @@ The Angle Display now scales dynamically with the window, giving the user the ab
 The logic port of the automatic configuration finished.
 
 Eventually, the table part of the automatic configuration screen was moved to its own class, to be reused with the manual screen.
+
+This was also done with the popup dialogue, which now also accomodates the logic for writing the angles to the database.
+
+With these two common elements modularized, the manual config screen was as simple as copying the layout of the automatic config screen, removing the textinput, resizing and relocating the button and changing the logic behind the button press as necessary. Now, with each press of the button, the angle is recorded and shown in the table. When the program detects a similar angle as the first one (i.e. the wheel looped around), the popup dialogue gets called to finish up and commit to database.
+
