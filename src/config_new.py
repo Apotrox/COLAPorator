@@ -14,42 +14,56 @@ import math, threading
 from backend.tlv493d import TLV493D
 from backend.database_manager import Manager
 
-class AngleDisplay(Widget):
+class AngleDisplay(FloatLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.angle = 0
-        Clock.schedule_interval(self.update_canvas, 1 / 30)
         self.tlv = TLV493D()
-        data_collector = threading.Thread(target=self.tlv.start_reading, name="TLV_Reader", daemon=True).start() #multithreading data collection
-        self.label = Label(pos=(10, self.height - 40), size_hint=(None, None))
+        threading.Thread(target=self.tlv.start_reading, daemon=True).start()
+
+        # Label added as widget
+        self.label = Label(text="0°", color=(0,0,1,1), pos_hint={'x':0, 'y':0.3}, font_size='40sp')
         self.add_widget(self.label)
 
+        # Static background + circle (draw once)
+        with self.canvas.before:
+            Color(1, 1, 1, 1)
+            self.bg = Rectangle(pos=self.pos, size=self.size)
 
-    def update_canvas(self, dt):
-        self.angle = self.tlv.get_angle()
-        self.canvas.clear()
-        with self.canvas:
-            Color(1, 1, 1)
-            Rectangle(pos=self.pos, size=self.size)
-
-            cx, cy = self.center
-            radius = min(self.width, self.height) * 0.4
-
-            # Draw outer circle
             Color(0, 1, 0)
-            Ellipse(pos=(cx - radius, cy - radius), size=(radius * 2, radius * 2), width=2)
+            self.circle = Ellipse(size=(0, 0), pos_hint={'x':0.5, 'y':1})
 
-            # Draw rotating line
-            rad = math.radians(self.angle)
-            x = cx + radius * math.cos(rad)
-            y = cy + radius * math.sin(rad)
-            Color(1, 0, 0)
-            Line(points=[cx, cy, x, y], width=2)
+        # Dynamic line (redraw in canvas.after)
+        with self.canvas.after:
+            self.line_color = Color(1, 0, 0)
+            self.line = Line(points=[0, 0, 0, 0], width=2)
 
-            # Draw angle text
-            Color(0, 0, 0)
-            self.label.text = f"{self.angle:.1f}°"
-            self.label.canvas.ask_update()
+        # Update canvas and geometry
+        self.bind(pos=self.update_static, size=self.update_static)
+        Clock.schedule_interval(self.update_dynamic, 1 / 40)
+
+    def update_static(self, *args):
+        self.bg.pos = self.pos
+        self.bg.size = self.size
+
+        cx = self.x + self.width * 0.5
+        cy = self.y + self.height * 0.5
+        radius = min(self.width, self.height) * 0.4
+        self.circle.pos = (cx - radius, cy - radius)
+        self.circle.size = (radius * 2, radius * 2)
+
+    def update_dynamic(self, dt):
+        self.angle = -self.tlv.get_angle()
+        self.label.text = f"{-self.angle:.1f}°"
+
+        cx, cy = self.center
+        radius = min(self.width, self.height) * 0.4
+        rad = math.radians(self.angle)
+        x = cx + radius * math.cos(rad)
+        y = cy + radius * math.sin(rad)
+
+        self.line.points = [cx, cy, x, y]
+
 
 
 class StartupScreen(Screen):
@@ -92,6 +106,9 @@ class AutoScreen(Screen):
         enter = Button(text="Enter", size_hint=(0.15,0.075), pos_hint={'x': 0.75, 'y': 0.75})
         enter.bind(on_press=self.calculate)
 
+        hint_label = Label(text="Align any slice edge with the pointer, enter the number of slices above and press enter.",
+                           text_size=(220,None), pos_hint={'x':-0.08, 'y':0.29})
+
         table = GridLayout(cols=2, pos_hint={'x':0, 'y':-0.3}, row_force_default=True, row_default_height=40 )
         for row in self.data:
             for cell in row:
@@ -101,11 +118,12 @@ class AutoScreen(Screen):
         #confirm.bind(on_press=None)
 
         angle_display = AngleDisplay(pos_hint={'x':0.01, 'y':0})
-        #right_layout.add_widget(angle_display)
+        right_layout.add_widget(angle_display)
         right_layout.add_widget(confirm)
 
         left_layout.add_widget(self.textinput)
         left_layout.add_widget(enter)
+        left_layout.add_widget(hint_label)
         left_layout.add_widget(table)
         left_layout.add_widget(back)
 
