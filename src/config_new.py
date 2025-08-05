@@ -78,7 +78,7 @@ class TableDisplay(GridLayout):
                 self.add_widget(Label(text=str(cell), color=(1,1,1,1)))
 
 class ConfirmPopup(Popup):
-    def __init__(self, slice_data, **kwargs):
+    def __init__(self,msg , slice_data, **kwargs):
         super().__init__(**kwargs)
         self.data = slice_data
         popup_layout= BoxLayout(orientation="vertical")
@@ -88,8 +88,10 @@ class ConfirmPopup(Popup):
 
         confirm_button = Button(text="Yes")
         confirm_button.bind(on_press=self._confirm)
-
-        label = Label(text="Commit to database?")
+        if(isinstance(msg, str)):
+            label = Label(text=msg)
+        else:
+            label = Label(text="")
 
         button_layout.add_widget(dismiss_button)
         button_layout.add_widget(confirm_button)
@@ -221,11 +223,8 @@ class AutoScreen(Screen):
     
     
     def popup_dialogue(self, _):
-        popup = ConfirmPopup(slice_data=self.data)
+        popup = ConfirmPopup(msg="Commit to database?", slice_data=self.data)
         popup.open()
-
-    
-
 
 
 
@@ -233,12 +232,59 @@ class ManualScreen(Screen):
     def __init__(self,tlv, **kw):
         super().__init__(**kw)
         self.tlv = tlv
-        back = Button(text="Back")
+        self.data=[]
+
+        base_layout = BoxLayout(orientation = "horizontal")
+        left_layout = FloatLayout()
+        right_layout = FloatLayout()
+
+        back = Button(text="Back", size_hint=(0.14, 0.06), pos_hint={'x': 0.02, 'y': 0.02})
         back.bind(on_press=self.go_back)
-        self.add_widget(back)
+        
+        record = Button(text="Record Angle", size_hint=(0.3,0.1), pos_hint={'x': 0.35, 'y': 0.85})
+        record.bind(on_press=self.add_angles)
+
+        hint_label = Label(text="Align next slice edge with the pointer and press the button above to record the angle. " \
+        "The programm will automatically detect if the wheel looped around.",
+                           text_size=(270,None), pos_hint={'x':-0.05, 'y':0.29})
+
+        self.table = TableDisplay(pos_hint={'x':0, 'y':-0.3})
+
+        confirm = Button(text="Confirm", size_hint=(0.18, 0.06), pos_hint={'x':0.8, 'y':0.02})
+        confirm.bind(on_press=self.popup_dialogue)
+
+        #adding the widgets to each side
+        angle_display = AngleDisplay(tlv=self.tlv, pos_hint={'x':0.01, 'y':0})
+        right_layout.add_widget(angle_display)
+        right_layout.add_widget(confirm)
+
+        left_layout.add_widget(record)
+        left_layout.add_widget(hint_label)
+        left_layout.add_widget(self.table)
+        left_layout.add_widget(back)
+
+        base_layout.add_widget(left_layout)
+        base_layout.add_widget(right_layout)
+
+        self.add_widget(base_layout)
+
+    def add_angles(self, _):
+        angle = self.tlv.get_angle()
+        if(len(self.data)>0 and (angle+5 >= int(self.data[0][1]) and angle-5 <= int(self.data[0][1]))):
+            self.popup_dialogue()
+        else:
+            self.data.append([f"Slice {len(self.data)}", angle])
+            self.table.update_table(self.data)
 
     def go_back(self, *args):
+        #resetting everything
+        self.data=[]
+        self.table.update_table(self.data)
         self.manager.current = 'startup'
+    
+    def popup_dialogue(self):
+        popup = ConfirmPopup(msg=f"Are {len(self.data)} slices correct?",slice_data=self.data)
+        popup.open()
 
 
 class ConfigApp(App):
