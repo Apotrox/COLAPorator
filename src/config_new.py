@@ -64,6 +64,18 @@ class AngleDisplay(FloatLayout):
 
         self.line.points = [cx, cy, x, y]
 
+class TableDisplay(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.cols=2
+        self.row_force_default=True
+        self.row_default_height=40
+
+    def update_table(self, data):
+        self.clear_widgets()
+        for row in data:
+            for cell in row:
+                self.add_widget(Label(text=str(cell), color=(1,1,1,1)))
 
 
 class StartupScreen(Screen):
@@ -109,7 +121,7 @@ class AutoScreen(Screen):
         hint_label = Label(text="Align any slice edge with the pointer, enter the number of slices above and press enter.",
                            text_size=(220,None), pos_hint={'x':-0.08, 'y':0.29})
 
-        self.table = GridLayout(cols=2, pos_hint={'x':0, 'y':-0.3}, row_force_default=True, row_default_height=40 )
+        self.table = TableDisplay(pos_hint={'x':0, 'y':-0.3})
         #the table needs to be updated separately
 
         confirm = Button(text="Confirm", size_hint=(0.18, 0.06), pos_hint={'x':0.8, 'y':0.02})
@@ -132,6 +144,10 @@ class AutoScreen(Screen):
         self.add_widget(base_layout)
 
     def go_back(self, _):
+        #resetting everything
+        self.data=[]
+        self.table.update_table(self.data)
+        self.textinput.text=""
         self.manager.current = 'startup'
     
     def calculate(self, _): #input at instance.text
@@ -147,13 +163,8 @@ class AutoScreen(Screen):
             if(angle <0): angle +=360
             if(angle > 360): angle -= 360
             self.data.append([f"Slice {i}",angle])
-        self.update_table()
+        self.table.update_table(self.data)
     
-    def update_table(self):
-        self.table.clear_widgets()
-        for row in self.data:
-            for cell in row:
-                self.table.add_widget(Label(text=str(cell), color=(1,1,1,1)))
     
     def popup_dialogue(self, _):
         popup_layout= BoxLayout(orientation="vertical")
@@ -191,7 +202,7 @@ class AutoScreen(Screen):
         db.commit_changes()
 
         #TODO Error Handling
-        
+
         end_layout = BoxLayout(orientation="vertical")
         end_layout.add_widget(Label(text="Successfully commited to database"))
         end_button = Button(text="Ok")
