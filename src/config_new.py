@@ -9,17 +9,17 @@ from kivy.clock import Clock
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
+from kivy.uix.popup import Popup
 
 import math, threading
 from backend.tlv493d import TLV493D
 from backend.database_manager import Manager
 
 class AngleDisplay(FloatLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, tlv, **kwargs):
         super().__init__(**kwargs)
         self.angle = 0
-        self.tlv = TLV493D()
-        threading.Thread(target=self.tlv.start_reading, daemon=True).start()
+        self.tlv=tlv
 
         # Label added as widget
         self.label = Label(text="0°", color=(0,0,1,1), pos_hint={'x':0, 'y':0.3}, font_size='40sp')
@@ -69,7 +69,6 @@ class AngleDisplay(FloatLayout):
 class StartupScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
-
         layout = BoxLayout(orientation='vertical') #use boxlayout inside the screen, a screen should contain a layout, not be one
 
         auto_button = Button(text="Automatic Calibration")
@@ -89,9 +88,10 @@ class StartupScreen(Screen):
         self.manager.current='manual'
 
 class AutoScreen(Screen):
-    def __init__(self, **kw):
+    def __init__(self, tlv, **kw):
         super().__init__(**kw)
         self.data =[] 
+        self.tlv = tlv
 
         base_layout = BoxLayout(orientation = "horizontal")
         left_layout = FloatLayout()
@@ -109,22 +109,21 @@ class AutoScreen(Screen):
         hint_label = Label(text="Align any slice edge with the pointer, enter the number of slices above and press enter.",
                            text_size=(220,None), pos_hint={'x':-0.08, 'y':0.29})
 
-        table = GridLayout(cols=2, pos_hint={'x':0, 'y':-0.3}, row_force_default=True, row_default_height=40 )
-        for row in self.data:
-            for cell in row:
-                table.add_widget(Label(text=str(cell), color=(1,1,1,1)))
+        self.table = GridLayout(cols=2, pos_hint={'x':0, 'y':-0.3}, row_force_default=True, row_default_height=40 )
+        #the table needs to be updated separately
 
         confirm = Button(text="Confirm", size_hint=(0.18, 0.06), pos_hint={'x':0.8, 'y':0.02})
-        #confirm.bind(on_press=None)
+        confirm.bind(on_press=self.popup_dialogue)
 
-        angle_display = AngleDisplay(pos_hint={'x':0.01, 'y':0})
+        #adding the widgets to each side
+        angle_display = AngleDisplay(tlv=self.tlv, pos_hint={'x':0.01, 'y':0})
         right_layout.add_widget(angle_display)
         right_layout.add_widget(confirm)
 
         left_layout.add_widget(self.textinput)
         left_layout.add_widget(enter)
         left_layout.add_widget(hint_label)
-        left_layout.add_widget(table)
+        left_layout.add_widget(self.table)
         left_layout.add_widget(back)
 
         base_layout.add_widget(left_layout)
@@ -132,15 +131,80 @@ class AutoScreen(Screen):
 
         self.add_widget(base_layout)
 
-    def go_back(self, *args):
+    def go_back(self, _):
         self.manager.current = 'startup'
     
     def calculate(self, _): #input at instance.text
-        print(self.textinput.text)
+        self.data=[] #clear data for new calculation
+        initial_angle = self.tlv.get_angle()
+        self.data.append(["Slice 0", initial_angle])
+
+        num_slices = int(self.textinput.text)
+        #if a circle is [0;2pi), then we can divide 2pi by the number of segments to get accurate points
+        segment_length = int(math.degrees((math.pi*2)/num_slices))
+        for i in range (1, num_slices):
+            angle = initial_angle + segment_length*i
+            if(angle <0): angle +=360
+            if(angle > 360): angle -= 360
+            self.data.append([f"Slice {i}",angle])
+        self.update_table()
+    
+    def update_table(self):
+        self.table.clear_widgets()
+        for row in self.data:
+            for cell in row:
+                self.table.add_widget(Label(text=str(cell), color=(1,1,1,1)))
+    
+    def popup_dialogue(self, _):
+        popup_layout= BoxLayout(orientation="vertical")
+        button_layout = BoxLayout(orientation="horizontal")
+
+        dismiss_button = Button(text="No")
+
+        confirm_button = Button(text="Yes")
+        confirm_button.bind(on_press=self.angles_to_database)
+
+        label = Label(text="Commit to database?")
+
+        button_layout.add_widget(dismiss_button)
+        button_layout.add_widget(confirm_button)
+        popup_layout.add_widget(label)
+        popup_layout.add_widget(button_layout)
+
+        #globalizing popup to close it in confirm method
+        self.popup = Popup(title='Confirmation', content=popup_layout, size_hint=(None,None), size=(400,200), auto_dismiss=False)
+        dismiss_button.bind(on_press=self.popup.dismiss)
+        self.popup.open()
+
+    def angles_to_database(self,_):
+        db = Manager()
+        db.ensure_database_availability()
+        slice_angles = [x[1] for x in self.data]
+        slice_names = [x[0] for x in self.data]
+        
+        slices = [(
+            slice_names[i],
+            slice_angles[i], #begin angle
+            slice_angles[(i+1) % len(slice_angles)] #end angle
+        )for i in range (len(slice_angles))]
+        db.execute_many("INSERT INTO slices (title, angle_begin, angle_end,) VALUES (?, ?, ?)", slices)
+        db.commit_changes()
+
+        #TODO Error Handling
+        
+        end_layout = BoxLayout(orientation="vertical")
+        end_layout.add_widget(Label(text="Successfully commited to database"))
+        end_button = Button(text="Ok")
+        end_button.bind(on_press=self.popup.dismiss)
+        end_layout.add_widget(end_button)
+        self.popup.content=end_layout
+        self.popup.auto_dismiss=True
+
 
 class ManualScreen(Screen):
-    def __init__(self, **kw):
+    def __init__(self,tlv, **kw):
         super().__init__(**kw)
+        self.tlv = tlv
         back = Button(text="Back")
         back.bind(on_press=self.go_back)
         self.add_widget(back)
@@ -151,10 +215,14 @@ class ManualScreen(Screen):
 
 class ConfigApp(App):
     def build(self):
+        # binding one global instance of the sensor to then give to the other screens that need it
+        self.tlv = TLV493D()
+        threading.Thread(target=self.tlv.start_reading, daemon=True).start()
+
         sm = ScreenManager()
         startup_screen = StartupScreen(name="startup")
-        auto_screen = AutoScreen(name="auto")
-        manual_screen = ManualScreen(name="manual")
+        auto_screen = AutoScreen(name="auto", tlv=self.tlv)
+        manual_screen = ManualScreen(name="manual", tlv=self.tlv)
 
         sm.add_widget(startup_screen)
         sm.add_widget(auto_screen)
