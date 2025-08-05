@@ -77,6 +77,61 @@ class TableDisplay(GridLayout):
             for cell in row:
                 self.add_widget(Label(text=str(cell), color=(1,1,1,1)))
 
+class ConfirmPopup(Popup):
+    def __init__(self, slice_data, **kwargs):
+        super().__init__(**kwargs)
+        self.data = slice_data
+        popup_layout= BoxLayout(orientation="vertical")
+        button_layout = BoxLayout(orientation="horizontal")
+
+        dismiss_button = Button(text="No")
+
+        confirm_button = Button(text="Yes")
+        confirm_button.bind(on_press=self._confirm)
+
+        label = Label(text="Commit to database?")
+
+        button_layout.add_widget(dismiss_button)
+        button_layout.add_widget(confirm_button)
+        popup_layout.add_widget(label)
+        popup_layout.add_widget(button_layout)
+
+        #globalizing popup to close it in confirm method
+        self.title='Confirmation'
+        self.content=popup_layout
+        self.size_hint=(None,None) 
+        self.size=(400,200)
+        self.auto_dismiss=False
+        dismiss_button.bind(on_press=self.dismiss)
+    
+    def _confirm(self, _):
+        self.angles_to_database(self.data)
+
+        end_layout = BoxLayout(orientation="vertical")
+        end_layout.add_widget(Label(text="Successfully commited to database"))
+        end_button = Button(text="Ok")
+        end_button.bind(on_press=self.dismiss)
+        end_layout.add_widget(end_button)
+        self.content=end_layout
+        self.auto_dismiss=True
+
+    def angles_to_database(self, data):
+        #db = Manager()
+        #db.ensure_database_availability()
+        slice_angles = [x[1] for x in data]
+        slice_names = [x[0] for x in data]
+        
+        slices = [(
+            slice_names[i],
+            slice_angles[i], #begin angle
+            slice_angles[(i+1) % len(slice_angles)] #end angle
+        )for i in range (len(slice_angles))]
+        #db.execute_many("INSERT INTO slices (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
+        #db.commit_changes()
+        print(slices)
+
+        #TODO Error Handling
+
 
 class StartupScreen(Screen):
     def __init__(self, **kw):
@@ -122,7 +177,6 @@ class AutoScreen(Screen):
                            text_size=(220,None), pos_hint={'x':-0.08, 'y':0.29})
 
         self.table = TableDisplay(pos_hint={'x':0, 'y':-0.3})
-        #the table needs to be updated separately
 
         confirm = Button(text="Confirm", size_hint=(0.18, 0.06), pos_hint={'x':0.8, 'y':0.02})
         confirm.bind(on_press=self.popup_dialogue)
@@ -167,49 +221,12 @@ class AutoScreen(Screen):
     
     
     def popup_dialogue(self, _):
-        popup_layout= BoxLayout(orientation="vertical")
-        button_layout = BoxLayout(orientation="horizontal")
+        popup = ConfirmPopup(slice_data=self.data)
+        popup.open()
 
-        dismiss_button = Button(text="No")
+    
 
-        confirm_button = Button(text="Yes")
-        confirm_button.bind(on_press=self.angles_to_database)
 
-        label = Label(text="Commit to database?")
-
-        button_layout.add_widget(dismiss_button)
-        button_layout.add_widget(confirm_button)
-        popup_layout.add_widget(label)
-        popup_layout.add_widget(button_layout)
-
-        #globalizing popup to close it in confirm method
-        self.popup = Popup(title='Confirmation', content=popup_layout, size_hint=(None,None), size=(400,200), auto_dismiss=False)
-        dismiss_button.bind(on_press=self.popup.dismiss)
-        self.popup.open()
-
-    def angles_to_database(self,_):
-        db = Manager()
-        db.ensure_database_availability()
-        slice_angles = [x[1] for x in self.data]
-        slice_names = [x[0] for x in self.data]
-        
-        slices = [(
-            slice_names[i],
-            slice_angles[i], #begin angle
-            slice_angles[(i+1) % len(slice_angles)] #end angle
-        )for i in range (len(slice_angles))]
-        db.execute_many("INSERT INTO slices (title, angle_begin, angle_end,) VALUES (?, ?, ?)", slices)
-        db.commit_changes()
-
-        #TODO Error Handling
-
-        end_layout = BoxLayout(orientation="vertical")
-        end_layout.add_widget(Label(text="Successfully commited to database"))
-        end_button = Button(text="Ok")
-        end_button.bind(on_press=self.popup.dismiss)
-        end_layout.add_widget(end_button)
-        self.popup.content=end_layout
-        self.popup.auto_dismiss=True
 
 
 class ManualScreen(Screen):
