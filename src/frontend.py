@@ -6,7 +6,7 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.properties import StringProperty, BooleanProperty
-from kivy.uix.screenmanager import ScreenManager, Screen, FallOutTransition, RiseInTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, FallOutTransition, RiseInTransition, SlideTransition
 from kivy.uix.behaviors import FocusBehavior
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle, RoundedRectangle
@@ -104,6 +104,7 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, 
             app = App.get_running_app()
             detail_screen = app.root.get_screen('topic_detail')
             detail_screen.display_topic(desc[0])
+            app.root.transition= SlideTransition()
             app.root.current = 'topic_detail'
 
 class TopicListScreen(Screen):
@@ -307,7 +308,7 @@ class ColapsApp(App):
         
         Clock.unschedule(self.check_movement)
         Clock.schedule_interval(self.check_stopped, 0.5)
-        self.sm.transition=RiseInTransition()
+        self.sm.transition=RiseInTransition(duration=0.05)
         self.sm.current = 'waiting'
         return False
         
