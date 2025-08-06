@@ -11,7 +11,15 @@ The logic port of the automatic configuration finished.
 
 Eventually, the table part of the automatic configuration screen was moved to its own class, to be reused with the manual screen.
 
-This was also done with the popup dialogue, which now also accomodates the logic for writing the angles to the database.
+This was also done with the popup dialogue, which now also accomodates the logic for writing the angles to the database. A small change was made to accomodate custom messages in the initial popup, as the semantics of automatic config confirmation and manual config confirmation change (i.e. just confirm or confirm number of slices).
 
 With these two common elements modularized, the manual config screen was as simple as copying the layout of the automatic config screen, removing the textinput, resizing and relocating the button and changing the logic behind the button press as necessary. Now, with each press of the button, the angle is recorded and shown in the table. When the program detects a similar angle as the first one (i.e. the wheel looped around), the popup dialogue gets called to finish up and commit to database.
 
+6.8.
+Ported the kivy file to native python code for the frontend for better visibility with the help of GPT and Claude.
+To get moved from the startup screen ("spin wheel") to the topic list screen, a movement detection was necessary. This was promptly implemented into the tlv interface to seperate the logic to where it belongs and make it accessible with a unified API. 
+To truly test out the functionality of the frontend and continue the integration, sample data was needed. This was generated using manually collected information from the client's website. Categories were created with the help of AI tools, which the various entries of the data were sorted into. The corresponding importer script was also handled by AI. After a bit of Trial and Error, the function to fetch the necessary data (category, topic titles), based on the current position of the non moving sensor, was finished. Testing this presented the first issue of the buttons not wrapping the text properly, which was then fixed. 
+
+In between all of this, a basic GitHub Project was set up to keep track on the tasks at hand, as well as adding any information for planning/execution to the respective steps.
+
+For a complete workflow, the user would need to be prompted to spin the wheel on startup, which then moves onto a waiting screen to then display the topic list. Whether the user is still browsing topics or reading the description of one, spinning the wheel should always restart this process from the waiting screen. With the current implementation of the movement detection, this was not possible. Thus, the movement detection logic was moved to the parent App class to function as a central controller. The various screens are then able to access the angle read by the sensor via the parent class as well.
