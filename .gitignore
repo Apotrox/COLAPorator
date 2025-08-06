@@ -1,3 +1,4 @@
 *.pyc
 /venv
 /src/.venv/
+src/test.db.bak

@@ -118,8 +118,8 @@ class ConfirmPopup(Popup):
         self.auto_dismiss=True
 
     def angles_to_database(self, data):
-        #db = Manager()
-        #db.ensure_database_availability()
+        db = Manager()
+        db.ensure_database_availability()
         slice_angles = [x[1] for x in data]
         slice_names = [x[0] for x in data]
         
@@ -128,8 +128,8 @@ class ConfirmPopup(Popup):
             slice_angles[i], #begin angle
             slice_angles[(i+1) % len(slice_angles)] #end angle
         )for i in range (len(slice_angles))]
-        #db.execute_many("INSERT INTO slices (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
-        #db.commit_changes()
+        db.execute_many("INSERT INTO slices (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
+        db.commit_changes()
         print(slices)
 
         #TODO Error Handling

@@ -13,7 +13,8 @@ from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.metrics import dp
 from backend.database_manager import Manager
 from backend.tlv493d import TLV493D
-import threading
+from kivy.clock import Clock
+import threading, time
 
 
 db = Manager()
@@ -31,12 +32,50 @@ class HoverableButton(Button):
         self.background_down = ''
         self.background_color = (0, 0, 0, 0)
         self.color = (0.1, 0.1, 0.1, 1)
+        
+        # Enable text wrapping and auto-sizing
+        self.text_size = (None, None)  # Will be set based on button width
+        self.halign = "center"
+        self.valign = "middle"
+        self.bind(size=self.on_size_change)
+        self.bind(text=self.on_text_change)
 
     def on_mouse_pos(self, *args):
         if not self.get_root_window():
             return
         pos = args[1]
         self.hovered = self.collide_point(*self.to_widget(*pos))
+
+    def on_size_change(self, *args):
+        # Update text_size when button width changes
+        if self.size[0] > 0:
+            self.text_size = (self.size[0] - 40, None)  # 20px padding
+        self.update_height()
+        self.on_hovered(self, self.hovered)
+
+    def on_text_change(self, *args):
+        # Update height when text changes
+        self.update_height()
+
+    def update_height(self):
+        if not self.text or self.size[0] <= 0:
+            return
+            
+        # Set text_size to enable wrapping
+        if self.text_size[0] is None:
+            self.text_size = (self.size[0] - 20, None)
+        
+        # Calculate required height based on text
+        self.texture_update()
+        if self.texture:
+            # Add padding (20px top/bottom + some extra for comfort)
+            required_height = self.texture.height + 30
+            min_height = dp(50)  # Minimum button height
+            new_height = max(required_height, min_height)
+            
+            # Only update if height actually changed to avoid infinite loops
+            if abs(self.height - new_height) > 1:
+                self.height = new_height
 
     def on_hovered(self, instance, hovered):
         # Update canvas when hovered state changes
@@ -47,10 +86,6 @@ class HoverableButton(Button):
 
     def on_pos(self, *args):
         # Update canvas when position changes
-        self.on_hovered(self, self.hovered)
-
-    def on_size(self, *args):
-        # Update canvas when size changes
         self.on_hovered(self, self.hovered)
 
         
@@ -75,7 +110,8 @@ class TopicListScreen(Screen):
     def __init__(self, tlv, **kwargs):
         super().__init__(**kwargs)
 
-        # Main container
+        self.tlv = tlv
+        
         main_layout = BoxLayout(
             orientation='vertical',
             padding=[10, 10, 10, 10],
@@ -91,7 +127,7 @@ class TopicListScreen(Screen):
         main_layout.bind(pos=self.update_bg, size=self.update_bg)
         
         # Title label
-        title_label = Label(
+        self.title_label = Label(
             text='Available Topics',
             font_size=24,
             size_hint_y=0.1,
@@ -106,7 +142,7 @@ class TopicListScreen(Screen):
         
         # RecycleBoxLayout
         recycle_layout = RecycleBoxLayout(
-            default_size=(None, dp(50)),
+            default_size=(None, None),  # Let buttons determine their own height
             default_size_hint=(1, None),
             size_hint_y=None,
             orientation='vertical',
@@ -119,7 +155,7 @@ class TopicListScreen(Screen):
         self.rv.viewclass = 'SelectableButton'
         
         # Add widgets to main layout
-        main_layout.add_widget(title_label)
+        main_layout.add_widget(self.title_label)
         main_layout.add_widget(self.rv)
         
         self.add_widget(main_layout)
@@ -129,7 +165,15 @@ class TopicListScreen(Screen):
         self.bg_rect.size = instance.size
 
     def on_enter(self):
-        data = db.execute("SELECT title FROM topics").fetchall()
+        angle= self.tlv.get_angle()
+        print(angle)
+        current_slice= db.execute(f"SELECT id, title FROM slices WHERE slices.angle_begin <= {angle} AND slices.angle_end >= {angle}").fetchall()
+        print(current_slice)
+        id, title = current_slice[0]
+        self.title_label.text=title
+        
+        data = db.execute(f"SELECT topics.title FROM topics INNER JOIN topicAssignment ON topics.ID = topicAssignment.topic_id \
+                          WHERE topicAssignment.slice_id = {id}").fetchall()
         self.rv.data = [{'text': topic[0]} for topic in data]
 
 
@@ -186,15 +230,36 @@ class TopicDetailScreen(Screen):
 class StartupScreen(Screen):
     def __init__(self, tlv, **kw):
         super().__init__(**kw)
-
-        startup_label = Label(
+        self.tlv = tlv
+        self.startup_label = Label(
             text='Spin the wheel to start',
             font_size=26,
             color=(1, 1, 1, 1)
         )
+        self.add_widget(self.startup_label)
+        time.sleep(1) #delay scheduling to give moving average time to fill up
         
-        self.add_widget(startup_label)
+        #periodically check for movement
+        Clock.schedule_interval(self.check_movement, 0.5)
         
+    def check_movement(self, _):
+        if not self.tlv.get_moving():
+            return True #not moving yet, continue checking
+        
+        self.startup_label.text= "Please wait..."
+        Clock.unschedule(self.check_movement)
+        Clock.schedule_interval(self.check_stopped, 0.5)
+        return False
+        
+    def check_stopped(self,_):
+        if self.tlv.get_moving():
+            return True # still moving, continue checking
+        
+        Clock.unschedule(self.check_stopped)
+        if self.manager:
+            self.manager.current = 'topic_list'
+        return False
+
         
 
 class ColapsApp(App):

@@ -1,0 +1,311 @@
+[
+    {
+        "type": "lecture",
+        "title": "Intelligent Learning Environments (ILE)",
+        "description": "Computers and 'machine-intelligence' are frequently discussed as the means for addressing today's critical educational challenges: learning remotely, learning at one's own pace, learning according to one's needs and background, providing quality education to all and for all. In this course, we welcome all master-level students with technical or non-technical backgrounds. Through the semester, we will cover topics on the intersection of Artificial Intelligence in Education, Educational Technologies, and Human-Computer Interaction and we will carry out hands-on exercises to deepen our understanding of intelligent learning technologies.",
+        "categories": [
+            "AI in Education",
+            "Experimental Learning",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Praxisprojekt",
+        "title": "CodeArcade - Designing Python Challenges for Hackathons",
+        "description": "Hackathons are time-bounded events (typically 1-3 days) with large participation, in which (small) groups carry out projects which they conceptualize, design, prototype, or implement. 'Learning' is often cited as one reason to organize or participate in Hackathons. However, we also know that it is necessary to plan for learning to ensure learning takes place. This Praxisproject is set to run in conjunction with 1-2 hackathons in December/January. In the project, we will continue the work done in last year's iteration of the project on Python-based challenges for the hackathon participants framed in the style of an Arcade Game machine. There the participants built a virtual arcade machine with games in different development phases for the hackathon participants to work on. This way we can have built-in challenges of different difficulty. This includes: \u2022 a frame for the application: a virtual arcade machine \u2022 different games in different development phases (for example Snake, Pong, Pinball) In the hackathon event(s), we will mentor participants and we will use the event(s) to get feedback on our challenges to (potentially) improve them after. Beyond that, we can also use the event for further research.",
+        "categories": [
+            "Experimental Learning",
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Praxisprojekt",
+        "title": "Building a Toolbox of Human-Centred Strategies for AI Literacy",
+        "description": "In this project, we aim to design human-centered strategies to train AI Literacy and prepare for living with AI. In particular, we will work in groups to design various learning activities for practicing AI Literacy. These activities will be part of a toolbox that will be available as an online repository. For the praxisproject, we will follow a mini-hackathon series format.",
+        "categories": [
+            "Experimental Learning",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Seminar",
+        "title": "Artificial Intelligence in Education: Automatic Generation of Feedback",
+        "description": "In this seminar, we will explore research works and literature on the topic of Artificial Intelligence in Education (AIED) with an emphasis on the automatic generation of feedback. We will work as one group with distinct individual contributions as follows: we will retrieve a set of recent research articles on the topic and we will read, review, and discuss these articles.",
+        "categories": [
+            "AI in Education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Seminar",
+        "title": "From Data to Evidence: Education as a Data Science Application Field",
+        "description": "In this seminar, we will explore the space between Data Science and Education! In particular, we will have an overview of what data science in education can look like and why education as a data science as an application field is not as straightforward as it may sound! We will discuss the data cycle for transforming data to useful information, we will try out data mining approaches and we will discuss and contextualize our findings. Finally, we will explore the state-of-the-art research in Educational Data Mining aiming to draw new and exciting directions!",
+        "categories": [
+            "Educational Data Science"
+        ]
+    },
+    {
+        "type": "Praxisprojekt",
+        "title": "Implementation of an Intelligent Tutoring System for Programming with Personalized Feedback",
+        "description": "This project aims to explore the design, use and impact of Intelligent Tutoring Systems for programming. In particular, we aim to: 1. We will be using CTAT \u2013 the Cognitive Tutor Authoring Tools \u2013 that support the creation of flexible tutors 2. We will look at the different levels of feedback and how to give appropriate feedback for a variety of programming tasks 3. Eventually, we will combine this and pass our feedback to the intelligent tutors For this project, we will work in groups of 4 students on a predefined topic (each group will be assigned a different topic). During the first weeks, we will provide an overview of the project, its goals, and related theoretical and practical concepts. Then, the groups will work towards three milestones: \u2022 An initial presentation of their ideas, strategies and workplans to address the project's topic \u2022 A mid-term presentation of the work-progress up to that point \u2022 A final presentation of the finished project and a written project report in the form of a scientific article.",
+        "categories": [
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Praxisprojekt",
+        "title": "Investigating the effect of tactile perception on the working memory",
+        "description": "Learning can be perceived as the storage of information in Long-term memory: \u2022 Information is first assimilated through our senses, visual, auditory etc. as perception(Multi store model of information processing) \u2022 Knowledge (factual & procedural) stored in long-term memory Tactile perception, i.e, information through touch, should play or plays a huge role in learning (embodied cognition) We use 'attention' to filter out irrelevant stimuli to improve learning. Given this, amplification of a stimuli should support the attention process leading to improved learning. Dual-coding theory assumes that auditory and visual information is processed in separated channels which lowers the demand on working memory. Similarly, tactile perceptions should also be processed separately in the working memory. In this project we aim: \u2022 To investigate how sensory modalities influence the retrieval of motor skills for handwriting skill development \u2022 To learn how to design and carry out small-scale research, including: \u2022 Designing studies to explore your hypothesis \u2022 Developing tools, for example using sensors, for collecting handwriting data Conducting data analysis and reporting your findings",
+        "categories": [
+            "Methodology & Meta-Research",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Praxisprojekt",
+        "title": "Me and My Chat-GPT (episode 2): studying together with a language model",
+        "description": "This project aims to explore the design, use and impact of generative AI systems, and specifically text-generators and language models, from the perspective of human-AI interaction and FATE (Fairness, Accountability, Transparency and Ethics) and in relation to learning. In particular, we aim to explore the interactions between humans and machines as mediated by text-generators using Chat-GPT as the primary example and experiment with text-generation algorithms and establish guidelines of good practice in terms of meaningful communication. Finally we will reflect on the role of AI technologies as facilitator of human-machine and human-human information exchange, communication, and collaboration. For this project, we will work in groups of 4 students on a predefined topic (each group will be assigned a different topic). During the first weeks, we will provide an overview of the project, its goals, and related theoretical and practical concepts. Then, the groups will work towards three milestones: a. An initial presentation of their ideas, strategies and workplans to address the project's topic; b. A mid-term presentation of the work-progress up to that point c. A final presentation of the finished project and a written project report in the form of a scientific article.",
+        "categories": [
+            "AI in Education",
+            "Experimental Learning",
+            "Societal Impact",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Projekt",
+        "title": "augMentor",
+        "description": "augMentor aims to develop a novel pedagogical framework that promotes basic skills and 21st century competencies by integrating emerging technologies. The development of personalized and collaborative learning and the achievement of higher-order thinking skills - the so-called 21st century competencies - is still nowadays a significant challenge. At the same time, it is of great interest to understand how learners work, how educators orchestrate their classrooms, and what information they have access to in order to adapt/enhance/improve their orchestration. Emerging technologies have the potential to propel the change from an instructional teaching paradigm, that favors mass instruction, to a learner-centered paradigm, that promotes the development of new roles for both the teacher and the learner. However, their acceptability and adoption are still slow mainly due to fragmented approaches. Importantly, in order to ensure quality education it is mandatory to address unexpected emergencies and disruptive events that may undermine the human and social dimensions of learning. augMENTOR adopts an augmented intelligence approach, where people and machines work together, building on their own strengths, to develop customized and collaborative learning paths that promote both basic and 21st century competencies as well as design thinking and creativity. augMENTOR will leverage advancements in the fields of Pedagogical Design, Creative Pedagogy, Explainable Artificial Intelligence, and Knowledge Representation and Reasoning for instructional purposes.",
+        "categories": [
+            "AI in Education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Projekt",
+        "title": "ai.prompt",
+        "description": "One of the challenges novice programmers face when practicing code-writing is interpreting and addressing compiler and interpreter warnings and error messages (Becker et al., 2019). This may explain why popular interactive programming environments like Jupyter Notebooks have not caught up with teaching introductory programming in HE (Al-Gahmi et al., 2022) despite their popularity and envisioned potential (Ram\u00edrez-Echeverry et al., 2022). Additionally, systems used for code-writing \u2013 including Jupyter Notebooks \u2013 do not provide instructional support such as worked examples, or supplementary materials that could help students interpret and work with compiler error messages, and understand what a program does or why it does not do what was intended. However, studies in our classes show that such materials and clear communication of expected learning outcomes have a positive effect on the achieved outcomes (Mauritz et al., 2022). This project aims to answer two research questions as a first step to address this challenge: \u2022 RQ1: What is the optimal prompting condition in order to have an LLM generate hints that best help students understand and learn from compiler errors? \u2022 RQ2: How can we help students with exhibiting prompting behavior that leads to optimal tailored feedback/support from the LLM model?",
+        "categories": [
+            "AI in Education",
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "Project",
+        "title": "DigiReady+",
+        "description": "The aim of DigiReady+ is to define a framework and develop a prototype, in the form of a web tool that would connect to the learning management systems and other institutional informational systems, in order to measure digital readiness indicators for the particular higher education institution. The DigiReady+ Tool wants to ensure the next key ideas: \u2022 The DigiReady+ tool, in the form of an institutional dashboard of digital readiness, can be used by HEI's stakeholders to provide information regarding potential issues and risks in the process of designing from scratch or adapting existing curricula to meet the needs of transitioning to digitally enhanced learning and teaching. \u2022 The learning analytics infrastructure for supporting HEI's students at risk of dropping out or failing their studies will provide data-based insights to policymakers with respect to strategic planning. \u2022 The DigiReady+ Open-source Tool and the related Application ProgrammingInterfaces (API) provided by the project will allow, if necessary, the interested HEIs to further expand and customize the use of the framework and the associated analytics to their own needs and special conditions. The Knowledge Repository will enable all stakeholders to take advantage of best practices, training materials, datasets, etc. developed throughout the project. It will also allow stakeholders of the participating organizations and other interested HEIs to further enrich such knowledge based on the use of the framework and the associated set of indicators and the toolkit in new scenarios.",
+        "categories": [
+            "Educational Data Science",
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Of house of cards and air castles, a deep dive into the fertile fields of educational technologies and technology enhanced learning",
+        "description": "Educational Technologies (EdTech) and Technology-Enhanced Learning (TEL) are established fields of academic research with the potential to transform educational practices and outcomes. Yet, they are currently facing several problems that undermine their efficacy and relevance. In this discussion paper, we examine recurrent complaints of researchers in the field allowing us to identify four main root causes responsible for hindering the impact of the field (starting with the less serious to most serious): (4) Lack of formal methods to evaluate, give credit, share and mature prototypes, (3) The prioritization of publication and citation metrics over the acquisition of scientific knowledge that leads to the enhancement of education and learning, (2) Researchers and their lack of practical experience in the field, and (1) The absence of robust epistemological paradigms and frameworks. In this paper, we lay down the problems caused by these root causes, discuss solutions for these causes, and propose implementable steps towards these solutions.",
+        "categories": [
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Pandemic for the Good of Digital Literacy? An Empirical Investigation of Newly Improved Digital Skills during COVID-19 Lockdowns",
+        "description": "This research explores whether the rapid digital transformation due to COVID-19 managed to close or exacerbate the digital divide concerning users' digital skills. We conducted a pre-registered survey with N = 1,143 German Internet users. Our findings suggest the latter: younger, male, and higher educated users were more likely to improve their digital skills than older, female, and less educated ones. According to their accounts, the pandemic helped Internet users improve their skills in communicating with others by using video conference software and reflecting critically upon information they found online. These improved digital skills exacerbated not only positive (e.g., feeling informed and safe) but also negative (e.g., feeling lonely) effects of digital media use during the pandemic. We discuss this research's theoretical and practical implications regarding the impact of challenges, such as technological disruption and health crises, on humans' digital skills, capabilities, and future potential, focusing on the second-level digital divide.",
+        "categories": [
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Can the Mighty Pen Be Mightier? Investigating the Role of Haptic Senses in Multimodal Immersive Learning Environments",
+        "description": "This study explores the role of motor activity and tactile perception in Multimodal Immersive Learning Environments (MILEs) within the context of handwriting. A 2x2 factorial experimental design was used to investigate the impact of the intensity of motor activity and the sensitivity of tactile perception on learning performance, measured as memory recall. Mental effort and perceived workload were monitored as the mediating variables. Participants (N=20) completed a handwriting task, that is, copying text displayed on a prompter using a tablet and a stylus. During the task, the participants used additional pressure to increase the intensity of the motor activity and/or wore gloves to reduce the sensitivity of tactile perception. Results indicate no significant effect of either manipulation on recall, mental effort, or perceived workload. This may suggest that integrating supplementary haptic feedback technologies in MILEs does not impose additional cognitive load or obstruct learning. The findings contribute to the design of MILEs by informing the effective integration of wearable sensors to support authentic practice for skill acquisition. The study can inform future research that explores the effects of haptic senses and their broader applications in other learning contexts, contributing to a deeper understanding of embodied learning and dual-coding theory.",
+        "categories": [
+            "Experimental Learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Learning to Program: Mapping Errors and Misconceptions of Python Novices to Support the Design of Intelligent Programming Tutors",
+        "description": "Students often struggle with basic programming tasks after their first programming course. Adaptive tutoring systems can support students' practice by generating tasks, providing feedback, and evaluating students' progress in real-time. Here, we describe the first step for building such a system focusing on designing tasks that address common errors and misconceptions. To that end, we compiled a collection of Python tasks for novices. In particular, a) we identified errors occurring during introductory programming and mapped them to learning tasks; b) we conducted a survey to validate our mapping; c) we conducted semi-structured interviews with instructors to understand potential reasons for such errors and best practices for addressing them. Synthesizing our findings, we discuss the creation of a tasks' corpus to serve as a basis for adaptive tutors. This work contributes to the standardization and systematization of computing education and provides insights regarding the design of learning tasks tailored to addressing errors.",
+        "categories": [
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Toward a data-informed framework for the assessment of digital readiness of higher education institutions. International Journal of Educational Technology in Higher Education",
+        "description": "This paper aims to address Digital Readiness in Higher Education Institutions from the perspective of data-informed and evidence-based assessment of Digital Readiness. Related research suggests that existing instruments for assessing digitalization aspects are limited to self-assessment, and there is a need for data-informed frameworks that will allow automated assessments based on data that Higher Education Institutions already collect. To bridge this gap, we propose a conceptual, data-informed framework for assessing Digital Readiness in Higher Education Institutions. We followed a participatory approach informed by related theory and practice to design, together with stakeholders from three academic institutions in three European countries, a Digital Readiness assessment framework on seven dimensions accompanied by 72 data-informed indicators. Digitalization of Higher Education is a priority in political agendas, and educational institutions have acknowledged it as an opportunity to promote digitalization of teaching and learning, organizational structures, and technical services, enabling innovation and internationalization. We envision that this work contributes towards supporting educational institutions in self-reflecting upon their digitalization policies and practices.",
+        "categories": [
+            "Educational Data Science",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Curriculum analytics in higher education institutions: a systematic literature review",
+        "description": "With technological advances, institutional stakeholders are considering evidence-based developments such as Curriculum Analytics (CA) to reflect on curriculum and its impact on student learning, dropouts, program quality, and overall educational effectiveness. However, little is known about the CA state of the art in Higher Education Institutions (HEIs), where dropout is a worldwide problem. Through a systematic literature review, this study summarizes 59 manuscripts about CA published until April 2024. The aim of this review is to identify: 1) WHERE CA was used; 2) WHO were the CA target stakeholders; 3) WHY CA was proposed; 4) WHAT types of data and what types of data gathering and analysis methods are employed; 5) HOW CA was designed, implemented and evaluated and what the stakeholders' role was; and 6) WHICH limitations and constraints affect CA and WHICH recommended practices could contribute to the CA success. Results from our review reveal a considerable number of CA solutions available. However, there is a need for more evidence on how CA solutions inform decision-making among various stakeholders. Thus, more longitudinal studies are needed, involving stakeholders not only in the design but also in the implementation and evaluation of CA solutions. At the same time, findings suggest that including multiple data sources can enrich the analysis and enable triangulation. Additionally, the lack of evidence on the role of CA in dropouts and decision-making in higher education institutions requires more future research on this aspect. Finally, researchers, practitioners, and decision-makers can use the findings obtained in this review to inform future research and practices on how to leverage CA to improve student learning, enhance the learning experience, and reduce student dropouts.",
+        "categories": [
+            "Methodology & Meta-Research",
+            "Educational Data Science",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Education in the Digital World: Challenges and Pitfalls in the 2020s",
+        "description": "This editorial places the topic of the special issue \"Education in the Digital World\" in a wider national and international context: At a national level, the Standing Conference of the Ministers of Education and Cultural Affairs ('Kultusministerkonferenz') initiated a national strategy in 2016 that aims to enable learners to lead a self-determined life in the digital condition (Stalder 2016). In this context, new technologies but also didactic scenarios for the various teaching contexts are to be developed and tested. This is where this Special Issue comes in with its interdisciplinary and multi-perspective contributions. Educational processes in the digital world that are based on innovative technologies, adequate didactic scenarios, and well-trained teachers, as called for by the Standing Conference of the Ministers of Education and Cultural Affairs, not only serve to implement a nationwide strategy but can also to solve problems worldwide: It seems plausible that cutting-edge solutions in the field of Education in the Digital World can be a key part of the human response to technological innovation in juxtaposition with international crises and conflicts. Finally, future challenges and opportunities for Education in the Digital World are identified and the contributions in this special issue are presented.",
+        "categories": [
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Hack Beyond the Code: Building a Toolbox of Human-Centred Strategies for AI Literacy",
+        "description": "Artificial Intelligence (AI) Literacy is quickly becoming an essential 21st-century skill. Be it discerning AI art and pictures from human-made ones, challenging answers from chatbots, or addressing ethical consequences of AI \u2013 with AI being ever more present in daily life, it is crucial for everyone to be aware of its utility but also potential pitfalls and challenges. This workshop aims to facilitate a hackathon in which AIED conference participants and local stakeholders will come together, exchange ideas and experiences, and collaborate with the aim of building a toolbox to promote AI Literacy. Our goal for this toolbox is to contain a spread of tools \u2013 in the form of lesson plans, apps, activities, and others \u2013 to support educators in teaching AI Literacy and students in learning or practicing AI Literacy.",
+        "categories": [
+            "AI in Education",
+            "Experimental Learning",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Ethical AI and Education: The Need for International Regulation to Foster Human Rights, Democracy and the Rule of Law",
+        "description": "The need for AI regulation is true in particular in the fields of education. Education is a special case and different from other sectors. Therefore, it reuqires careful considerations: How can we develop and implement legal and organisational requirements for ethical AI introduction and usage? How can we safeguard and maybe even strengthen human rights, democracy, digital equity and rules of law through AI-supported education and learning opportunities? And how can we involve all educational levels (micro, meso, macro) and stakeholders to guarantee a trustworthy and ethical AI usage? These open and urgent questions will be discussed during a workshop that aims to identify and document next steps towards establishing ethical and legal requirements for Artificial Intelligence and Education.",
+        "categories": [
+            "AI in Education",
+            "Societal Impact",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Global Trends in Scientific Debates on Trustworthy and Ethical Artificial Intelligence and Education.",
+        "description": "This paper presents a systematic review of the scientific literature on trustworthy and ethical Artificial Intelligence (AI) and Education (AI&ED), including both AI applied in education to support teaching and learning (AIED), as well as education about AI (AI literacy). Key interest is the identification of global trends with a special focus on unbalanced disparities. Strictly following the standardised protocol and the underlying PRISMA approach, 324 records were identified and selected according to the pre-defined protocol for the systematic review. Finally, 62 articles were included in the quantitative and qualitative analysis in response to four research questions: Which (i) journals, (ii) disciplines, and (iii) regions are leading scientific debates and sustainable developments in education and trustworthy/ethical AI, and (iv) what are the past trends? The articles revealed an unbalanced distribution across the various dimensions, together with an exponential growth over recent years. Building upon our analysis, we argue for an increase in interdisciplinary research that shifts the focus from the currently dominant technological focus towards a more human-centered (educational and societal) focus. Only through such a development AI can contribute effectively to the UN Sustainable Development Goal no. 4 of a world with equitable and universal access to quality education. The results of our systematic review provide the basis to address and facilitate equality in the future AI&ED progress across regions worldwide.",
+        "categories": [
+            "AI in Education",
+            "Methodology & Meta-Research",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "How do we learn in and from Hackathons? A systematic literature review. Education and Information Technologies",
+        "description": "This paper presents an analysis of the current research landscape around hackathons and hackathon-like events as opportunities and means for learning. In particular, we aimed to explore how hackathon-like events are utilized to promote learning, what systematic approaches are used to orchestrate learning in such events, and to what extent knowledge is systematized and standardized in this context. To that end, we conducted a Systematic Literature Review following established guidelines. In this review we studied 39 research papers published over a 10-year span. Our findings indicate that no standardized setup for hackathons to promote learning and to assess learning outcomes has been investigated exhaustively. We did not find a systematic approach to reliably produce or measure learning effects in hackathons. Most of the reviewed papers relied on perceived learning for the assessment of learning. Based on the consulted literature, this does not provide comprehensive proof of positive learning outcomes from hackathons. We, therefore, conclude that additional research is needed to gather insights and consequently work toward solidifying the role of hackathons as learning tools. This work contributes to exploring the landscape and proposing research directions for capitalizing on the potential of hackathons and similar events for learning.",
+        "categories": [
+            "Experimental Learning",
+            "Methodology & Meta-Research",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Beyond the Grey Area: Exploring the Effectiveness of Scaffolding as a Learning Measure",
+        "description": "In this paper, we aim to explore students' help-seeking patterns, and learning performance using a computational model of the Zone of Proximal Development (ZPD). We used student traces in four courses supported by Intelligent Tutoring Systems (ITSs) to assess whether a student may be in their ZPD. Then, we analyzed students' help-seeking behavior and their performance after receiving scaffolding to investigate if and under which circumstances our assessment may act as a proxy of the ZPD. Results suggest that the computational model may offer an acceptable approximation of the student's ZPD. However, several factors, such as the difficulty of the learning task, the student's age, and their attitude regarding hints, may affect modeling students' cognitive states. We discuss the implications of this research on the design of computational student models for providing personalized and adaptive feedback and scaffolding. We envision that this work contributes toward bridging the gap between theory and practice for AI-assisted tutoring and scaffolding, and it provides insights regarding evaluation techniques of theory-driven, computational approaches.",
+        "categories": [
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Exploring the Methodological Contexts and Constraints of Research in Artificial Intelligence in Education",
+        "description": "In this paper, we present a Systematic Literature Review (SLR) on the state-of-the-art in Artificial Intelligence in Education (AIED) focusing on methodological contexts and constraints of the research landscape. To do so, we built on existing works and extended them to cover the latest research advancements in the field over the past five years. We aimed at covering all educational levels and retrieving important data regarding the planning and execution of research studies and the robustness of results. In total, we reviewed 181 papers and answered three research questions, relating to the educational context of AI use, the methodology and study design utilized in AIED research, and the type of AI algorithms and technologies used in education. Our findings suggest that research in AIED primarily focuses on formal, higher education and that there is a demand for robust and rigorous scientific evidence of the effectiveness and impact of AIED. Furthermore, the findings indicate that the most popular AI technologies currently studied are traditional AI algorithms, usually used for prediction, classification, or clustering. Based on our analysis, we discuss practical implications that can serve as inspiration and guidance for future research initiatives.",
+        "categories": [
+            "AI in Education",
+            "Methodology & Meta-Research",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Role of Multimodal Learning Systems in Technology-Enhanced Learning (TEL): A Scoping Review",
+        "description": "Technology-enhanced learning systems, specifically multimodal learning technologies, use sensors to collect data from multiple modalities to provide personalized learning support beyond traditional learning settings. However, many studies surrounding such multimodal learning systems mostly focus on technical aspects concerning data collection and exploitation and therefore overlook theoretical and instructional design aspects such as feedback design in multimodal settings. This paper explores multimodal learning systems as a critical part of technology-enhanced learning used for capturing and analyzing the learning process to exploit the collected multimodal data to generate feedback in multimodal settings. By investigating various studies, we aim to reveal the roles of multimodality in technology-enhanced learning across various learning domains. Our scoping review outlines the conceptual landscape of multimodal learning systems, identifies potential gaps, and provides new perspectives on adaptive multimodal system design: intertwining learning data for meaningful insights into learning, designing effective feedback, and implementing them in diverse learning domains.",
+        "categories": [
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "HoloLearn: Towards a Hologram Mediated Hybrid Education",
+        "description": "Educational institutions worldwide were thrust into adopting an online educational models due to the COVID-19 pandemic exposing severe limitations of tools used in online education, much to chagrin of both teachers and students. However, despite these limitations, hybrid educational models garnered significant interest. Holograms have shown potential in addressing several of the limitations of online educational tools that are currently in use. This paper reports the findings of an exploratory pilot study which investigates the benefits and limitations of holograms in hybrid and online educational models. The study compares student's holographic viewing experience of the teacher in several dimensions such as presence, zoom exhaustion, and fatigue. Results are drawn from the comparison across a holographic display, virtual reality glasses, a video conferencing tool, and a tele-presence robot. The paper concludes with takeaways for the future steps of the study.",
+        "categories": [
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Delving into instructor-led feedback interventions informed by learning analytics in massive open online courses",
+        "description": "Background Providing feedback in massive open online courses (MOOCs) is challenging due to the massiveness and heterogeneity of learners' population. Learning analytics (LA) solutions aim at scaling up feedback interventions and supporting instructors in this endeavour. Paper Objectives This paper focuses on instructor-led feedback mediated by LA tools in MOOCs. Our goal is to answer how, to what extent data-driven feedback is provided to learners, and what its impact is. Methods We conducted a systematic literature review on the state-of-the-art LA-informed instructor-led feedback in MOOCs. From a pool of 227 publications, we selected 38 articles that address the topic of LA-informed feedback in MOOCs mediated by instructors. We applied etic content analysis to the collected data. Results and Conclusions The results revealed a lack of empirical studies exploring LA to deliver feedback, and limited attention on pedagogy to inform feedback practices. Our findings suggest the need for systematization and evaluation of feedback. Additionally, there is a need for conceptual tools to guide instructors' in the design of LA-based feedback. Takeaways We point out the need for systematization and evaluation of feedback. We envision that this research can support the design of LA-based feedback, thus contributing to bridge the gap between pedagogy and data-driven practice in MOOCs.",
+        "categories": [
+            "Methodology & Meta-Research",
+            "Educational Data Science",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Towards a conceptualized model of supporting teachers' application process for acquiring professional qualifications",
+        "description": "Starting as niche programming events, hackathons have since become a popular form of collaboration. Events are organized in various domains across the globe, aiming to foster innovation and learning, create and expand communities and tackle civic and environmental issues. While research around such events has grown in recent years, most studies are based on observations of a few individuals during an event and on post-hoc interviews during which participants report their experiences. Such studies are helpful but somewhat limited in that they do not allow us to study how individuals communicate at scale using technology. To address this gap, we conducted an archival analysis of communication traces of teams during a 48-h event. Our findings indicate that teams scaffold their communication around the design of an event, influenced by milestones set by the organizers. The officially selected communication platform's main use was to organize the event and the teams and to facilitate contact between participants and hackathon officials. We further investigated the balance of intra-team communication on the given platform and the potential use of additional communication tools.",
+        "categories": [
+            "Experimental Learning",
+            "Methodology & Meta-Research",
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Quizzes and Eggs: Exploring the Impact of Course Design Elements on Students' Engagement",
+        "description": "In this paper, we explored the impact of course design elements that aim to support and sustain students' engagement during a 12-week online course. The course we analyzed targeted higher education, master-level students of Computer Science and Educational Technologies, and took place fully online during the COVID-19 pandemic. The course was facilitated by a Learning Management System (LMS), and due to the circumstances, the instructor's primary goal was to motivate students to actively participate during the course's duration. To that end, the instructor implemented a course design focused on integrating elements such as interactive activities, short quizzes, hidden \"easter eggs,\" and real-time webinars. To study the impact of these elements on students' activity, we carried out an exploratory analysis of students' activity as recorded by the log files of the LMS and the qualitative feedback that students provided to the instructor. Our results suggest that the course's design supported sustaining students' engagement. The level of students' activity varied for the learning materials and resources, but we confirmed a high usage of the quizzes over the course's duration.",
+        "categories": [
+            "Methodology & Meta-Research",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "AI and Education. A View Through the Lens of Human Rights, Democracy and the Rule of Law. Legal and Organizational Requirements",
+        "description": "How can we develop and implement legal and organisational requirements for ethical AI introduction and usage? How can we safeguard and maybe even strengthen human rights, democracy, digital equity and rules of law through AI-supported education and learning opportunities? And how can we involve all educational levels (micro, meso, macro) and stakeholders to guarantee a trustworthy and ethical AI usage? These open and urgent questions will be discussed during a full-day workshop that aims to identify and document next steps towards establishing ethical and legal requirements for Artificial Intelligence and Education.",
+        "categories": [
+            "AI in Education",
+            "Societal Impact",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Exploring indicators for collaboration quality and its dimensions in classroom settings using multimodal learning analytics.",
+        "description": "Multimodal Learning Analytics researchers have explored relationships between collaboration quality and multimodal data. However, the current state-of-art research works have scarcely investigated authentic settings and seldom used video data that can offer rich behavioral information. In this paper, we present our findings on potential indicators for collaboration quality and its underlying dimensions such as argumentation, and mutual understanding. We collected multimodal data (namely, video and logs) from 4 Estonian classrooms during authentic computer-supported collaborative learning activities. Our results show that vertical head movement (looking up and down) and mouth region features could be used as potential indicators for collaboration quality and its aforementioned dimensions. Also, our results from clustering provide indications of the potential of video data for identifying different levels of collaboration quality (e.g., high, low, medium). The findings have implications for building collaboration quality monitoring and guiding systems for authentic classroom settings.",
+        "categories": [
+            "Educational Data Science",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "Implementing a data-driven framework for measuring digital readiness across European universities.",
+        "description": "This paper explores the feasibility of defining a data-driven framework for assessing digital readiness in Higher Education Institutions (HEIs). This is part of a project that aims at measuring digital readiness indicators with the ultimate objective to contribute to the quality assurance processes of the institutions. The project involves the design and demonstration of a prototype toolkit and an Application Programming Interface to enable self-reflection, using data sourced from the institutions' information systems, which are aligned with the indicators of the framework, to provide feedback to relevant stakeholders. The reported research examines information sources of the HEIs involved, auditing of proposed framework indicators, and proposals for further review on digital readiness frameworks and other data-driven approaches as well as the first architectural considerations on implementing the Digital Readiness tool.",
+        "categories": [
+            "Educational Data Science",
+            "Programming education",
+            "Technology enhanced learning"
+        ]
+    },
+    {
+        "type": "research",
+        "title": "A standardised PRISMA-based protocol for systematic reviews of the scientific literature on Artificial Intelligence and education (AI&ED)",
+        "description": "By using standardised approaches, systematic reviews of the educational, scientific literature can inform educational research and influence educational policies and practices. However, the various systematic reviews of the scientific literature in the field of Artificial Intelligence (AI) and education all adopt individual approaches, making it challenging to systematically compare their conclusions. Accordingly, this paper presents a standardised protocol for conducting systematic reviews of the scientific literature on AI and education (AI&ED), including both literature on teaching and learning with AI (AIED) and literature on teaching and learning about AI (AI literacy). Our protocol applies the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines and is presented here for the purpose of replication and validation. We exemplify our protocol by means of a systematic review of the scientific literature on trustworthy and ethical AI&ED, which was undertaken iteratively in symbiosis with the development of the protocol, informing each other throughout. In the future, we intend to apply our novel protocol for other search terms of relevance to AI&ED, as well as for the same search terms over a longer time period, in order to allow comparisons and the exploration of trends.",
+        "categories": [
+            "AI in Education",
+            "Experimental Learning",
+            "Methodology & Meta-Research",
+            "Technology enhanced learning"
+        ]
+    }
+]
