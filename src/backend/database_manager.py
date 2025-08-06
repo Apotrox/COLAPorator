@@ -7,7 +7,7 @@ class Manager:
     
     
     def __init__(self): 
-        db_path = ".\\src\\test.db"
+        db_path = "test.db"
         self.__con = sqlite3.connect(db_path)
         self.cur = self.__con.cursor()
 
