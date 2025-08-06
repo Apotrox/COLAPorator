@@ -107,10 +107,10 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, 
             app.root.current = 'topic_detail'
 
 class TopicListScreen(Screen):
-    def __init__(self, tlv, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.tlv = tlv
+        self.tlv = App.get_running_app().tlv
         
         main_layout = BoxLayout(
             orientation='vertical',
@@ -166,9 +166,7 @@ class TopicListScreen(Screen):
 
     def on_enter(self):
         angle= self.tlv.get_angle()
-        print(angle)
         current_slice= db.execute(f"SELECT id, title FROM slices WHERE slices.angle_begin <= {angle} AND slices.angle_end >= {angle}").fetchall()
-        print(current_slice)
         id, title = current_slice[0]
         self.title_label.text=title
         
@@ -198,10 +196,13 @@ class TopicDetailScreen(Screen):
         
         # Content label
         self.content_label = Label(
-            text='',
+            text='Test',
             font_size=18,
             color=(0.1, 0.1, 0.1, 1),
-            size_hint_y=0.9
+            size_hint_y=0.9,
+            text_size=(Window.width -60, None),
+            halign='left',
+            valign='top'
         )
         
         # Back button
@@ -227,39 +228,30 @@ class TopicDetailScreen(Screen):
     def go_back(self, *args):
         self.manager.current = 'topic_list'
 
+
 class StartupScreen(Screen):
-    def __init__(self, tlv, **kw):
+    def __init__(self, **kw):
         super().__init__(**kw)
-        self.tlv = tlv
+        self.tlv = App.get_running_app().tlv
+        
         self.startup_label = Label(
             text='Spin the wheel to start',
             font_size=26,
             color=(1, 1, 1, 1)
         )
         self.add_widget(self.startup_label)
-        time.sleep(1) #delay scheduling to give moving average time to fill up
-        
-        #periodically check for movement
-        Clock.schedule_interval(self.check_movement, 0.5)
-        
-    def check_movement(self, _):
-        if not self.tlv.get_moving():
-            return True #not moving yet, continue checking
-        
-        self.startup_label.text= "Please wait..."
-        Clock.unschedule(self.check_movement)
-        Clock.schedule_interval(self.check_stopped, 0.5)
-        return False
-        
-    def check_stopped(self,_):
-        if self.tlv.get_moving():
-            return True # still moving, continue checking
-        
-        Clock.unschedule(self.check_stopped)
-        if self.manager:
-            self.manager.current = 'topic_list'
-        return False
 
+class WaitingScreen(Screen):
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.tlv = App.get_running_app().tlv
+        
+        self.startup_label = Label(
+            text='Please Wait...',
+            font_size=26,
+            color=(1, 1, 1, 1)
+        )
+        self.add_widget(self.startup_label)
         
 
 class ColapsApp(App):
@@ -269,16 +261,42 @@ class ColapsApp(App):
         threading.Thread(target=self.tlv.start_reading, daemon=True).start()
         
         
-        sm = ScreenManager()
-        startup_screen = StartupScreen(name="startup", tlv =self.tlv)
-        topic_list_screen = TopicListScreen(name='topic_list', tlv = self.tlv)
+        self.sm = ScreenManager()
+        startup_screen = StartupScreen(name="startup")
+        waiting_screen= WaitingScreen(name="waiting")
+        topic_list_screen = TopicListScreen(name='topic_list')
         detail_screen = TopicDetailScreen(name='topic_detail')
         
-        sm.add_widget(startup_screen)
-        sm.add_widget(topic_list_screen)
-        sm.add_widget(detail_screen)
+        self.sm.add_widget(startup_screen)
+        self.sm.add_widget(waiting_screen)
+        self.sm.add_widget(topic_list_screen)
+        self.sm.add_widget(detail_screen)
 
-        return sm
+        time.sleep(1) #delay scheduling to give moving average time to fill up
+        
+        #periodically check for movement
+        Clock.schedule_interval(self.check_movement, 1)
+
+        return self.sm
+
+    def check_movement(self, _):
+        if not self.tlv.get_moving():
+            return True #not moving yet, continue checking
+        
+        Clock.unschedule(self.check_movement)
+        Clock.schedule_interval(self.check_stopped, 1)
+        self.sm.current = 'waiting'
+        return False
+        
+    def check_stopped(self,_):
+        if self.tlv.get_moving():
+            return True # still moving, continue checking
+        
+        Clock.unschedule(self.check_stopped)
+        if self.sm:
+            self.sm.current = 'topic_list'
+        Clock.schedule_interval(self.check_movement, 1)
+        return False
 
 
 if __name__ == '__main__':
