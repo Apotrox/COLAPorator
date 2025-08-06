@@ -72,7 +72,7 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, 
             app.root.current = 'topic_detail'
 
 class TopicListScreen(Screen):
-    def __init__(self, **kwargs):
+    def __init__(self, tlv, **kwargs):
         super().__init__(**kwargs)
 
         # Main container
@@ -136,9 +136,7 @@ class TopicListScreen(Screen):
 class TopicDetailScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.create_ui()
 
-    def create_ui(self):
         # Main container
         main_layout = BoxLayout(
             orientation='vertical',
@@ -186,12 +184,9 @@ class TopicDetailScreen(Screen):
         self.manager.current = 'topic_list'
 
 class StartupScreen(Screen):
-    def __init__(self, **kw):
+    def __init__(self, tlv, **kw):
         super().__init__(**kw)
-        self.create_ui()
 
-    def create_ui(self):
-        # Startup label
         startup_label = Label(
             text='Spin the wheel to start',
             font_size=26,
@@ -199,15 +194,22 @@ class StartupScreen(Screen):
         )
         
         self.add_widget(startup_label)
+        
+        
 
 class ColapsApp(App):
     def build(self):
+        # binding one global instance of the sensor to then give to the other screens that need it
+        self.tlv = TLV493D()
+        threading.Thread(target=self.tlv.start_reading, daemon=True).start()
+        
+        
         sm = ScreenManager()
-        startup_screen = StartupScreen(name="startup")
-        topic_list_screen = TopicListScreen(name='topic_list')
+        startup_screen = StartupScreen(name="startup", tlv =self.tlv)
+        topic_list_screen = TopicListScreen(name='topic_list', tlv = self.tlv)
         detail_screen = TopicDetailScreen(name='topic_detail')
         
-        #sm.add_widget(startup_screen)
+        sm.add_widget(startup_screen)
         sm.add_widget(topic_list_screen)
         sm.add_widget(detail_screen)
 

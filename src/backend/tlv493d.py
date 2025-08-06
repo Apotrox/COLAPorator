@@ -16,6 +16,7 @@ class TLV493D:
         self.tlv = adafruit_tlv493d.TLV493D(i2c)
         self.mean_angle=0
         self.arctan=0.0000
+        self.is_moving=False
 
     def start_reading(self):
         #moving average filter to reduce noise
@@ -34,9 +35,11 @@ class TLV493D:
                 readings[i]=angle
                 self.mean_angle = statistics.mean(readings)
                 
-                
-                
-                #print('\rX: %.2f, Y: %.2f, Z: %.2f mT, Angle XY: %.2f°' % (*magnet, mean_angle), end='')
+                threshold = 10
+                if abs(readings[0] - readings [4]) > threshold:
+                    self.is_moving=True
+                else:
+                    self.is_moving=False
 
     def stop_reading(self):
         self._stop_event.set()
@@ -46,6 +49,9 @@ class TLV493D:
     
     def get_arctan(self):
         return self.arctan
+    
+    def get_moving(self):
+        return self.is_moving
 
     #------Debugging Helpers--------------
 
