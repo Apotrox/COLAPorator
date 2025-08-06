@@ -6,7 +6,7 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.properties import StringProperty, BooleanProperty
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, FallOutTransition, RiseInTransition
 from kivy.uix.behaviors import FocusBehavior
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle, RoundedRectangle
@@ -237,9 +237,20 @@ class StartupScreen(Screen):
         self.startup_label = Label(
             text='Spin the wheel to start',
             font_size=26,
-            color=(1, 1, 1, 1)
+            color=(0.2, 0.2, 0.2, 1)
         )
+        
+        with self.canvas.before:
+            Color(rgba=(0.95, 0.95, 0.95, 1))
+            self.bg_rect = Rectangle(pos=self.pos, size=self.size)
+                # Update background when layout changes
+        self.bind(pos=self.update_bg, size=self.update_bg)
+        
         self.add_widget(self.startup_label)
+        
+    def update_bg(self, instance, value):
+        self.bg_rect.pos = instance.pos
+        self.bg_rect.size = instance.size
 
 class WaitingScreen(Screen):
     def __init__(self, **kw):
@@ -249,9 +260,20 @@ class WaitingScreen(Screen):
         self.startup_label = Label(
             text='Please Wait...',
             font_size=26,
-            color=(1, 1, 1, 1)
+            color=(0.2, 0.2, 0.2, 1)
         )
+        
+        with self.canvas.before:
+            Color(rgba=(0.95, 0.95, 0.95, 1))
+            self.bg_rect = Rectangle(pos=self.pos, size=self.size)
+                # Update background when layout changes
+        self.bind(pos=self.update_bg, size=self.update_bg)
+        
         self.add_widget(self.startup_label)
+        
+    def update_bg(self, instance, value):
+        self.bg_rect.pos = instance.pos
+        self.bg_rect.size = instance.size
         
 
 class ColapsApp(App):
@@ -275,7 +297,7 @@ class ColapsApp(App):
         time.sleep(1) #delay scheduling to give moving average time to fill up
         
         #periodically check for movement
-        Clock.schedule_interval(self.check_movement, 1)
+        Clock.schedule_interval(self.check_movement, 0.5)
 
         return self.sm
 
@@ -284,7 +306,8 @@ class ColapsApp(App):
             return True #not moving yet, continue checking
         
         Clock.unschedule(self.check_movement)
-        Clock.schedule_interval(self.check_stopped, 1)
+        Clock.schedule_interval(self.check_stopped, 0.5)
+        self.sm.transition=RiseInTransition()
         self.sm.current = 'waiting'
         return False
         
@@ -294,8 +317,9 @@ class ColapsApp(App):
         
         Clock.unschedule(self.check_stopped)
         if self.sm:
+            self.sm.transition=FallOutTransition()
             self.sm.current = 'topic_list'
-        Clock.schedule_interval(self.check_movement, 1)
+        Clock.schedule_interval(self.check_movement, 0.5)
         return False
 
 
