@@ -2,3 +2,4 @@
 /venv
 /src/.venv/
 src/test.db.bak
+src/.vscode/settings.json
