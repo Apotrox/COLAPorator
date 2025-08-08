@@ -95,6 +95,7 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, 
 
 
 class ListSelector(RecycleView):
+    """"The selection list used to select different topic/category items"""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -110,7 +111,7 @@ class ListSelector(RecycleView):
         )
         recycle_layout.bind(minimum_height=recycle_layout.setter('height'))
 
-        self.update_content(content='topics')
+        self.update_content(content='start')
 
         
         self.add_widget(recycle_layout)
@@ -127,9 +128,9 @@ class ListSelector(RecycleView):
             categories = db.execute("Select id, title FROM slices").fetchall()
             self.data=[{'text' : f"{id} {title}"} for id, title in sorted(categories, key = lambda x: x[0])]
         elif content == 'test':
-            self.data=[{'text': f"Item {i} 123456789"} for i in range(10)]
+            self.data=[{'text': f"Item {i} 123456789"} for i in range(10)] #something longer to test line wrapping
         else:
-            self.data=[{'text': "No data found"}]
+            self.data=[{'text': "Please select data type to load"}]
         self.refresh_from_data()
 
 class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
@@ -171,13 +172,14 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             self.add_widget(categories_button)
             self.add_widget(topics_button)
 
-
         def add_widget(self, widget, *args, **kwargs):
             """ Override the adding of widgets so we can bind and catch their
             *on_touch_down* events. """
             widget.bind(on_touch_down=self.button_touch_down)
             return super(MenuBar, self).add_widget(widget, *args, **kwargs)
-
+        
+        
+        # the following are all kivy events btw
         def button_touch_down(self, button, touch):
             """ Use collision detection to select buttons when the touch occurs
             within their area. """
@@ -211,12 +213,20 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
         def update_top_border(self, instance, _):
             self.top_rect.rectangle = (*instance.pos, *instance.size)
 
+class EditingBlock()
+
+
+
+
+#--Main window stuff
+
 class ContentManager(FloatLayout):
+        # use this as central controller/interface for different window parts
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
             self.orientation='horizontal'            
 
-            self.list_selector = ListSelector(size_hint=(0.3, 0.9), pos_hint={'x': 0.01, 'y': 0.05})
+            self.list_selector = ListSelector(size_hint=(0.2, 0.8), pos_hint={'x': 0.01, 'y': 0.05})
             self.add_widget(self.list_selector)
 
             #menu bar
