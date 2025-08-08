@@ -7,12 +7,17 @@ from kivy.uix.button import Button
 from kivy.uix.behaviors import FocusBehavior
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle, RoundedRectangle, Line
-from kivy.properties import StringProperty, BooleanProperty
+from kivy.properties import StringProperty, BooleanProperty, NumericProperty
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.behaviors.compoundselection import CompoundSelectionBehavior
 from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.stacklayout import StackLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.scrollview import ScrollView
 
 from backend.database_manager import Manager
 
@@ -83,6 +88,7 @@ class HoverableButton(Button):
         
 class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, Button):
     text = StringProperty()
+    db_id = NumericProperty(0) #give the button an id to store the DB id's in
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -90,8 +96,45 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, 
         self.size_hint_x = 0.95
         self.pos_hint = {"center_x": 0.5}
 
+    def refresh_view_attrs(self, rv, index, data):
+        super().refresh_view_attrs(rv, index, data)
+        self.db_id = data.get('db_id', 0) # set db_id from data
+
     def on_press(self):
-        pass
+        cm = self.get_root_window().children[0]
+        if hasattr(cm, 'update_editing_block_fields'):
+            cm.update_editing_block_fields(self.db_id)
+
+class LabeledCheckbox(BoxLayout):
+    text = StringProperty()
+    category_id = NumericProperty(0)
+    checked = BooleanProperty(False)
+    
+    def __init__(self, text, category_id, checked=False, **kwargs):
+        super().__init__(**kwargs)
+        self.size_hint = (None, None)
+        self.height = dp(20)
+        self.spacing = dp(5)
+        
+        self.text=text
+        self.category_id = category_id
+        self.checked = checked
+        
+        
+        self.checkbox = CheckBox( size_hint=(None,None), size=(dp(20), dp(20)), active=checked, color=(0,0,0,1))
+        self.label = Label(text=text, size_hint=(1,None), height=dp(20), text_size=(None,None), halign='left', valign='center', color=(0,0,0,1))
+        
+        self.label.bind(texture_size=self._update_size)
+        self._update_size()
+
+        self.add_widget(self.checkbox)
+        self.add_widget(self.label)
+
+    def _update_size(self, *_):
+        self.label.size = self.label.texture_size
+        self.width = self.checkbox.width + self.spacing + self.label.width
+            
+        
 
 
 class ListSelector(RecycleView):
@@ -123,14 +166,14 @@ class ListSelector(RecycleView):
         db = App.get_running_app().db
         if content == 'topics':
             topics = db.execute("SELECT id, title FROM topics").fetchall()
-            self.data=[{'text' : f"{id} {title}"} for id, title in sorted(topics, key = lambda x: x[0])]
+            self.data=[{'text' : f"{id} {title}", 'db_id': id} for id, title in sorted(topics, key = lambda x: x[0])]
         elif content == 'categories':
             categories = db.execute("Select id, title FROM slices").fetchall()
-            self.data=[{'text' : f"{id} {title}"} for id, title in sorted(categories, key = lambda x: x[0])]
+            self.data=[{'text' : f"{id} {title}", 'db_id': id} for id, title in sorted(categories, key = lambda x: x[0])]
         elif content == 'test':
-            self.data=[{'text': f"Item {i} 123456789"} for i in range(10)] #something longer to test line wrapping
+            self.data=[{'text': f"Item {i} 123456789", 'db_id': i+100} for i in range(10)] #something longer to test line wrapping
         else:
-            self.data=[{'text': "Please select data type to load"}]
+            self.data=[{'text': "Please select data type to load", 'db_id': 0}]
         self.refresh_from_data()
 
 class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
@@ -213,9 +256,65 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
         def update_top_border(self, instance, _):
             self.top_rect.rectangle = (*instance.pos, *instance.size)
 
-class EditingBlock()
+class EditingBlock(FloatLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        
+        self.db = App.get_running_app().db
+        
+        #input for title box
+        self.title_input = TextInput(text="",font_size="20sp", size_hint=(1, 0.08), pos_hint={'x': 0, 'y': 0.92})
+        self.add_widget(self.title_input)
+        
+        self.desc_input = TextInput(text="", font_size="20sp", size_hint=(0.7, 0.7), pos_hint={'x':0, 'y': 0.2})
+        self.add_widget(self.desc_input)
+        
+        #category list was too large, required a scrollview
+        scroll_view = ScrollView(
+            size_hint=(0.7, 0.15),
+            pos_hint={'x': 0.0, 'y': 0.02},
+            do_scroll_x=False  # only scroll vertically
+        )
+
+        self.category_box = StackLayout(
+            orientation='lr-tb',
+            size_hint_y=None,  # required for scrolling
+            spacing=dp(5),
+            padding=dp(5)
+        )
+        self.category_box.bind(minimum_height=self.category_box.setter('height'))
+        
+        scroll_view.add_widget(self.category_box)
+        self.add_widget(scroll_view)
 
 
+    
+    def load_item_content(self, item_id, type):
+        
+        self.category_box.clear_widgets()
+                                        
+        if type == "topics":
+           
+            result = self.db.execute(f"SELECT title, description FROM topics where id = {item_id}").fetchall() #getting topic data
+            categories = self.db.execute("SELECT ID, title from slices").fetchall() #getting all categories
+            topic_in_category = [x[0] for x in (self.db.execute(f"SELECT slices.id FROM slices \
+                                            INNER JOIN topicAssignment ON slices.ID = topicAssignment.slice_id \
+                                            INNER JOIN topics on topicAssignment.topic_id = topics.id WHERE topics.id = {item_id}").fetchall())]
+                                            #then get all categories the selected topic already belongs to (also returns tuples)
+            
+            title, desc = result[0]
+            self.title_input.text=title
+            self.desc_input.text=desc
+            
+            for (id, category_title) in categories:
+                self.category_box.add_widget(LabeledCheckbox(text=category_title, category_id=id, checked=id in topic_in_category))
+            
+        
+        elif type == "categories":
+            res = self.db.execute(f"SELECT title from slices where id = {item_id}").fetchall() #ducking returns (title,). yes, a tuple
+            title = res[0][0]
+            self.title_input.text=title
+            
 
 
 #--Main window stuff
@@ -224,7 +323,9 @@ class ContentManager(FloatLayout):
         # use this as central controller/interface for different window parts
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
-            self.orientation='horizontal'            
+            self.orientation='horizontal'
+            self.current_data_type = None #tracking which type is currently active (topics/cats)                meow
+                        
 
             self.list_selector = ListSelector(size_hint=(0.2, 0.8), pos_hint={'x': 0.01, 'y': 0.05})
             self.add_widget(self.list_selector)
@@ -232,13 +333,32 @@ class ContentManager(FloatLayout):
             #menu bar
             menu_bar = MenuBar(size_hint=(1, None), pos_hint={'y':0.82})
             self.add_widget(menu_bar)
+            
+            #EditingBlock with input fields
+            self.editing_block = EditingBlock(size_hint=(0.74, 0.83), pos_hint={'x': 0.25, 'y': 0.02})
+            #editing_block.bind(pos=self.debug_bg_update, size=self.debug_bg_update)
+            self.add_widget(self.editing_block)
+
+
+
+            
+        def update_editing_block_fields(self, db_id):
+            """"Called when a button on the list is pressed"""
+            if self.current_data_type:
+                self.editing_block.load_item_content(db_id, self.current_data_type)
         
         def on_menu_selection(self, selection):
             if selection =="categories":
+                self.current_data_type="categories"
                 self.list_selector.update_content(content='categories')
             elif selection == "topics":
+                self.current_data_type ="topics"
                 self.list_selector.update_content(content='topics')
-            
+        
+        def debug_bg_update(self, instance, *_):
+            with instance.canvas.before:
+                Color(rgba=(0.2,0.2,0.2,0.5))
+                Rectangle(pos=instance.pos, size=instance.size)
 
 
 class ContentApp(App):
