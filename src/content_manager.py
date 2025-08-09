@@ -122,6 +122,7 @@ class LabeledCheckbox(BoxLayout):
         
         
         self.checkbox = CheckBox( size_hint=(None,None), size=(dp(20), dp(20)), active=checked, color=(0,0,0,1))
+        self.checkbox.bind(active=self.toggle_active)
         self.label = Label(text=text, size_hint=(1,None), height=dp(20), text_size=(None,None), halign='left', valign='center', color=(0,0,0,1))
         
         self.label.bind(texture_size=self._update_size)
@@ -133,7 +134,9 @@ class LabeledCheckbox(BoxLayout):
     def _update_size(self, *_):
         self.label.size = self.label.texture_size
         self.width = self.checkbox.width + self.spacing + self.label.width
-            
+    
+    def toggle_active(self, _, value):
+        self.checked=value
         
 
 
@@ -185,8 +188,9 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             self.row_force_default=True
             self.row_default_height=50
             self.padding=[10,0,10,0]
-
-            empty_space_L = Label(text="", size_hint=(0.5,None))
+            
+            
+            
 
             categories_button = Button(text="Categories", 
                                        color=(0,0,0,1), 
@@ -210,8 +214,6 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
                 self.top_rect = Line(width=1)
 
             topics_button.bind(pos=self.update_top_border, size=self.update_top_border)
-
-            self.add_widget(empty_space_L)
             self.add_widget(categories_button)
             self.add_widget(topics_button)
 
@@ -257,6 +259,9 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             self.top_rect.rectangle = (*instance.pos, *instance.size)
 
 class EditingBlock(FloatLayout):
+    db_id = NumericProperty(0) #add the id as a property to make updates possible
+    content_type = StringProperty() #for table selection
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         
@@ -286,12 +291,41 @@ class EditingBlock(FloatLayout):
         
         scroll_view.add_widget(self.category_box)
         self.add_widget(scroll_view)
+        
+        save_button=Button(text="save", font_size="16sp", color=(0,0,0,1),
+                           size_hint=(0.2,0.1),
+                           pos_hint={'x': 0.78, 'y':0.02})
+        self.add_widget(save_button)
+        
+        save_button.bind(on_press=self.save_changes)
+        
+    def save_changes(self, _):
+        
+        title = self.title_input.text.replace("'", "''") #escape single quotes to contain all the text 
+        desc = self.desc_input.text.replace("'", "''")
+        category_selection=[]
+        
+        for checkbox in self.category_box.children:
+            if checkbox.checked:
+                category_selection.append((self.db_id, checkbox.category_id))
+        
+        if self.content_type=="categories":
+            self.db.execute(f"UPDATE slices SET title='{title}' WHERE id={self.db_id}")
+        elif self.content_type=="topics":
+            self.db.execute(f"UPDATE topics SET title='{title}', description='{desc}' WHERE id={self.db_id}")
+            self.db.execute(f"DELETE FROM topicAssignment WHERE topic_id={self.db_id}") #just remove all entries related to the topic
+            self.db.execute_many("INSERT INTO topicAssignment (topic_id, slice_id) VALUES (?, ?)", category_selection)
+              
+        #self.db.commit_changes()
 
 
     
     def load_item_content(self, item_id, type):
         
         self.category_box.clear_widgets()
+        
+        self.db_id=item_id
+        self.content_type=type
                                         
         if type == "topics":
            
@@ -314,6 +348,7 @@ class EditingBlock(FloatLayout):
             res = self.db.execute(f"SELECT title from slices where id = {item_id}").fetchall() #ducking returns (title,). yes, a tuple
             title = res[0][0]
             self.title_input.text=title
+            self.desc_input.text=""
             
 
 
@@ -361,7 +396,7 @@ class ContentManager(FloatLayout):
                 Rectangle(pos=instance.pos, size=instance.size)
 
 
-class ContentApp(App):
+class ContentManagerApp(App):
     def build(self):
 
         Window.clearcolor=(0.95, 0.95, 0.95, 1) #global background color
@@ -376,4 +411,4 @@ class ContentApp(App):
 
 
 if __name__ == '__main__':
-    ContentApp().run()
+    ContentManagerApp().run()

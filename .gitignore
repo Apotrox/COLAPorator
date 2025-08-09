@@ -3,3 +3,4 @@
 /src/.venv/
 src/test.db.bak
 src/.vscode/settings.json
+src/test.db-journal
