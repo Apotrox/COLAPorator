@@ -183,13 +183,24 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
 
-            self.cols=3
+            self.cols=4
             self.rows=1
             self.row_force_default=True
             self.row_default_height=50
             self.padding=[10,0,10,0]
             
+            add_button = Button(text="Add", 
+                                       color=(1,1,1,1), 
+                                       background_color=(200/255, 255/255, 255/255, 1), 
+                                       size_hint=(0.2, 0.8))
+            add_button.bind(on_press=self.add_items)
             
+            
+            remove_button = Button(text="Remove", 
+                                       color=(1,1,1,1), 
+                                       background_color=(200/255, 255/255, 255/255, 1), 
+                                       size_hint=(0.2, 0.8))
+            remove_button.bind(on_press=self.remove_items)
             
 
             categories_button = Button(text="Categories", 
@@ -214,6 +225,11 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
                 self.top_rect = Line(width=1)
 
             topics_button.bind(pos=self.update_top_border, size=self.update_top_border)
+            
+            
+            
+            self.add_widget(add_button)
+            self.add_widget(remove_button)
             self.add_widget(categories_button)
             self.add_widget(topics_button)
 
@@ -233,17 +249,24 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
 
         def select_node(self, node):
             node.background_color = (200/255, 255/255, 255/255, 1)
+            node.color=(1,1,1,1)
             return super(MenuBar, self).select_node(node)
 
         def deselect_node(self, node):
             node.background_color = (0, 0, 0, 0)
+            node.color=(0,0,0,1)
             super(MenuBar, self).deselect_node(node)
         
         def on_selected_nodes(self, _, nodes):
+            #filtering out the nodes that are not supposed to be toggleable (add/remove)
+            for node in nodes:
+                if not (node.text == "Categories" or node.text == "Topics"):
+                    super(MenuBar,self).deselect_node(node) # can't use my own deselect method here due to the color change...
+            
             if not nodes: #this method, for some reason first gets an empty list and then a list with the element
                 return    #gotta skip the empty list
                           #node objects are just the original objects, here the buttons, whose attributes can be accessed normally 
-            
+                          
             #this assumes that MenuBar will *always* be added to ContentManager as a child
             if(nodes[0].text =="Categories"):
                 self.parent.on_menu_selection(selection="categories")
@@ -257,6 +280,14 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
 
         def update_top_border(self, instance, _):
             self.top_rect.rectangle = (*instance.pos, *instance.size)
+            
+            
+        def add_items(self, _):
+            self.parent.on_add_item()
+        
+        def remove_items(self,_):
+            self.parent.on_remove_item()
+            
 
 class EditingBlock(FloatLayout):
     db_id = NumericProperty(0) #add the id as a property to make updates possible
@@ -374,8 +405,26 @@ class ContentManager(FloatLayout):
             #editing_block.bind(pos=self.debug_bg_update, size=self.debug_bg_update)
             self.add_widget(self.editing_block)
 
-
-
+        def on_add_item(self, *_):
+            if self.current_data_type == "categories": #skip categories as we won't be handling those
+                return
+            
+            db = App.get_running_app().db
+            
+            db.execute(f"INSERT INTO topics (title, description) VALUES ('New Topic', 'Placeholder description')")
+            #db.commit_changes()
+        
+        def on_remove_item(self, *_):
+            if self.current_data_type == "categories":
+                return
+            
+            db = App.get_running_app().db
+            
+            id = self.editing_block.db_id
+            db.execute(f"DELETE FROM topics WHERE id = {id}")
+            
+            #db.commit_changes()
+            
             
         def update_editing_block_fields(self, db_id):
             """"Called when a button on the list is pressed"""
