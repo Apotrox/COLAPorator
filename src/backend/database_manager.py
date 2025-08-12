@@ -26,7 +26,7 @@ class Manager:
                             "title" : "TEXT UNIQUE",
                             "description": "TEXT"
                             },
-                "slices": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+                "categories": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT", #slices
                             "title": "TEXT UNIQUE",
                             "angle_begin": "INTEGER",
                             "angle_end": "INTEGER"},
@@ -36,10 +36,10 @@ class Manager:
                             "img_path" : "TEXT"},
                 "topicAssignment" : {   "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
                                         "topic_id": "INTEGER NOT NULL",
-                                        "slice_id": "INTEGER NOT NULL",
-                                        "" : "FOREIGN KEY (topic_id) REFERENCES topics (id), FOREIGN KEY (slice_id) REFERENCES slices (id)"
+                                        "category_id": "INTEGER NOT NULL",
+                                        "" : "FOREIGN KEY (topic_id) REFERENCES topics (id), FOREIGN KEY (category_id) REFERENCES categories (id)"
                                         # sqlite does not like the constraints in between the column definitions :/
-                                    }   #the relationships between topics and slices/categories will be managed here
+                                    }   #the relationships between topics and categories will be managed here
             }
 
         #tries to create tables based on the dict above. if it already exists, that's fine

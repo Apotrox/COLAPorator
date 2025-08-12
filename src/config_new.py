@@ -128,7 +128,7 @@ class ConfirmPopup(Popup):
             slice_angles[i], #begin angle
             slice_angles[(i+1) % len(slice_angles)] #end angle
         )for i in range (len(slice_angles))]
-        db.execute_many("INSERT INTO slices (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
+        db.execute_many("INSERT INTO categories (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
         db.commit_changes()
         print(slices)
 

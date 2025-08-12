@@ -172,7 +172,7 @@ class ListSelector(RecycleView):
             topics = db.execute("SELECT id, title FROM topics").fetchall()
             self.data=[{'text' : f"{id} {title}", 'db_id': id} for id, title in sorted(topics, key = lambda x: x[0])]
         elif content == 'categories':
-            categories = db.execute("Select id, title FROM slices").fetchall()
+            categories = db.execute("Select id, title FROM categories").fetchall()
             self.data=[{'text' : f"{id} {title}", 'db_id': id} for id, title in sorted(categories, key = lambda x: x[0])]
         elif content == 'test':
             self.data=[{'text': f"Item {i} 123456789", 'db_id': i+100} for i in range(10)] #something longer to test line wrapping
@@ -361,11 +361,11 @@ class EditingBlock(FloatLayout):
                 category_selection.append((self.db_id, checkbox.category_id))
         
         if self.content_type=="categories":
-            self.db.execute(f"UPDATE slices SET title='{title}' WHERE id={self.db_id}")
+            self.db.execute(f"UPDATE categories SET title='{title}' WHERE id={self.db_id}")
         elif self.content_type=="topics":
             self.db.execute(f"UPDATE topics SET title='{title}', description='{desc}' WHERE id={self.db_id}")
             self.db.execute(f"DELETE FROM topicAssignment WHERE topic_id={self.db_id}") #just remove all entries related to the topic
-            self.db.execute_many("INSERT INTO topicAssignment (topic_id, slice_id) VALUES (?, ?)", category_selection)
+            self.db.execute_many("INSERT INTO topicAssignment (topic_id, category_id) VALUES (?, ?)", category_selection)
               
         #self.db.commit_changes()
 
@@ -381,9 +381,9 @@ class EditingBlock(FloatLayout):
         if type == "topics":
            
             result = self.db.execute(f"SELECT title, description FROM topics where id = {item_id}").fetchall() #getting topic data
-            categories = self.db.execute("SELECT ID, title from slices").fetchall() #getting all categories
-            topic_in_category = [x[0] for x in (self.db.execute(f"SELECT slices.id FROM slices \
-                                            INNER JOIN topicAssignment ON slices.ID = topicAssignment.slice_id \
+            categories = self.db.execute("SELECT ID, title from categories").fetchall() #getting all categories
+            topic_in_category = [x[0] for x in (self.db.execute(f"SELECT categories.id FROM categories \
+                                            INNER JOIN topicAssignment ON categories.ID = topicAssignment.category_id \
                                             INNER JOIN topics on topicAssignment.topic_id = topics.id WHERE topics.id = {item_id}").fetchall())]
                                             #then get all categories the selected topic already belongs to (also returns tuples)
             
@@ -396,7 +396,7 @@ class EditingBlock(FloatLayout):
             
         
         elif type == "categories":
-            res = self.db.execute(f"SELECT title from slices where id = {item_id}").fetchall() #ducking returns (title,). yes, a tuple
+            res = self.db.execute(f"SELECT title from categories where id = {item_id}").fetchall() #ducking returns (title,). yes, a tuple
             title = res[0][0]
             self.title_input.text=title
             self.desc_input.text=""

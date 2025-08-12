@@ -167,12 +167,12 @@ class TopicListScreen(Screen):
 
     def on_enter(self):
         angle= self.tlv.get_angle()
-        current_slice= db.execute(f"SELECT id, title FROM slices WHERE slices.angle_begin <= {angle} AND slices.angle_end >= {angle}").fetchall()
+        current_slice= db.execute(f"SELECT id, title FROM categories WHERE categories.angle_begin <= {angle} AND categories.angle_end >= {angle}").fetchall()
         id, title = current_slice[0]
         self.title_label.text=title
         
         data = db.execute(f"SELECT topics.title FROM topics INNER JOIN topicAssignment ON topics.ID = topicAssignment.topic_id \
-                          WHERE topicAssignment.slice_id = {id}").fetchall()
+                          WHERE topicAssignment.category_id = {id}").fetchall()
         self.rv.data = [{'text': topic[0]} for topic in data]
 
 
