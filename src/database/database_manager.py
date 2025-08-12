@@ -73,9 +73,10 @@ class Manager:
     
     def execute(self, query:str, params: str | None = None) -> sqlite3.Cursor: #adding the return type just to clarify it's usage           
         try:
-            if params:
+            if params and all(params): #checks if parameters contain none types
                 return self.cur.execute(query, params)
-            return self.cur.execute(query)
+            return self.cur.execute(query) #if they do, try executing without them
+            #this WILL throw an error, but better than overwriting with faulty data (None's)
         except Exception as e:
             print(f"Query execution failed due to: {str(e)}") #no need to have the entire database manager crash just because a query didn't execute correctly
     

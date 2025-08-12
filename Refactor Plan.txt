@@ -38,4 +38,6 @@ Topic Service:
 	update(ID, new_title: str | None = None, description: str | None = None)
 	set_assignment(topic_id, List[category_id])
 	get_assignments(topic_id) -> List[category_id]
+	add()-> Topic 
+	remove(id)
 	
