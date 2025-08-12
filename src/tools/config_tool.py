@@ -4,8 +4,8 @@ import math
 import threading
 import sys,os, time
 
-import backend.tlv493d as tlv493d
-from backend.database_manager import Manager
+import hardware.tlv493d as tlv493d
+from database.database_manager import Manager
 
 #---init---------
 

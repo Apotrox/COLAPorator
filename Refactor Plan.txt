@@ -1,0 +1,41 @@
+Refactor Plan:
+
+DB: Make Assignments Unique, to enforce pair uniqueness
+DB: replace f String with parametrized SQL -> Might fix injection risk?
+
+TLV: Normalize angles at boundary (mod 360)
+
+
+
+Assumes small dataclasses for Topic and Category respectively that exposes the DB data
+
+Category Class:
+ID
+Title
+Angle_begin
+angle_end
+
+Category service:
+	list() -> List[Category]
+	get(ID) -> Category | None
+	rename(id, new_title) -> Bool # to enable additional error handling in UI?
+	get_for_angle(angle:int) -> Category | None
+
+	#maybe for later, requires angle wrapping
+	delete(id) -> Bool
+	create(title, angle_begin, andle_end)
+	validate_ranges() #validates angles to remove/fix overlap and full 0-360°
+
+Topic Class:
+ID
+Title
+Desc
+
+Topic Service:
+	list_all() -> List[Topic]
+	list_by_category(category_id) -> List[Topic]
+	get(ID) -> Topic |None
+	update(ID, new_title: str | None = None, description: str | None = None)
+	set_assignment(topic_id, List[category_id])
+	get_assignments(topic_id) -> List[category_id]
+	

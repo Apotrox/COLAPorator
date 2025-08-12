@@ -1,6 +1,6 @@
 
 import json
-from backend.database_manager import Manager
+from database.database_manager import Manager
 
 # Mapping category names to IDs
 CATEGORY_ID_MAP = {

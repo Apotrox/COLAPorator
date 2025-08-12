@@ -7,7 +7,7 @@ class Manager:
     
     
     def __init__(self): 
-        db_path = "test.db"
+        db_path = ".\\database\\test.db"
         self.__con = sqlite3.connect(db_path)
         self.cur = self.__con.cursor()
 
@@ -37,7 +37,7 @@ class Manager:
                 "topicAssignment" : {   "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
                                         "topic_id": "INTEGER NOT NULL",
                                         "category_id": "INTEGER NOT NULL",
-                                        "" : "FOREIGN KEY (topic_id) REFERENCES topics (id), FOREIGN KEY (category_id) REFERENCES categories (id)"
+                                        "" : "FOREIGN KEY (topic_id) REFERENCES topics (id) ON DELETE CASCADE, FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE"
                                         # sqlite does not like the constraints in between the column definitions :/
                                     }   #the relationships between topics and categories will be managed here
             }

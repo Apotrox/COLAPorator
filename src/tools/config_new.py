@@ -12,8 +12,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.popup import Popup
 
 import math, threading
-from backend.tlv493d import TLV493D
-from backend.database_manager import Manager
+from hardware.tlv493d import TLV493D
+from database.database_manager import Manager
 
 class AngleDisplay(FloatLayout):
     def __init__(self, tlv, **kwargs):

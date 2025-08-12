@@ -11,8 +11,8 @@ from kivy.uix.behaviors import FocusBehavior
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.metrics import dp
-from backend.database_manager import Manager
-from backend.tlv493d import TLV493D
+from database.database_manager import Manager
+from hardware.tlv493d import TLV493D
 from kivy.clock import Clock
 import threading, time
 

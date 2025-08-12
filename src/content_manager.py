@@ -19,7 +19,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 
-from backend.database_manager import Manager
+from database.database_manager import Manager
 
 class HoverableButton(Button):
     hovered = BooleanProperty(False)
