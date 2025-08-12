@@ -23,6 +23,14 @@ class CategoryService:
             id = Category.id    
         self.db.execute("UPDATE categories SET title=? WHERE id=?", (id,new_title))
         
+    def get_for_angle(self, angle:int) -> Category | None:
+        query = self.db.execute("SELECT * FROM categories WHERE categories.angle_begin <= ? AND categories.angle_end > ?", (angle,)).fetchone()
+        id, title, ab, ae = query
+        if query and all(query): #if there is actually data
+            return Category(id,title,ab,ae)
+        else:
+            return None
+        
     #TODO 
     # 	#maybe for later, requires angle wrapping
 	# delete(id) -> Bool
