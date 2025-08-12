@@ -71,8 +71,10 @@ class Manager:
         self.__con.commit()
     
     
-    def execute(self, query:str) -> sqlite3.Cursor: #adding the return type just to clarify it's usage
+    def execute(self, query:str, params: str | None = None) -> sqlite3.Cursor: #adding the return type just to clarify it's usage           
         try:
+            if params:
+                return self.cur.execute(query, params)
             return self.cur.execute(query)
         except Exception as e:
             print(f"Query execution failed due to: {str(e)}") #no need to have the entire database manager crash just because a query didn't execute correctly
