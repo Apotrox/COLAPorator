@@ -1,152 +1,45 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.metrics import dp
 from kivy.uix.button import Button
 from kivy.uix.behaviors import FocusBehavior
 from kivy.core.window import Window
-from kivy.graphics import Color, Rectangle, RoundedRectangle, Line
-from kivy.properties import StringProperty, BooleanProperty, NumericProperty
-from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.graphics import Color, Rectangle, Line
+from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.behaviors.compoundselection import CompoundSelectionBehavior
-from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
-from kivy.uix.checkbox import CheckBox
 from kivy.uix.stacklayout import StackLayout
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 
 from database.database_manager import Manager
+from categories.CategoryService import CategoryService
+from topics.TopicService import TopicService
 
-class HoverableButton(Button):
-    hovered = BooleanProperty(False)
+from ui.SelectableButton import SelectableButton 
+from ui.LabeledCheckbox import LabeledCheckbox
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        Window.bind(mouse_pos=self.on_mouse_pos)
-        
-        # Set button properties from KV
-        self.background_normal = ''
-        self.background_down = ''
-        self.background_color = (0, 0, 0, 0)
-        self.color = (0.1, 0.1, 0.1, 1)
-        
-        # Enable text wrapping and auto-sizing
-        self.text_size = (None, None)  # Will be set based on button width
-        self.halign = "center"
-        self.valign = "middle"
-        self.bind(size=self.on_size_change) #NOTE
-        self.bind(text=self.update_height)
 
-    def on_mouse_pos(self, *args):
-        if not self.get_root_window():
-            return
-        pos = args[1]
-        self.hovered = self.collide_point(*self.to_widget(*pos))
-
-    def on_size_change(self, *args):
-        # Update text_size when button width changes
-        if self.size[0] > 0:
-            self.text_size = (self.size[0] - 40, None)  # 40px padding
-        self.update_height()
-        self.on_hovered(self, self.hovered)
-
-    def update_height(self, *_):
-        if not self.text or self.size[0] <= 0:
-            return
-            
-        # Set text_size to enable wrapping
-        if self.text_size[0] is None:
-            self.text_size = (self.size[0] - 20, None)
-        
-        # Calculate required height based on text
-        self.texture_update()
-        if self.texture:
-            # Add padding (20px top/bottom + some extra for comfort)
-            required_height = self.texture.height + 30
-            min_height = dp(50)  # Minimum button height
-            new_height = max(required_height, min_height)
-            
-            # Only update if height actually changed to avoid infinite loops
-            if abs(self.height - new_height) > 1:
-                self.height = new_height
-
-    def on_hovered(self, instance, hovered):
-        # Update canvas when hovered state changes
-        self.canvas.before.clear()
-        with self.canvas.before:
-            Color(rgba=(0.8, 0.87, 1, 1) if hovered else (1, 1, 1, 1))
-            RoundedRectangle(pos=self.pos, size=self.size, radius=[12])
-
-    def on_pos(self, *args):
-        # Update canvas when position changes
-        self.on_hovered(self, self.hovered)
-
-        
-class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior, Button):
-    text = StringProperty()
-    db_id = NumericProperty(0) #give the button an id to store the DB id's in
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        
-        self.size_hint_x = 0.95
-        self.pos_hint = {"center_x": 0.5}
-
-    def refresh_view_attrs(self, rv, index, data):
-        super().refresh_view_attrs(rv, index, data)
-        self.db_id = data.get('db_id', 0) # set db_id from data
-
+class CMSelectableButton(SelectableButton):
+    #overwriting with custom press behaviour
     def on_press(self):
+        print("pressed!")
         cm = self.get_root_window().children[0]
         if hasattr(cm, 'update_editing_block_fields'):
             cm.update_editing_block_fields(self.db_id)
 
-class LabeledCheckbox(BoxLayout):
-    text = StringProperty()
-    category_id = NumericProperty(0)
-    checked = BooleanProperty(False)
-    
-    def __init__(self, text, category_id, checked=False, **kwargs):
-        super().__init__(**kwargs)
-        self.size_hint = (None, None)
-        self.height = dp(20)
-        self.spacing = dp(5)
-        
-        self.text=text
-        self.category_id = category_id
-        self.checked = checked
-        
-        
-        self.checkbox = CheckBox( size_hint=(None,None), size=(dp(20), dp(20)), active=checked, color=(0,0,0,1))
-        self.checkbox.bind(active=self.toggle_active)
-        self.label = Label(text=text, size_hint=(1,None), height=dp(20), text_size=(None,None), halign='left', valign='center', color=(0,0,0,1))
-        
-        self.label.bind(texture_size=self._update_size)
-        self._update_size()
-
-        self.add_widget(self.checkbox)
-        self.add_widget(self.label)
-
-    def _update_size(self, *_):
-        self.label.size = self.label.texture_size
-        self.width = self.checkbox.width + self.spacing + self.label.width
-    
-    def toggle_active(self, _, value):
-        self.checked=value
-        
-
-
 class ListSelector(RecycleView):
     """"The selection list used to select different topic/category items"""
-    def __init__(self, **kwargs):
+    def __init__(self, ts: TopicService, cs: CategoryService, **kwargs):
         super().__init__(**kwargs)
+        
+        self.topic_service=ts
+        self.category_service=cs
 
         self.scroll_type=['bars', 'content']
-        self.bar_width=5
+        self.bar_width=7
 
         recycle_layout = RecycleBoxLayout(
             default_size=(None, None),  # Let buttons determine their own height
@@ -162,18 +55,17 @@ class ListSelector(RecycleView):
 
         
         self.add_widget(recycle_layout)
-        self.viewclass='SelectableButton'
+        self.viewclass='CMSelectableButton'
 
     def update_content(self, content):
         """content has to be 'topics' or 'categories'"""
-
-        db = App.get_running_app().db
+        
         if content == 'topics':
-            topics = db.execute("SELECT id, title FROM topics").fetchall()
-            self.data=[{'text' : f"{id} {title}", 'db_id': id} for id, title in sorted(topics, key = lambda x: x[0])]
+            topics = self.topic_service.list_all()
+            self.data=[{'text' : f"{topic.id} {topic.title}", 'db_id': topic.id} for topic in topics]
         elif content == 'categories':
-            categories = db.execute("Select id, title FROM categories").fetchall()
-            self.data=[{'text' : f"{id} {title}", 'db_id': id} for id, title in sorted(categories, key = lambda x: x[0])]
+            categories = self.category_service.list()
+            self.data=[{'text' : f"{cat.id} {cat.title}", 'db_id': cat.id} for cat in categories]
         elif content == 'test':
             self.data=[{'text': f"Item {i} 123456789", 'db_id': i+100} for i in range(10)] #something longer to test line wrapping
         else:
@@ -185,9 +77,16 @@ class ListSelector(RecycleView):
             self.scroll_y=0 #easiest way to scroll down
 
 
+
+
 class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
-        def __init__(self, **kwargs):
+        """Selecting content type"""
+        def __init__(self, ts: TopicService, cs: CategoryService, cm, **kwargs):
             super().__init__(**kwargs)
+            
+            self.topic_service=ts
+            self.category_service=cs
+            self.cm=cm
 
             self.cols=2
             self.rows=1
@@ -249,20 +148,15 @@ class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             super(TypeSelector, self).deselect_node(node)
         
         def on_selected_nodes(self, _, nodes):
-            #filtering out the nodes that are not supposed to be toggleable (add/remove)
-            for node in nodes:
-                if not (node.text == "Categories" or node.text == "Topics"):
-                    super(TypeSelector,self).deselect_node(node) # can't use my own deselect method here due to the color change...
-            
             if not nodes: #this method, for some reason first gets an empty list and then a list with the element
                 return    #gotta skip the empty list
                           #node objects are just the original objects, here the buttons, whose attributes can be accessed normally 
                           
             #this assumes that MenuBar will *always* be added to ContentManager as a child
             if(nodes[0].text =="Categories"):
-                self.parent.parent.on_menu_selection(selection="categories")
+                self.cm.on_menu_selection(selection="categories")
             elif(nodes[0].text == "Topics"):
-                self.parent.parent.on_menu_selection(selection="topics")
+                self.cm.on_menu_selection(selection="topics")
             else:
                 pass
 
@@ -273,9 +167,16 @@ class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             self.top_rect.rectangle = (*instance.pos, *instance.size)
             
             
+            
+            
 class MenuBar(GridLayout):
-    def __init__(self, **kwargs):
+    """Menubar to select content type and add/remove topics"""
+    def __init__(self, ts: TopicService, cs: CategoryService,cm, **kwargs):
         super().__init__(**kwargs)
+        
+        self.topic_service=ts
+        self.category_service=cs
+        self.cm=cm
         
         self.cols=3
         self.rows=1
@@ -296,7 +197,7 @@ class MenuBar(GridLayout):
                                     size_hint=(0.2, 0.8))
         remove_button.bind(on_press=self.remove_items)
         
-        type_selector= TypeSelector()
+        type_selector= TypeSelector(ts=self.topic_service, cs=self.category_service, cm=self.cm)
         
         self.add_widget(add_button)
         self.add_widget(remove_button)
@@ -304,19 +205,24 @@ class MenuBar(GridLayout):
         
         
     def add_items(self, _):
-        self.parent.on_add_item()
+        self.cm.on_add_item()
         
     def remove_items(self,_):
-        self.parent.on_remove_item()
+        self.cm.on_remove_item()
+        
+        
+        
 
 class EditingBlock(FloatLayout):
+    """Contains all Input field necessary to edit content. Saves content type and selected ID in properties"""
     db_id = NumericProperty(0) #add the id as a property to make updates possible
     content_type = StringProperty() #for table selection
     
-    def __init__(self, **kwargs):
+    def __init__(self, ts: TopicService, cs: CategoryService, **kwargs):
         super().__init__(**kwargs)
         
-        self.db = App.get_running_app().db
+        self.topic_service=ts
+        self.category_service=cs
         
         #input for title box
         self.title_input = TextInput(text="",font_size="20sp", size_hint=(1, 0.08), pos_hint={'x': 0, 'y': 0.92})
@@ -351,28 +257,20 @@ class EditingBlock(FloatLayout):
         save_button.bind(on_press=self.save_changes)
         
     def save_changes(self, _):
-        
-        title = self.title_input.text.replace("'", "''") #escape single quotes to contain all the text 
-        desc = self.desc_input.text.replace("'", "''")
-        category_selection=[]
-        
-        for checkbox in self.category_box.children:
-            if checkbox.checked:
-                category_selection.append((self.db_id, checkbox.category_id))
+        """Handles basic data processing for the services to save to DB"""
+        title = self.title_input.text
+        desc = self.desc_input.text
+        category_selection=[checkbox.category_id for checkbox in self.category_box.children if checkbox.checked]
         
         if self.content_type=="categories":
-            self.db.execute(f"UPDATE categories SET title='{title}' WHERE id={self.db_id}")
+            self.category_service.rename(self.db_id, title)
         elif self.content_type=="topics":
-            self.db.execute(f"UPDATE topics SET title='{title}', description='{desc}' WHERE id={self.db_id}")
-            self.db.execute(f"DELETE FROM topicAssignment WHERE topic_id={self.db_id}") #just remove all entries related to the topic
-            self.db.execute_many("INSERT INTO topicAssignment (topic_id, category_id) VALUES (?, ?)", category_selection)
-              
-        #self.db.commit_changes()
-
-
+            self.topic_service.update(self.db_id, title, desc)
+            self.topic_service.set_assignment(self.db_id, category_selection)
+        
     
     def load_item_content(self, item_id, type):
-        
+        """Loads content for given item_id and type"""
         self.category_box.clear_widgets()
         
         self.db_id=item_id
@@ -380,25 +278,19 @@ class EditingBlock(FloatLayout):
                                         
         if type == "topics":
            
-            result = self.db.execute(f"SELECT title, description FROM topics where id = {item_id}").fetchall() #getting topic data
-            categories = self.db.execute("SELECT ID, title from categories").fetchall() #getting all categories
-            topic_in_category = [x[0] for x in (self.db.execute(f"SELECT categories.id FROM categories \
-                                            INNER JOIN topicAssignment ON categories.ID = topicAssignment.category_id \
-                                            INNER JOIN topics on topicAssignment.topic_id = topics.id WHERE topics.id = {item_id}").fetchall())]
-                                            #then get all categories the selected topic already belongs to (also returns tuples)
+            categories = self.category_service.list()
+            topic_in_category = self.topic_service.get_assignments(item_id)
+                                            
+            topic = self.topic_service.get(item_id)
+            self.title_input.text=topic.title
+            self.desc_input.text=topic.description
             
-            title, desc = result[0]
-            self.title_input.text=title
-            self.desc_input.text=desc
-            
-            for (id, category_title) in categories:
-                self.category_box.add_widget(LabeledCheckbox(text=category_title, category_id=id, checked=id in topic_in_category))
+            for category in categories:
+                self.category_box.add_widget(LabeledCheckbox(text=category.title, category_id=category.id, checked=category.id in topic_in_category))
             
         
         elif type == "categories":
-            res = self.db.execute(f"SELECT title from categories where id = {item_id}").fetchall() #ducking returns (title,). yes, a tuple
-            title = res[0][0]
-            self.title_input.text=title
+            self.title_input.text=self.category_service.get(item_id).title
             self.desc_input.text=""
             
 
@@ -407,21 +299,25 @@ class EditingBlock(FloatLayout):
 
 class ContentManager(FloatLayout):
         # use this as central controller/interface for different window parts
-        def __init__(self, **kwargs):
+        def __init__(self, ts:TopicService, cs: CategoryService, **kwargs):
             super().__init__(**kwargs)
+            
+            self.topic_service=ts
+            self.category_service=cs
+            
             self.orientation='horizontal'
             self.current_data_type = None #tracking which type is currently active (topics/cats)                meow
                         
 
-            self.list_selector = ListSelector(size_hint=(0.2, 0.8), pos_hint={'x': 0.01, 'y': 0.05})
+            self.list_selector = ListSelector(size_hint=(0.2, 0.8), pos_hint={'x': 0.01, 'y': 0.05}, ts=self.topic_service, cs=self.category_service)
             self.add_widget(self.list_selector)
 
             #menu bar
-            menu_bar = MenuBar(size_hint=(1, None), pos_hint={'y':0.82})
+            menu_bar = MenuBar(size_hint=(1, None), pos_hint={'y':0.82}, ts=self.topic_service, cs=self.category_service, cm=self)
             self.add_widget(menu_bar)
             
             #EditingBlock with input fields
-            self.editing_block = EditingBlock(size_hint=(0.74, 0.83), pos_hint={'x': 0.25, 'y': 0.02})
+            self.editing_block = EditingBlock(size_hint=(0.74, 0.83), pos_hint={'x': 0.25, 'y': 0.02}, ts=self.topic_service, cs=self.category_service)
             #editing_block.bind(pos=self.debug_bg_update, size=self.debug_bg_update)
             self.add_widget(self.editing_block)
 
@@ -429,10 +325,7 @@ class ContentManager(FloatLayout):
             if self.current_data_type == "categories": #skip categories as we won't be handling those
                 return
             
-            db = App.get_running_app().db
-            
-            db.execute(f"INSERT INTO topics (title, description) VALUES ('New Topic', 'Placeholder description')")
-            #db.commit_changes()
+            self.topic_service.add_topic()
             
             self.list_selector.update_content("topics")
             self.list_selector.scroll_to_end()
@@ -441,12 +334,8 @@ class ContentManager(FloatLayout):
             if self.current_data_type == "categories":
                 return
             
-            db = App.get_running_app().db
-            
             id = self.editing_block.db_id
-            db.execute(f"DELETE FROM topics WHERE id = {id}")
-            
-            #db.commit_changes()
+            self.topic_service.remove_topic(id)
             
             self.list_selector.update_content("topics")
             
@@ -459,10 +348,10 @@ class ContentManager(FloatLayout):
         def on_menu_selection(self, selection):
             if selection =="categories":
                 self.current_data_type="categories"
-                self.list_selector.update_content(content='categories')
             elif selection == "topics":
                 self.current_data_type ="topics"
-                self.list_selector.update_content(content='topics')
+                
+            self.list_selector.update_content(content=self.current_data_type)
         
         def debug_bg_update(self, instance, *_):
             with instance.canvas.before:
@@ -475,10 +364,13 @@ class ContentManagerApp(App):
 
         Window.clearcolor=(0.95, 0.95, 0.95, 1) #global background color
 
-        self.db = Manager()
-        self.db.ensure_database_availability()
+        db = Manager()
+        db.ensure_database_availability()
+        
+        topic_service = TopicService(db)
+        category_service = CategoryService(db)
 
-        window = ContentManager()
+        window = ContentManager(topic_service, category_service)
 
         return window
 

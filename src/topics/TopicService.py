@@ -9,19 +9,19 @@ class TopicService:
         self.db = db
     
     def list_all(self) -> List[Topic]:
-        """Returns list of all topics"""
+        """Returns list of all topics sorted ASC by ID"""
         query = self.db.execute("SELECT * from topics").fetchall()
-        return [Topic(id, title, desc) for (id, title, desc) in query]
+        return sorted([Topic(id, title, desc) for (id, title, desc) in query], key = lambda x: x.id)
     
     def list_by_category(self, category_id: int | Category) -> List[Topic]:
-        """Returns list of all Topics of a specific category"""
+        """Returns list of all Topics of a specific category sorted ASC by ID"""
         if isinstance(category_id, Category):
             category_id = category_id.id
         
         query = self.db.execute("SELECT topics.id, topics.title, topics.description from topics \
                                 INNER JOIN topicAssignment as TA on topics.id = ta.topic_id \
                                 WHERE ta.category_id=?", (category_id,)).fetchall()
-        return [Topic(id, title, desc) for (id, title, desc) in query]
+        return sorted([Topic(id, title, desc) for (id, title, desc) in query], key = lambda x: x.id)
 
     def get(self, topic_id: int) -> Topic | None:
         """Returns single topic based on integer ID provided"""
@@ -68,5 +68,5 @@ class TopicService:
         if isinstance(topic_id, Topic):
             topic_id=topic_id.id
         
-        self.db.execute("DELETE FROM topics WHERE id=?"(topic_id,))
+        self.db.execute("DELETE FROM topics WHERE id=?", (topic_id,))
         self.db.commit_changes()

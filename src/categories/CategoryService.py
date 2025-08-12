@@ -7,8 +7,9 @@ class CategoryService:
         self.db = db
     
     def list(self) -> List[Category]:
+        """Returns list of all categories. Sorted ASC by ID"""
         query = self.db.execute("SELECT * from categories").fetchall()
-        return [Category(id,title,ab,ae) for (id,title,ab,ae) in query]
+        return sorted([Category(id,title,ab,ae) for (id,title,ab,ae) in query], key=lambda x:x.id)
     
     def get(self, id) -> Category | None:
         query = self.db.execute("SELECT * from categories where id=?", (id,)).fetchone()  
