@@ -146,6 +146,7 @@ class ListSelector(RecycleView):
         super().__init__(**kwargs)
 
         self.scroll_type=['bars', 'content']
+        self.bar_width=5
 
         recycle_layout = RecycleBoxLayout(
             default_size=(None, None),  # Let buttons determine their own height
@@ -178,29 +179,22 @@ class ListSelector(RecycleView):
         else:
             self.data=[{'text': "Please select data type to load", 'db_id': 0}]
         self.refresh_from_data()
+        
+    def scroll_to_end(self):
+        if self.data:
+            self.scroll_y=0 #easiest way to scroll down
 
-class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
+
+class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
         def __init__(self, **kwargs):
             super().__init__(**kwargs)
 
-            self.cols=4
+            self.cols=2
             self.rows=1
             self.row_force_default=True
             self.row_default_height=50
             self.padding=[10,0,10,0]
             
-            add_button = Button(text="Add", 
-                                       color=(1,1,1,1), 
-                                       background_color=(200/255, 255/255, 255/255, 1), 
-                                       size_hint=(0.2, 0.8))
-            add_button.bind(on_press=self.add_items)
-            
-            
-            remove_button = Button(text="Remove", 
-                                       color=(1,1,1,1), 
-                                       background_color=(200/255, 255/255, 255/255, 1), 
-                                       size_hint=(0.2, 0.8))
-            remove_button.bind(on_press=self.remove_items)
             
 
             categories_button = Button(text="Categories", 
@@ -226,10 +220,7 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
 
             topics_button.bind(pos=self.update_top_border, size=self.update_top_border)
             
-            
-            
-            self.add_widget(add_button)
-            self.add_widget(remove_button)
+
             self.add_widget(categories_button)
             self.add_widget(topics_button)
 
@@ -237,7 +228,7 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             """ Override the adding of widgets so we can bind and catch their
             *on_touch_down* events. """
             widget.bind(on_touch_down=self.button_touch_down)
-            return super(MenuBar, self).add_widget(widget, *args, **kwargs)
+            return super(TypeSelector, self).add_widget(widget, *args, **kwargs)
         
         
         # the following are all kivy events btw
@@ -250,18 +241,18 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
         def select_node(self, node):
             node.background_color = (200/255, 255/255, 255/255, 1)
             node.color=(1,1,1,1)
-            return super(MenuBar, self).select_node(node)
+            return super(TypeSelector, self).select_node(node)
 
         def deselect_node(self, node):
             node.background_color = (0, 0, 0, 0)
             node.color=(0,0,0,1)
-            super(MenuBar, self).deselect_node(node)
+            super(TypeSelector, self).deselect_node(node)
         
         def on_selected_nodes(self, _, nodes):
             #filtering out the nodes that are not supposed to be toggleable (add/remove)
             for node in nodes:
                 if not (node.text == "Categories" or node.text == "Topics"):
-                    super(MenuBar,self).deselect_node(node) # can't use my own deselect method here due to the color change...
+                    super(TypeSelector,self).deselect_node(node) # can't use my own deselect method here due to the color change...
             
             if not nodes: #this method, for some reason first gets an empty list and then a list with the element
                 return    #gotta skip the empty list
@@ -269,9 +260,9 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
                           
             #this assumes that MenuBar will *always* be added to ContentManager as a child
             if(nodes[0].text =="Categories"):
-                self.parent.on_menu_selection(selection="categories")
+                self.parent.parent.on_menu_selection(selection="categories")
             elif(nodes[0].text == "Topics"):
-                self.parent.on_menu_selection(selection="topics")
+                self.parent.parent.on_menu_selection(selection="topics")
             else:
                 pass
 
@@ -282,12 +273,41 @@ class MenuBar(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             self.top_rect.rectangle = (*instance.pos, *instance.size)
             
             
-        def add_items(self, _):
-            self.parent.on_add_item()
+class MenuBar(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         
-        def remove_items(self,_):
-            self.parent.on_remove_item()
-            
+        self.cols=3
+        self.rows=1
+        self.row_force_default=True
+        self.row_default_height=50
+        self.padding=[10,0,10,0]
+        
+        add_button = Button(text="Add", 
+                                       color=(1,1,1,1), 
+                                       background_color=(200/255, 255/255, 255/255, 1), 
+                                       size_hint=(0.2, 0.8))
+        add_button.bind(on_press=self.add_items)
+        
+        
+        remove_button = Button(text="Remove", 
+                                    color=(1,1,1,1), 
+                                    background_color=(200/255, 255/255, 255/255, 1), 
+                                    size_hint=(0.2, 0.8))
+        remove_button.bind(on_press=self.remove_items)
+        
+        type_selector= TypeSelector()
+        
+        self.add_widget(add_button)
+        self.add_widget(remove_button)
+        self.add_widget(type_selector)
+        
+        
+    def add_items(self, _):
+        self.parent.on_add_item()
+        
+    def remove_items(self,_):
+        self.parent.on_remove_item()
 
 class EditingBlock(FloatLayout):
     db_id = NumericProperty(0) #add the id as a property to make updates possible
@@ -413,6 +433,9 @@ class ContentManager(FloatLayout):
             
             db.execute(f"INSERT INTO topics (title, description) VALUES ('New Topic', 'Placeholder description')")
             #db.commit_changes()
+            
+            self.list_selector.update_content("topics")
+            self.list_selector.scroll_to_end()
         
         def on_remove_item(self, *_):
             if self.current_data_type == "categories":
@@ -424,6 +447,8 @@ class ContentManager(FloatLayout):
             db.execute(f"DELETE FROM topics WHERE id = {id}")
             
             #db.commit_changes()
+            
+            self.list_selector.update_content("topics")
             
             
         def update_editing_block_fields(self, db_id):
