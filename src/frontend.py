@@ -265,6 +265,9 @@ class ColapsApp(App):
             self.sm.current = 'topic_list'
         Clock.schedule_interval(self.check_movement, 0.5)
         return False
+    
+    def on_stop(self):
+        self.tlv.stop_reading()
 
 
 if __name__ == '__main__':

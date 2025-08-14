@@ -21,7 +21,7 @@ class TLV493D:
     def start_reading(self):
         #moving average filter to reduce noise
         num_readings = 8 # 8 offers pretty good latency while still being stable enough
-        readings = list(range(1,num_readings))
+        readings = [self.tlv.magnetic] * num_readings
 
         while not self._stop_event.is_set():
             for i in range (0,num_readings-1):

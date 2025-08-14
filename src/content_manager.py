@@ -130,6 +130,14 @@ class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             return super(TypeSelector, self).add_widget(widget, *args, **kwargs)
         
         
+        def update_cat_border(self, instance, _):
+            self.cat_rect.rectangle = (*instance.pos, *instance.size)
+
+        def update_top_border(self, instance, _):
+            self.top_rect.rectangle = (*instance.pos, *instance.size)
+            
+
+
         # the following are all kivy events btw
         def button_touch_down(self, button, touch):
             """ Use collision detection to select buttons when the touch occurs
@@ -152,7 +160,7 @@ class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
                 return    #gotta skip the empty list
                           #node objects are just the original objects, here the buttons, whose attributes can be accessed normally 
                           
-            #this assumes that MenuBar will *always* be added to ContentManager as a child
+
             if(nodes[0].text =="Categories"):
                 self.cm.on_menu_selection(selection="categories")
             elif(nodes[0].text == "Topics"):
@@ -160,12 +168,6 @@ class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
             else:
                 pass
 
-        def update_cat_border(self, instance, _):
-            self.cat_rect.rectangle = (*instance.pos, *instance.size)
-
-        def update_top_border(self, instance, _):
-            self.top_rect.rectangle = (*instance.pos, *instance.size)
-            
             
             
             
