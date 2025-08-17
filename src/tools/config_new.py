@@ -9,6 +9,7 @@ from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.popup import Popup
+from kivy.properties import NumericProperty
 
 import math, threading
 from hardware.tlv493d import TLV493D
@@ -52,16 +53,23 @@ class AngleDisplay(FloatLayout):
         self.circle.size = (radius * 2, radius * 2)
 
     def update_dynamic(self, dt):
-        self.angle = -self.tlv.get_angle()
-        self.label.text = f"{-self.angle:.1f}°"
+        self.angle = self.tlv.get_angle()
+        self.label.text = f"{self.angle:.1f}°"
 
         cx, cy = self.center
         radius = min(self.width, self.height) * 0.4
-        rad = math.radians(self.angle)
+        rad = math.radians(-self.angle)
         x = cx + radius * math.cos(rad)
         y = cy + radius * math.sin(rad)
 
         self.line.points = [cx, cy, x, y]
+
+class TitleInput(TextInput):
+    angle = NumericProperty(0)
+    def __init__(self, angle: int, **kwargs):
+        super().__init__(**kwargs)
+        self.angle = angle
+        
 
 class TableDisplay(GridLayout):
     def __init__(self, **kwargs):
@@ -69,13 +77,28 @@ class TableDisplay(GridLayout):
         self.cols=2
         self.row_force_default=True
         self.row_default_height=40
+        self.data={}
 
     def update_table(self, data):
         self.clear_widgets()
-        for row in data:
-            for cell in row:
-                self.add_widget(TextInput(text=str(cell), multiline=False, background_color=(0,0,0,0), cursor_color=(0.5,0.5,0.5,1), foreground_color=(1,1,1,1)))
+        if data:
+            self.data.update(data)
+        for i, (angle,title) in enumerate(self.data.items()):
+            self.add_widget(TitleInput(text=str(title), multiline=False, background_color=(0,0,0,0), 
+                                          cursor_color=(0.5,0.5,0.5,1), foreground_color=(1,1,1,1), on_text_validate=self.on_enter, angle=angle))
+            self.add_widget(Label(text=str(angle)))
 
+    def on_enter(self,instance):
+        self.data[instance.angle]=instance.text
+        self.update_table(None)
+        
+    def get_table_length(self):
+        return len(self.data)
+    
+    def clear_table(self):
+        self.data={}
+        self.update_table(None)
+    
 class ConfirmPopup(Popup):
     def __init__(self,msg , slice_data, **kwargs):
         super().__init__(**kwargs)
@@ -97,7 +120,6 @@ class ConfirmPopup(Popup):
         popup_layout.add_widget(label)
         popup_layout.add_widget(button_layout)
 
-        #globalizing popup to close it in confirm method
         self.title='Confirmation'
         self.content=popup_layout
         self.size_hint=(None,None) 
@@ -116,20 +138,22 @@ class ConfirmPopup(Popup):
         self.content=end_layout
         self.auto_dismiss=True
 
-    def angles_to_database(self, data):
+    def angles_to_database(self, data: dict):
         db = Manager()
         db.ensure_database_availability()
-        slice_angles = [x[1] for x in data]
-        slice_names = [x[0] for x in data]
+        print(f"angles to db: {data}")
+        slice_angles = list(data.keys())
+        slice_names = list(data.values())
         
         slices = [(
             slice_names[i],
             slice_angles[i], #begin angle
             slice_angles[(i+1) % len(slice_angles)] #end angle
         )for i in range (len(slice_angles))]
+        print(slices)
         db.execute_many("INSERT INTO categories (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
         db.commit_changes()
-        print(slices)
+
 
         #TODO Error Handling
 
@@ -174,7 +198,7 @@ class AutoScreen(Screen):
         enter = Button(text="Enter", size_hint=(0.15,0.075), pos_hint={'x': 0.75, 'y': 0.75})
         enter.bind(on_press=self.calculate)
 
-        hint_label = Label(text="Align any slice edge with the pointer, enter the number of slices above and press enter.",
+        hint_label = Label(text="Align any slice edge with the pointer, enter the number of slices above and press enter. Titles are editable.",
                            text_size=(220,None), pos_hint={'x':-0.08, 'y':0.29})
 
         self.table = TableDisplay(pos_hint={'x':0, 'y':-0.3})
@@ -200,15 +224,14 @@ class AutoScreen(Screen):
 
     def go_back(self, _):
         #resetting everything
-        self.data=[]
-        self.table.update_table(self.data)
+        self.table.clear_table()
         self.textinput.text=""
         self.manager.current = 'startup'
     
     def calculate(self, _): #input at instance.text
         self.data=[] #clear data for new calculation
         initial_angle = self.tlv.get_angle()
-        self.data.append(["Slice 0", initial_angle])
+        self.table.update_table({initial_angle: "Slice 0"})
 
         num_slices = int(self.textinput.text)
         #if a circle is [0;2pi), then we can divide 2pi by the number of segments to get accurate points
@@ -217,12 +240,11 @@ class AutoScreen(Screen):
             angle = initial_angle + segment_length*i
             if(angle <0): angle +=360
             if(angle > 360): angle -= 360
-            self.data.append([f"Slice {i}",angle])
-        self.table.update_table(self.data)
+            self.table.update_table({angle: f"Slice {i}"}) #keying by angle as unique identifier
     
     
     def popup_dialogue(self, _):
-        popup = ConfirmPopup(msg="Commit to database?", slice_data=self.data)
+        popup = ConfirmPopup(msg="Commit to database?", slice_data=self.table.data)
         popup.open()
 
 
@@ -244,10 +266,10 @@ class ManualScreen(Screen):
         record.bind(on_press=self.add_angles)
 
         hint_label = Label(text="Align next slice edge with the pointer and press the button above to record the angle. " \
-        "The programm will automatically detect if the wheel looped around.",
-                           text_size=(270,None), pos_hint={'x':-0.05, 'y':0.29})
+        "The programm will automatically detect if the wheel looped around. Titles are editable, need to be confirmed with enter.",
+                           text_size=(270,None), pos_hint={'x':-0.05, 'y':0.25})
 
-        self.table = TableDisplay(pos_hint={'x':0, 'y':-0.3})
+        self.table = TableDisplay(pos_hint={'x':0.02, 'y':-0.4})
 
         confirm = Button(text="Confirm", size_hint=(0.18, 0.06), pos_hint={'x':0.8, 'y':0.02})
         confirm.bind(on_press=self.popup_dialogue)
@@ -269,20 +291,19 @@ class ManualScreen(Screen):
 
     def add_angles(self, _):
         angle = self.tlv.get_angle()
-        if(len(self.data)>0 and (angle+5 >= int(self.data[0][1]) and angle-5 <= int(self.data[0][1]))):
+        angles=list(self.table.data.keys())            
+        if (angles) and ((angle+5 >= int(angles[0]) and (angle-5 <= int(angles[0])))):
             self.popup_dialogue()
         else:
-            self.data.append([f"Slice {len(self.data)}", angle])
-            self.table.update_table(self.data)
+            self.table.update_table({angle: f"Slice {self.table.get_table_length()}"}) #keying by angle as unique identifier
 
     def go_back(self, *args):
         #resetting everything
-        self.data=[]
-        self.table.update_table(self.data)
+        self.table.clear_table()
         self.manager.current = 'startup'
     
-    def popup_dialogue(self):
-        popup = ConfirmPopup(msg=f"Are {len(self.data)} slices correct?",slice_data=self.data)
+    def popup_dialogue(self, *_):
+        popup = ConfirmPopup(msg=f"Are {len(self.table.data)} slices correct?",slice_data=self.table.data)
         popup.open()
 
 

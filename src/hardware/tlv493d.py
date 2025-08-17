@@ -27,9 +27,8 @@ class TLV493D:
             for i in range (0,num_readings-1):
                 time.sleep(0.1)
                 magnet = self.tlv.magnetic
-                angle = math.degrees(math.atan2(magnet[1], magnet[0]))
-                            
-                if(angle <0): angle +=360 #wrapping bc sensor reports [-180,180]
+                angle = math.degrees(math.atan2(-magnet[1], magnet[0])) % 360 #wrapping bc sensor reports [-180,180]
+
                 
                 if not readings: #if readings is empty (first init), then fill with first value read
                     readings = [angle] * (num_readings-1)
