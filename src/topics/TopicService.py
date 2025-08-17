@@ -29,6 +29,14 @@ class TopicService:
         id, title, desc = query
         return Topic(id, title,desc)
     
+    def get_many(self, topic_ids: List[int]) -> List[Topic] | None:
+        """Returns list of topics based on IDs provided"""
+        sql="select * from topics where id in ({seq})".format(seq=','.join(['?']*len(topic_ids)))
+        #sqlite library does not provide a way to query with lists, so i have to join enough placeholders together for each entry in the list
+        
+        query = self.db.execute(sql, topic_ids).fetchall()
+        return [Topic(id,title,desc) for (id, title, desc) in query]
+            
     def update(self, id: Topic | int, new_title: str | None = None, new_desc: str|None = None):
         """Updates Values for topics. If values are NoneType / have been left empty, the old value is used"""
         if isinstance(id, Topic):
@@ -70,3 +78,10 @@ class TopicService:
         
         self.db.execute("DELETE FROM topics WHERE id=?", (topic_id,))
         self.db.commit_changes()
+        
+    def search(self,text:str) -> List[int] | None:
+        """Returns a list of topic IDs matching the search query in their Title"""
+        query = self.db.execute("SELECT id FROM topics WHERE title LIKE ?", ('%'+text+'%',)).fetchall()
+        if not query or (not all(query)):
+            return None
+        return [id for (id,) in query]
