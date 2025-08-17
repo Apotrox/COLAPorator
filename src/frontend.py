@@ -35,10 +35,9 @@ class AppSelectableButton(SelectableButton):
 
 
 class TopicListScreen(Screen):
-    def __init__(self, angle: int, ts:TopicService, cs:CategoryService, **kwargs):
+    def __init__(self, ts:TopicService, cs:CategoryService, **kwargs):
         super().__init__(**kwargs)
 
-        self.angle = angle 
         self.ts=ts
         self.cs=cs
         
@@ -95,7 +94,7 @@ class TopicListScreen(Screen):
         self.bg_rect.size = instance.size
 
     def handle_choose(self, topic_id):
-        topic = self.ts.get_by_id(topic_id)  # expose a get_by_id in your service if not present
+        topic = self.ts.get(topic_id)
         detail_screen = self.manager.get_screen('topic_detail')
         detail_screen.display_topic(topic.description)
         self.manager.transition = SlideTransition()
@@ -230,13 +229,14 @@ class ColapsApp(App):
         self.sm = ScreenManager()
         startup_screen = StartupScreen(name="startup")
         waiting_screen= WaitingScreen(name="waiting")
-        topic_list_screen = TopicListScreen(name='topic_list', angle=self.tlv.get_angle(), ts=ts, cs=cs)
+        self.topic_list_screen = TopicListScreen(name='topic_list', ts=ts, cs=cs)
         detail_screen = TopicDetailScreen(name='topic_detail')
         
         self.sm.add_widget(startup_screen)
         self.sm.add_widget(waiting_screen)
-        self.sm.add_widget(topic_list_screen)
+        self.sm.add_widget(self.topic_list_screen)
         self.sm.add_widget(detail_screen)
+        
 
         time.sleep(1) #delay scheduling to give moving average time to fill up
         
@@ -262,6 +262,7 @@ class ColapsApp(App):
         Clock.unschedule(self.check_stopped)
         if self.sm:
             self.sm.transition=FallOutTransition()
+            self.topic_list_screen.angle=self.tlv.get_angle() #setting the current angle before changing screens
             self.sm.current = 'topic_list'
         Clock.schedule_interval(self.check_movement, 0.5)
         return False

@@ -1,9 +1,10 @@
 import sqlite3
 from typing import List
 from .Category import Category
+from database.database_manager import Manager #just adding this for pylance purposes to make debugging a tiny bit easier
 
 class CategoryService:
-    def __init__(self, db):
+    def __init__(self, db: Manager):
         self.db = db
     
     def list(self) -> List[Category]:
@@ -24,7 +25,9 @@ class CategoryService:
         self.db.execute("UPDATE categories SET title=? WHERE id=?", (id,new_title))
         
     def get_for_angle(self, angle:int) -> Category | None:
-        query = self.db.execute("SELECT * FROM categories WHERE categories.angle_begin <= ? AND categories.angle_end > ?", (angle,)).fetchone()
+        query = self.db.execute("SELECT * FROM categories WHERE (angle_begin <= angle_end AND ? BETWEEN angle_begin AND angle_end) \
+            OR (angle_begin > angle_end AND (? >= angle_begin OR ? <= angle_end))", (angle,angle,angle)).fetchone()
+            #angle wrapping
         id, title, ab, ae = query
         if query and all(query): #if there is actually data
             return Category(id,title,ab,ae)
