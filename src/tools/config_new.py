@@ -3,7 +3,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
-from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Ellipse, Rectangle
 from kivy.clock import Clock
 from kivy.uix.label import Label
@@ -75,7 +74,7 @@ class TableDisplay(GridLayout):
         self.clear_widgets()
         for row in data:
             for cell in row:
-                self.add_widget(Label(text=str(cell), color=(1,1,1,1)))
+                self.add_widget(TextInput(text=str(cell), multiline=False, background_color=(0,0,0,0), cursor_color=(0.5,0.5,0.5,1), foreground_color=(1,1,1,1)))
 
 class ConfirmPopup(Popup):
     def __init__(self,msg , slice_data, **kwargs):

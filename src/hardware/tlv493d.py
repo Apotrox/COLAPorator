@@ -21,15 +21,18 @@ class TLV493D:
     def start_reading(self):
         #moving average filter to reduce noise
         num_readings = 8 # 8 offers pretty good latency while still being stable enough
-        readings = [self.tlv.magnetic] * num_readings
+        readings = []
 
         while not self._stop_event.is_set():
             for i in range (0,num_readings-1):
                 time.sleep(0.1)
                 magnet = self.tlv.magnetic
                 angle = math.degrees(math.atan2(magnet[1], magnet[0]))
+                            
+                if(angle <0): angle +=360 #wrapping bc sensor reports [-180,180]
                 
-                if(angle <0): angle +=360
+                if not readings: #if readings is empty (first init), then fill with first value read
+                    readings = [angle] * (num_readings-1)
                 
                 
                 readings[i]=angle
@@ -40,6 +43,7 @@ class TLV493D:
                     self.is_moving=True
                 else:
                     self.is_moving=False
+                
 
     def stop_reading(self):
         self._stop_event.set()

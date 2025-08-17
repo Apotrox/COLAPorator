@@ -230,7 +230,7 @@ class ColapsApp(App):
         self.sm = ScreenManager()
         startup_screen = StartupScreen(name="startup")
         waiting_screen= WaitingScreen(name="waiting")
-        topic_list_screen = TopicListScreen(name='topic_list', tlv=self.tlv.get_angle(), ts=ts, cs=cs)
+        topic_list_screen = TopicListScreen(name='topic_list', angle=self.tlv.get_angle(), ts=ts, cs=cs)
         detail_screen = TopicDetailScreen(name='topic_detail')
         
         self.sm.add_widget(startup_screen)
