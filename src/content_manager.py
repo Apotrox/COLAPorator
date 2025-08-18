@@ -9,10 +9,15 @@ from kivy.graphics import Color, Rectangle, Line
 from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.behaviors.compoundselection import CompoundSelectionBehavior
 from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.popup import Popup
+
+import time
 
 from database.database_manager import Manager
 from categories.CategoryService import CategoryService
@@ -25,7 +30,6 @@ from ui.LabeledCheckbox import LabeledCheckbox
 class CMSelectableButton(SelectableButton):
     #overwriting with custom press behaviour
     def on_press(self):
-        print("pressed!")
         cm = self.get_root_window().children[0]
         if hasattr(cm, 'update_editing_block_fields'):
             cm.update_editing_block_fields(self.db_id)
@@ -76,8 +80,44 @@ class ListSelector(RecycleView):
         if self.data:
             self.scroll_y=0 #easiest way to scroll down
 
+class ConfirmPopup(Popup):
+    def __init__(self,msg, callback=None, **kwargs):
+        super().__init__(**kwargs)
+        self.callback = callback
+        
+        popup_layout= BoxLayout(orientation="vertical")
+        button_layout = BoxLayout(orientation="horizontal")
 
+        dismiss_button = Button(text="No")
 
+        confirm_button = Button(text="Yes")
+        confirm_button.bind(on_press=self._confirm)
+        if(isinstance(msg, str)):
+            label = Label(text=msg)
+        else:
+            label = Label(text="")
+
+        button_layout.add_widget(dismiss_button)
+        button_layout.add_widget(confirm_button)
+        popup_layout.add_widget(label)
+        popup_layout.add_widget(button_layout)
+
+        self.title='Confirmation'
+        self.content=popup_layout
+        self.size_hint=(None,None) 
+        self.size=(400,200)
+        self.auto_dismiss=False
+        dismiss_button.bind(on_press=self._dismiss)
+
+    def _confirm(self, _):
+        if self.callback:
+            self.callback(True)
+        self.dismiss()
+    
+    def _dismiss(self, _):
+        if self.callback:
+            self.callback(False)
+        self.dismiss()
 
 class TypeSelector(GridLayout, FocusBehavior, CompoundSelectionBehavior):
         """Selecting content type"""
@@ -197,7 +237,7 @@ class MenuBar(GridLayout):
                                     color=(1,1,1,1), 
                                     background_color=(200/255, 255/255, 255/255, 1), 
                                     size_hint=(0.2, 0.8))
-        remove_button.bind(on_press=self.remove_items)
+        remove_button.bind(on_press=self.show_popup)
         
         type_selector= TypeSelector(ts=self.topic_service, cs=self.category_service, cm=self.cm)
         
@@ -208,9 +248,18 @@ class MenuBar(GridLayout):
         
     def add_items(self, _):
         self.cm.on_add_item()
+    
+    def show_popup(self, _):
+        popup = ConfirmPopup(msg="Delete Topic? This action cannot be undone.", callback = self.on_confirm)
+        popup.open()
         
-    def remove_items(self,_):
+    def remove_items(self):
         self.cm.on_remove_item()
+            
+    def on_confirm(self, confirm):
+        if confirm:
+            self.remove_items()
+        
         
         
         
