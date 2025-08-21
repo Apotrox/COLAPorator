@@ -249,12 +249,13 @@ class WaitingScreen(Screen):
         
         self.add_widget(self.startup_label)
         
+        
     def update_bg(self, instance, _):
         self.bg_rect.pos = instance.pos
         self.bg_rect.size = instance.size
         
 
-class ColapsApp(App):
+class ColapsExplorerApp(App):
     def build(self):
         # binding one global instance of the sensor to then give to the other screens that need it
         self.tlv = TLV493D()
@@ -313,4 +314,4 @@ class ColapsApp(App):
 
 
 if __name__ == '__main__':
-    ColapsApp().run()
+    ColapsExplorerApp().run()
