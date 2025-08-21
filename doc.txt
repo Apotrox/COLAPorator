@@ -97,3 +97,39 @@ Features that will be prioritized:
 
 
 Currently, the project is at the point of a minimum viable product. The fundamental features are working and have their required tools. Users can configure the spinning wheel, record angles and name the corresponding slices. Blank topics can be added, filled with necessary information and assigned to categories. Topics can also be removed and reassigned. In the main application, categories can be chosen using the spinning wheel, topics can be explored for every category they're assigned to and expanded to obtain more details.
+
+
+21.8.
+
+It was decided to make the configuration tool a more comprehensive tool to use by giving it the ability to delete/create topics as well as reassign angles.
+These methods were implemented in the categoryService.
+
+(its late and i want to finish this asap)
+First angle assignment:
+- Goal: Overwrite the angles of a given category
+- Problem: What happens if angles overlap. How to handle?
+- resolution: provide flag for overflow handling. If false, just set angles and be done. If true, get adjacent categories (next & prev) and adjust their beginning and end angle to end and beginning angle of the adjusted one. Call method again with same values and disable overflow flag to just set it.
+
+create category:
+- Goal: create a category and assign angles to it
+- Problem: What happens if a same named category exists? Violates unique constraint for category title!
+- Resolution: Check if same title category exists, if yes just change angle
+If no, create new category with title and 0,0 angles, commit changes, select again to get ID and use assign angles function to assign actual angles to manage overflow.
+
+delete category:
+- Goal: delete a category
+- Problem: what happens with the empty space?
+- Resolution: Provide leave_empty flag to decide whether or not to fill the hole. if True, just delete nothing else. If false, calculate the distance the old category had from begin to end angle and divide by two. Get adjacent angles and use assign angles function to assign new angles. Next category begins "earlier", prev category ends "later".
+
+Topic and Category classes were also expanded with their string representations for easier debugging. This enables printing the object and receiving a string instead of an object.
+
+CategoryService was also expanded with functions to get categories with similar titles and a category with the exact same title. These functions were implemented because there appeared a need for them, but they ended up unused in all of the other three functions above due to accuracy issues (e.g. create category needed a query to look for a title and set angles, not just title).
+
+Testing the newly implemented functions output an error that, even after extensive investigation, still seemed to be paradoxical.
+"Query execution failed due to: Incorrect number of bindings supplied. The current statement uses 3, and there are 0 supplied."
+This specifically came from the "UPDATE" query in assign angles function. However, this function was identical to the one in the topicService (apart from column/variable names), so how come the topicservice query works but this doesn't?
+After a long time of tracing down this error, it was discovered to originate from the safeguard implementation of the DB execute statement. Specifically, the all() in "if params and all(params)". It was discovered that all() is false when given a 0, an empty string and a False boolean. This was not desired, as it was only used to check for nested None types. This was then replaced with a dedicated None type check: "if all(p is not None for p in params)"
+
+
+After solving this, testing the assign angles function as well as create category function went with only minor issues.
+However, deleting a category proved to be difficult due to various query issues. If only one query returned None, the entire process would throw an error. Eventually, the issue was traced down to the "get_for_angle" function, which had no failsafe in case the query didn't result in anything. Thus a simple Nonecheck was added.
