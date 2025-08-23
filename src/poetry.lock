@@ -289,6 +289,17 @@ files = [
 ]
 
 [[package]]
+name = "evdev"
+version = "1.9.2"
+description = "Bindings to the Linux input handling subsystem"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "evdev-1.9.2.tar.gz", hash = "sha256:5d3278892ce1f92a74d6bf888cc8525d9f68af85dbe336c95d1c87fb8f423069"},
+]
+
+[[package]]
 name = "ffpyplayer"
 version = "4.5.3"
 description = "A cython implementation of an ffmpeg based player."
@@ -810,4 +821,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11"
-content-hash = "7a79aef5652acfc0486a5d6486009216dba42c6374a483153ae23bbc74813033"
+content-hash = "cc674e5726fe41134c178d77744de2c089af880f2f967d5dee16140603b8c385"
