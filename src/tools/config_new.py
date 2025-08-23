@@ -118,7 +118,7 @@ class ConfirmPopup(Popup):
         else:
             label = Label(text="")
             
-        warning_label = Label(text="If there is an existing category with the same name, it will just get updated")
+        warning_label = Label(text="Note: If there is an existing category with the \nsame name, it will just get updated. \nAll others will get removed & replaced", halign='center')
 
         button_layout.add_widget(dismiss_button)
         button_layout.add_widget(confirm_button)
@@ -129,12 +129,13 @@ class ConfirmPopup(Popup):
         self.title='Confirmation'
         self.content=popup_layout
         self.size_hint=(None,None) 
-        self.size=(400,200)
+        self.size=(400,250)
         self.auto_dismiss=False
         dismiss_button.bind(on_press=self.dismiss)
     
     def _confirm(self, _):
-        self.angles_to_database(self.data)
+        if self.data:
+            self.angles_to_database(self.data)
 
         end_layout = BoxLayout(orientation="vertical")
         end_layout.add_widget(Label(text="Successfully commited to database"))
@@ -145,10 +146,20 @@ class ConfirmPopup(Popup):
         self.auto_dismiss=True
 
     def angles_to_database(self, data: dict):
-        print(f"angles to db: {data}")
         slice_angles = list(data.keys())
         slice_names = list(data.values())
         
+        all_categories = self.cs.list()
+        #check if there are any existing categories to later just be updated
+        for name in slice_names:
+            existing_category = self.cs.get_for_title(name)
+            if existing_category:
+                print(f"Found: {existing_category}")
+                all_categories.remove(existing_category)
+        
+        #deleting all categories to be replaced
+        for category in all_categories:
+            self.cs.delete_category(category, True)
         
         for i in range(len(slice_angles)):
             self.cs.create_category(slice_names[i],slice_angles[i],(slice_angles[(i+1) % len(slice_angles)]-1),True)

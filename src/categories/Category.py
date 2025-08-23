@@ -11,3 +11,11 @@ class Category:
 
     def __repr__(self):
         return f"{self.id}, {self.title}, {self.angle_begin}, {self.angle_end}"
+    
+    def __eq__(self, value):
+        if not isinstance(value, Category):
+            return False
+        return self.id == value.id
+    
+    def __hash__(self):
+        return hash(self.id)
