@@ -133,3 +133,20 @@ After a long time of tracing down this error, it was discovered to originate fro
 
 After solving this, testing the assign angles function as well as create category function went with only minor issues.
 However, deleting a category proved to be difficult due to various query issues. If only one query returned None, the entire process would throw an error. Eventually, the issue was traced down to the "get_for_angle" function, which had no failsafe in case the query didn't result in anything. Thus a simple Nonecheck was added.
+
+23.8.
+
+The configuration tool was adjusted to use the category service, especially the create_category function. 
+Where previously, it was planned to expand the configuration tool with comprehensive category management (i.e. Deleting, creating, manually adjusting angles), It was decided to not expand the configuration tool any further at this point in time and rather focus on implementing the Controller support. 
+This decision was made based on the educated assumption, that the most commmon change of categories would be renaming them, which is already featured in the content manager (Renaming can also be seen as a replacement function). The other possibilities left are adding more categories or removing them, and while those are made possible in the category service, integrating them in the configuration tool would require an extensive overhaul of it's layout and workflow. However, for the sake of maximizing data integrity, reconfiguring all categories from the beginning has been assigned as the default workflow in those cases.
+
+The only improvement that will be made to the config tool at this point is overwriting categories with existing titles while removing and replacing others.
+For this, the angles_to_database function was adjusted to test if any of the provided titles are already within the database. Testing this, an error was encountered of the element not being inside the list, despite print statements clearly showing the contrary. This was caused due to the custom Category class not having a compare operation, which was promptly added. For now, the compare operator will just compare by id, though it might be useful to also add the title in that equiation. This will be adjusted as necessary. A hash function was also added on recommendation of Claude, in case Category objects are used in sets/dicts. Basic testing of this feature showed no problems with it's current implementation, thus it was marked as complete.
+
+Lastly, joystick communications were confirmed by installing the recommended packages for joystick support (joystick lol) and choosing an appropriate python library. Here, evdev was chosen for the following reasons:
+
+- it talking directly to the kernel level interface /dev/input/event for full control
+- broad hardware support as it works with any device under /dev/input
+- lightweight as it only focuses on input
+
+A simple testing script was generated using GPT to bind the controller and print the outputs. This resulted in various kinds of outputs that were insightful on how this controller functions.
