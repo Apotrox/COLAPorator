@@ -84,14 +84,13 @@ class CategoryService:
         """Creates a new category based on data provided. Handles overflow by default.
         If the name is the same as another existing category, the angles will just be updated."""
         
-        check_for_unique=self.db.execute("SELECT * from categories WHERE title=?",(title,)).fetchone()
+        check_for_unique=self.get_for_title(title)
         if check_for_unique:
-            print("Same name category found, updating angles")
-            id,title,ab,ae = check_for_unique
-            self.assign_angle(Category(id,title,ab,ae), angle_begin, angle_end, True)
+            print(f"Same name category found, updating angles for {title}")
+            self.assign_angle(check_for_unique, angle_begin, angle_end, handle_overflow)
             return
         
-        print("No same category found, creating new one")
+        print(f"No same category found, creating new one: {title} -> from {angle_begin} to {angle_end}")
         self.db.execute("INSERT INTO categories (title, angle_begin, angle_end) VALUES (?, ?, ?)", (title,0,0))
         self.db.commit_changes()
         
@@ -99,7 +98,7 @@ class CategoryService:
         new_category = self.db.execute("SELECT * FROM categories WHERE title=? AND angle_begin=0 AND angle_end=0", (title,)).fetchone()
         id=new_category[0]
         
-        self.assign_angle(Category(id,title,0,0), angle_begin, angle_end, True)
+        self.assign_angle(Category(id,title,0,0), angle_begin, angle_end, handle_overflow)
     
     def delete_category(self, category:Category, leave_empty:bool=False):
         """Deletes a given category from the Database. By default, the hole created will be closed by the categories surrounding it."""

@@ -14,6 +14,8 @@ from kivy.properties import NumericProperty
 import math, threading
 from hardware.tlv493d import TLV493D
 from database.database_manager import Manager
+from categories.CategoryService import CategoryService
+from categories.Category import Category
 
 class AngleDisplay(FloatLayout):
     def __init__(self, tlv, **kwargs):
@@ -100,9 +102,10 @@ class TableDisplay(GridLayout):
         self.update_table(None)
     
 class ConfirmPopup(Popup):
-    def __init__(self,msg , slice_data, **kwargs):
+    def __init__(self,msg , slice_data, cs:CategoryService, **kwargs):
         super().__init__(**kwargs)
         self.data = slice_data
+        self.cs = cs
         popup_layout= BoxLayout(orientation="vertical")
         button_layout = BoxLayout(orientation="horizontal")
 
@@ -114,10 +117,13 @@ class ConfirmPopup(Popup):
             label = Label(text=msg)
         else:
             label = Label(text="")
+            
+        warning_label = Label(text="If there is an existing category with the same name, it will just get updated")
 
         button_layout.add_widget(dismiss_button)
         button_layout.add_widget(confirm_button)
         popup_layout.add_widget(label)
+        popup_layout.add_widget(warning_label)
         popup_layout.add_widget(button_layout)
 
         self.title='Confirmation'
@@ -139,24 +145,14 @@ class ConfirmPopup(Popup):
         self.auto_dismiss=True
 
     def angles_to_database(self, data: dict):
-        db = Manager()
-        db.ensure_database_availability()
         print(f"angles to db: {data}")
         slice_angles = list(data.keys())
         slice_names = list(data.values())
         
-        slices = [(
-            slice_names[i],
-            slice_angles[i], #begin angle
-            slice_angles[(i+1) % len(slice_angles)] #end angle
-        )for i in range (len(slice_angles))]
-        print(slices)
-        db.execute_many("INSERT INTO categories (title, angle_begin, angle_end) VALUES (?, ?, ?)", slices)
-        db.commit_changes()
-
-
-        #TODO Error Handling
-
+        
+        for i in range(len(slice_angles)):
+            self.cs.create_category(slice_names[i],slice_angles[i],(slice_angles[(i+1) % len(slice_angles)]-1),True)
+                                                                    # -1 to remove overlap
 
 class StartupScreen(Screen):
     def __init__(self, **kw):
@@ -180,10 +176,11 @@ class StartupScreen(Screen):
         self.manager.current='manual'
 
 class AutoScreen(Screen):
-    def __init__(self, tlv, **kw):
+    def __init__(self, tlv, cs, **kw):
         super().__init__(**kw)
         self.data =[] 
         self.tlv = tlv
+        self.cs=cs
 
         base_layout = BoxLayout(orientation = "horizontal")
         left_layout = FloatLayout()
@@ -244,16 +241,17 @@ class AutoScreen(Screen):
     
     
     def popup_dialogue(self, _):
-        popup = ConfirmPopup(msg="Commit to database?", slice_data=self.table.data)
+        popup = ConfirmPopup(msg="Commit to database?", slice_data=self.table.data, cs=self.cs)
         popup.open()
 
 
 
 class ManualScreen(Screen):
-    def __init__(self,tlv, **kw):
+    def __init__(self,tlv,cs, **kw):
         super().__init__(**kw)
         self.tlv = tlv
         self.data=[]
+        self.cs=cs
 
         base_layout = BoxLayout(orientation = "horizontal")
         left_layout = FloatLayout()
@@ -303,20 +301,23 @@ class ManualScreen(Screen):
         self.manager.current = 'startup'
     
     def popup_dialogue(self, *_):
-        popup = ConfirmPopup(msg=f"Are {len(self.table.data)} slices correct?",slice_data=self.table.data)
+        popup = ConfirmPopup(msg=f"Are {len(self.table.data)} slices correct?",slice_data=self.table.data, cs=self.cs)
         popup.open()
 
 
 class ConfigApp(App):
     def build(self):
         # binding one global instance of the sensor to then give to the other screens that need it
-        self.tlv = TLV493D()
-        threading.Thread(target=self.tlv.start_reading, daemon=True).start()
+        tlv = TLV493D()
+        threading.Thread(target=tlv.start_reading, daemon=True).start()
+        
+        db = Manager()
+        cs = CategoryService(db)
 
         sm = ScreenManager()
         startup_screen = StartupScreen(name="startup")
-        auto_screen = AutoScreen(name="auto", tlv=self.tlv)
-        manual_screen = ManualScreen(name="manual", tlv=self.tlv)
+        auto_screen = AutoScreen(name="auto", tlv=tlv, cs=cs)
+        manual_screen = ManualScreen(name="manual", tlv=tlv, cs=cs)
 
         sm.add_widget(startup_screen)
         sm.add_widget(auto_screen)
