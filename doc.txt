@@ -150,3 +150,12 @@ Lastly, joystick communications were confirmed by installing the recommended pac
 - lightweight as it only focuses on input
 
 A simple testing script was generated using GPT to bind the controller and print the outputs. This resulted in various kinds of outputs that were insightful on how this controller functions.
+It was discovered that the controller returns a code and value (among other things) for each event triggered. Decoding these resulted in a clear mapping for each button and stick movement, which was promptly and successfully tested and confirmed to hold true.
+
+Planing on how the controller wrapper is supposed to work and communicate it's inputs to other classes, the following decisions were made:
+1. The wrapper manages it's own thread for simplicity
+2. Inputs will be put in a queue for the ExplorerApp to work through
+3. To clearly communicate and define each input, an Enum class was necessary to define each kind of input.
+4. Inputs will only be triggered on the "button down" event, not the up
+
+Additionally to the 5 pre defined LEFT, RIGHT, UP, DOWN, SELECT Enums, a NOTHING enum was added. With only the "button down" event triggering an input, holding down a button or the stick to scroll is not possible. This nothing enum could be used to facilitate this, by moving down until the NOTHING input was triggered. However, this is a feature for a later point in time.
