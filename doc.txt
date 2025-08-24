@@ -159,3 +159,31 @@ Planing on how the controller wrapper is supposed to work and communicate it's i
 4. Inputs will only be triggered on the "button down" event, not the up
 
 Additionally to the 5 pre defined LEFT, RIGHT, UP, DOWN, SELECT Enums, a NOTHING enum was added. With only the "button down" event triggering an input, holding down a button or the stick to scroll is not possible. This nothing enum could be used to facilitate this, by moving down until the NOTHING input was triggered. However, this is a feature for a later point in time.
+
+
+24.8.
+Continueing with the Joystick implementation, the target was set on enabling joystick navigation in the ExplorerApp.
+This was first done using the same approach as the TLV, by initializing the Joystick object in the App class, and giving it to each subclass that needs it.
+Event handling was done using two functions: one to detect whether the current screen is active and if there has been an input, which then triggers the second class that actually handles the input. This was simply done by checking what intent was in the queue and setting the selection index accordingly.
+Problems that arose:
+1. The children of the RecycleLayoutBox are not generated IMMEDIATELY after setting the data. It takes some time, which caused some confusion during debugging.
+2. Select needed a check whether or not the selection index is between 0 and the max number of items DISPLAYED, it was able to still go beyond that despite setting a min and max in the other two intents, which were the only ones to modify the selectionindex.
+
+Highlighting the selected button was done via indexing all visible buttons and setting the hovered property based on whether the button's index matched the current selection index.
+However, in some edge cases it might be possible for a button to be indexed but not rendered (or only by a very small amount). This causes the selection to go "off screen". This appears to be not easily fixable as there currently is no way to determine, which button is actually visible.
+
+The detection and handling methods were ported to both the detail screen and the startup screen. The former was modified to highlight the "back" button automatically if there is a joystick present and trigger it on SELECT input. The latter uses it to skip spinning the wheel and load directly into the category the wheel is at.
+
+Each of these three classes handles their own scheduling regarding input checking. This was done by starting the scheduling in the functions that load the screens, unscheduling was done in functions that load the next screens. This ensures that there will be no race conditions, misinputs or anything along those lines as only one input checking is active at all times.
+
+Implementing auto scrolling once the bottom of the list has been reached proved to be rather difficult with the current way of detecting the selected topic. Scrolling up or down a set amount once at the top or bottom of the shown list is not a problem. However, the RecycleView handles the Buttons similar to a queue, with the object loaded first having the lowest index, while the items loaded last have the highest index. This works when scrolling down, as new items loaded will be at the bottom of the queue, this have the last index. Though, scrolling up again seems to be problematic, as the newly loaded items are appended to the bottom of the queue, even though they should be at the top of it (as they are above the lowest indexed ones).
+This problem seemed to require each button to have it's own set index, based on the amount of topics available, not buttons visible. Thus, a NumericProperty was assigned to the AppSelectableButton class. Luckily, kivy has a refresh_view_attrs function, which is called on by the RecycleView (more specifically the RecycleAdapter), when the view is initially populated with the values form the data dict. This function also has an index parameter, which is promptly hijacked and assigned to the index property. Printing all buttons visible with their indizes shows that the indizes are assigned properly. The selection_index was changed to be capped by the amount of data inside the recycleview, not the buttons visible, enabling it to go through all topics in the dict.
+
+This fixed the initial issue of which button to adress/highlight, as this is now done as desired.
+
+Nonetheless, the automatic scrolling still seemed to require some work, as it is not fast enough to keep up with new buttons popping up. Because of this, the selection once again goes off screen.
+After contemplating on how to approach this, it seemed to be most sensible to first scroll down a small bit to load the next button, get it's y size and scroll down again by this size. This required a combination of the old and new scrolling methods, as this is dependend on the new buttons loading in. A function was created to get the next button's height and return it as a value. However, it was apparent that this needed to be normalized to the window size or similar, as the scroll_y of the recycleview is a percentage, while the button height is an absolute value.
+
+i am loosing my shit please help. the maths aint mathin
+
+After help from Claude, a somewhat functional scrolling function was created. However, there is some jumping around and faulty highlighting, which only appears the first time of scrolling through the list. After reaching the bottom once, this issue does not appear anymore. Might need to look into caching all recycleview buttons before showing them.
