@@ -16,3 +16,10 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior):
     def refresh_view_attrs(self, rv, index, data):
         super().refresh_view_attrs(rv, index, data)
         self.db_id = data.get('db_id', 0) # set db_id from data
+        
+    
+    def __str__(self):
+        return f"({self.db_id}: {super().__str__()})"
+    
+    def __repr__(self):
+        return f"({self.db_id}: {super().__repr__()})\n"

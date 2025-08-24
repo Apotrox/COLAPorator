@@ -25,19 +25,24 @@ class Joystick:
 
     def start(self):
         if self._thread: return
-        self._thread = threading.Thread(target=self._run, name="Joystick Reader",daemon=False)
+        self._thread = threading.Thread(target=self._run, name="Joystick Reader",daemon=True)
         self._thread.start()
 
     def stop(self):
         self._stop_event.set()
 
+    def get(self) -> Intent | None:
+        try:
+            return self.events.get_nowait()
+        except Exception as e:
+            return None
 
     def _run(self):
         while not self._stop_event.is_set():
             try:
                 event = self.device.read_one()
             except Exception as e:
-                print(e)
+                print("From run:", e)
                 break
             
             intent = None

@@ -78,3 +78,9 @@ class HoverableButton(Button):
     def on_size(self, *args):
         # Update canvas when size changes, but don't trigger height updates
         self.on_hovered(self, self.hovered)
+        
+    def __str__(self):
+        return f"{self.text}"
+    
+    def __repr__(self):
+        return f"{self.text}"

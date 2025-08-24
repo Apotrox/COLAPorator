@@ -20,6 +20,7 @@ from topics.Topic import Topic
 from categories.Category import Category
 from database.database_manager import Manager
 from hardware.tlv493d import TLV493D
+from hardware.JoystickManager import Joystick, Intent
 from ui.SelectableButton import SelectableButton
 from ui.HoverableButton import HoverableButton
 
@@ -31,11 +32,21 @@ import threading, time
 class AppSelectableButton(SelectableButton):
     topic_id = NumericProperty(None)
     on_choose = ObjectProperty(None)    # callback injected via rv.data
+    data_index = NumericProperty(None)  # indexing used for scrolling
+    
+    def refresh_view_attrs(self, rv, index, data):
+        self.data_index = index
+        return super().refresh_view_attrs(rv, self.data_index, data)
+        
 
     def on_press(self):
         # Keep the view "dumb": just signal upward
         if callable(self.on_choose):
             self.on_choose(self.topic_id)
+            
+            
+    def __repr__(self):
+        return f"{self.data_index}: {super().__repr__()}"
 
 class SearchBar(TextInput):
     def __init__(self, ts:TopicService, parent_screen, **kwargs):
@@ -55,9 +66,10 @@ class SearchBar(TextInput):
         
 
 class TopicListScreen(Screen):
-    def __init__(self, ts:TopicService, cs:CategoryService, **kwargs):
+    def __init__(self, ts:TopicService, cs:CategoryService, js:Joystick, **kwargs):
         super().__init__(**kwargs)
 
+        self.js=js
         self.ts=ts
         self.cs=cs
         
@@ -71,7 +83,7 @@ class TopicListScreen(Screen):
         # Update background when layout changes
         main_layout.bind(pos=self.update_bg, size=self.update_bg)
         
-        # Title label
+        
         self.title_label = Label(
             text='Available Topics',
             font_size=24,
@@ -80,7 +92,6 @@ class TopicListScreen(Screen):
             pos_hint={'center_x': 0.5, 'top':0.99}
         )
         
-        # RecycleView
         self.rv = RecycleView(
             bar_width=10,
             scroll_type=['bars', 'content'],
@@ -88,7 +99,6 @@ class TopicListScreen(Screen):
             size_hint=(0.85,0.75)
         )
         
-        # RecycleBoxLayout
         recycle_layout = RecycleBoxLayout(
             default_size=(None, None),  # Let buttons determine their own height
             default_size_hint=(1, None),
@@ -117,6 +127,10 @@ class TopicListScreen(Screen):
         main_layout.add_widget(searchbar)
         
         self.add_widget(main_layout)
+        
+        if(self.js): #if there is no joystick connected, skip it's entire logic
+            self.selection_index=0
+    
 
     def update_bg(self, instance, _):
         self.bg_rect.pos = instance.pos
@@ -128,6 +142,7 @@ class TopicListScreen(Screen):
         detail_screen.display_topic(topic.description)
         self.manager.transition = SlideTransition()
         self.manager.current = 'topic_detail'
+        Clock.unschedule(self.check_joystick_events)
 
     def on_enter(self):
         """Triggers button update with all topics in the chosen category"""
@@ -137,6 +152,12 @@ class TopicListScreen(Screen):
         topics = self.ts.list_by_category(category)
         
         self.update_buttons(topics)
+        
+        self.selection_index=0
+        if self.js:
+            Clock.schedule_interval(self.check_joystick_events, 0.1)
+        
+        #Clock.schedule_once(self.debug, 0)
             
             
     def on_search(self, keyword: str):
@@ -154,10 +175,92 @@ class TopicListScreen(Screen):
                 'topic_id': t.id,
                 'on_choose': self.handle_choose
             } for t in topics]
+        
+
+    #---Joystick input handling
+    
+    def check_joystick_events(self, *_):
+        if self.manager.current=='topic_list':
+            intent= self.js.get() #don't need to be here if it isnt the active screen
+            if intent:
+                self.handle_joystick_intents(intent)
+    
+    def handle_joystick_intents(self, intent:Intent):
+        max_items=len(self.rv.data)
+        if(max_items==0):
+            return #just skip if there is no data
+        
+        if(0 <= self.selection_index < max_items): #gotta check bc apparently it can still exceed this despite the min/max above
+            match intent:
+                case Intent.UP:
+                    self.selection_index=max(0, self.selection_index-1)
+                    self.update_selection()
+                    self.scroll_with_selection()
+                case Intent.DOWN:
+                    self.selection_index=min(max_items-1, self.selection_index+1)
+                    self.update_selection()
+                    self.scroll_with_selection()
+                case Intent.SELECT:
+                    topic_id=self.rv.data[self.selection_index]['topic_id']
+                    self.handle_choose(topic_id)
+                case _:
+                    return
+
+    def update_selection(self):
+        """Updates the visual selection of buttons by setting 'hovered' state"""
+        
+        buttons=self.rv.children[0].children
+        for i, button in enumerate(buttons):
+            if hasattr(button, 'hovered'):
+                button.hovered=(button.data_index==self.selection_index)
+                
+    def scroll_with_selection(self):
+        total_items=len(self.rv.data)
+        visible_items = len(self.rv.children[0].children)-1  # Approximate number of items visible at once
+        
+        
+        if self.selection_index < 2:
+            # Near the top - scroll to show from beginning
+            target_scroll_y = 1.0
+        elif self.selection_index >= total_items - 2 and total_items >6:
+            # Near the bottom - scroll to show end
+            target_scroll_y = 0.0
+        else:
+            # Middle items - center the selection in viewport
+            # Calculate relative position (0.0 = bottom, 1.0 = top)
+            relative_position = (total_items - 1 - self.selection_index) / max(1, total_items - visible_items) #TODO FIX
+            target_scroll_y = max(0.0, min(1.0, relative_position))
+        
+        self.animate_scroll_to(target_scroll_y)
+        
+    def animate_scroll_to(self, target_y):
+        """Smoothly animate scroll to target position"""
+        from kivy.animation import Animation
+        
+        # Cancel any existing scroll animation
+        Animation.cancel_all(self.rv)
+        
+        # Animate to target position
+        anim = Animation(scroll_y=target_y, duration=0.2, transition='out_quart')
+        anim.start(self.rv)
+         
+                
+
+    def debug(self, *_):
+        buttons = self.rv.children[0].children
+        print(f"\nAmount of Buttons: {len(buttons)}")
+        print(buttons)
+        for i, button in enumerate(buttons):
+            print(f"{len(buttons)-1-i}: {button}\n")
+        
+            
+
 
 class TopicDetailScreen(Screen):
-    def __init__(self, **kwargs):
+    def __init__(self, js:Joystick, **kwargs):
         super().__init__(**kwargs)
+
+        self.js=js
 
         # Main container
         main_layout = BoxLayout(
@@ -192,6 +295,9 @@ class TopicDetailScreen(Screen):
         )
         back_button.bind(on_press=self.go_back)
         
+        if(self.js):
+            back_button.hovered=True #becomes unset if a mouse is present but oh well
+        
         # Add widgets to main layout
         main_layout.add_widget(self.content_label)
         main_layout.add_widget(back_button)
@@ -204,14 +310,30 @@ class TopicDetailScreen(Screen):
 
     def display_topic(self, text):
         self.content_label.text = text
+        if self.js:
+            Clock.schedule_interval(self.check_joystick_events, 0.1)
 
     def go_back(self, *_):
         self.manager.current = 'topic_list'
+        
+    def check_joystick_events(self, *_):
+        if self.manager.current=='topic_detail':
+            intent= self.js.get() #don't need to be here if it isnt the active screen
+            if intent:
+                self.handle_joystick_intents(intent)
+    
+    def handle_joystick_intents(self, intent:Intent):
+        if intent== Intent.SELECT:
+            Clock.unschedule(self.check_joystick_events)
+            self.go_back()
+
 
 
 class StartupScreen(Screen):
-    def __init__(self, **kw):
+    def __init__(self, js:Joystick, **kw):
         super().__init__(**kw)
+        
+        self.js=js
         
         self.startup_label = Label(
             text='Spin the wheel to start',
@@ -227,9 +349,24 @@ class StartupScreen(Screen):
         
         self.add_widget(self.startup_label)
         
+        if self.js:
+            Clock.schedule_interval(self.check_joystick_events, 0.1)
+        
     def update_bg(self, instance, _):
         self.bg_rect.pos = instance.pos
         self.bg_rect.size = instance.size
+        
+    def check_joystick_events(self, *_):
+        if self.manager.current=='startup':
+            intent= self.js.get() #don't need to be here if it isnt the active screen
+            if intent:
+                self.handle_joystick_intents(intent)
+    
+    def handle_joystick_intents(self, intent:Intent):
+        if intent== Intent.SELECT:
+            Clock.unschedule(self.check_joystick_events)
+            Clock.unschedule(App.get_running_app().check_movement) #quick and dirty i admit...
+            App.get_running_app().check_stopped()
 
 class WaitingScreen(Screen):
     def __init__(self, **kw):
@@ -267,27 +404,28 @@ class ColapsExplorerApp(App):
         ts=TopicService(db)
         cs=CategoryService(db)
         
+        self.joystick = Joystick()
+        if self.joystick:
+            self.joystick.start() 
+        
         
         self.sm = ScreenManager()
-        startup_screen = StartupScreen(name="startup")
+        startup_screen = StartupScreen(name="startup", js=self.joystick)
         waiting_screen= WaitingScreen(name="waiting")
-        self.topic_list_screen = TopicListScreen(name='topic_list', ts=ts, cs=cs)
-        detail_screen = TopicDetailScreen(name='topic_detail')
+        self.topic_list_screen = TopicListScreen(name='topic_list', ts=ts, cs=cs, js=self.joystick)
+        detail_screen = TopicDetailScreen(name='topic_detail', js=self.joystick)
         
         self.sm.add_widget(startup_screen)
         self.sm.add_widget(waiting_screen)
         self.sm.add_widget(self.topic_list_screen)
         self.sm.add_widget(detail_screen)
         
-
-        time.sleep(1) #delay scheduling to give moving average time to fill up
-        
         #periodically check for movement
         Clock.schedule_interval(self.check_movement, 0.5)
 
         return self.sm
 
-    def check_movement(self, _):
+    def check_movement(self, *_):
         if not self.tlv.get_moving():
             return True #not moving yet, continue checking
         
@@ -297,7 +435,7 @@ class ColapsExplorerApp(App):
         self.sm.current = 'waiting'
         return False
         
-    def check_stopped(self,_):
+    def check_stopped(self,*_):
         if self.tlv.get_moving():
             return True # still moving, continue checking
         
@@ -311,6 +449,8 @@ class ColapsExplorerApp(App):
     
     def on_stop(self):
         self.tlv.stop_reading()
+        self.joystick.stop()
+        
 
 
 if __name__ == '__main__':
