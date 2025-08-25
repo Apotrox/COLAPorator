@@ -184,6 +184,36 @@ This fixed the initial issue of which button to adress/highlight, as this is now
 Nonetheless, the automatic scrolling still seemed to require some work, as it is not fast enough to keep up with new buttons popping up. Because of this, the selection once again goes off screen.
 After contemplating on how to approach this, it seemed to be most sensible to first scroll down a small bit to load the next button, get it's y size and scroll down again by this size. This required a combination of the old and new scrolling methods, as this is dependend on the new buttons loading in. A function was created to get the next button's height and return it as a value. However, it was apparent that this needed to be normalized to the window size or similar, as the scroll_y of the recycleview is a percentage, while the button height is an absolute value.
 
-i am loosing my shit please help. the maths aint mathin
+i am loosing my shit please help. the maths aint mathin. The function above was unused and eventually removed. The entire scrolling behavior was replaced.
 
 After help from Claude, a somewhat functional scrolling function was created. However, there is some jumping around and faulty highlighting, which only appears the first time of scrolling through the list. After reaching the bottom once, this issue does not appear anymore. Might need to look into caching all recycleview buttons before showing them.
+
+25.8.
+
+A few minor issues were identified and promptly fixed. First, the scrolling position and selection reset after each screen change. This was caused by setting the selection index to 0 on each on_enter/pre_enter, which is called every time the screen is entered. As this was only intended as initialization, this was moved into the init.
+
+Secondly, on categories that did not have enough topics to scroll, reaching the last topic still moved the list to the bottom. This was rather unintuitive behavior. This was fixed by adding a condition to the scrolling behavior, if there is only a certain amount of items, the scrolling position will be set to 1 (the top).
+
+After further investigation, the erratic scrolling issue appeared to be tied to the dynamic height of the buttons, which is computed when the button is generated, not before. Solving this issue can be done with different approaches:
+
+1. Making each button a fixed height so there is no variability to mess up the scrolling
+2. Somehow fixing the behavior with variable height buttons
+3. Scrolling down and up again to load all buttons
+
+As one might be able to tell by the lack of detail in the first two approaches, it was quickly decided to try the simplest approach first: Loading all buttons by scrolling down and then up again.
+This was first realized by simply setting the attribute scroll_y accordingly, which seemed to not work as intended. A lot of buttons were skipped in loading, resulting in the same behavior. However, using the animated scroll function for this appeared to scroll through the list smoothly but quickly, loading all buttons on the way.
+While it might not be the most intuitive behavior, it could be considered to offer a bit of a preview of available topics. Calling the animation was once again moved behind the condition of there being enough items to enable scrolling.
+
+Considering the app will be used in fullscreen, the thresholds were all set for a small windowed application. To facilitate predictable behavior in both, the average amount of buttons shown was calculated based on the recycleview size. Specifically, the size_y was divided by a chosen magic number to get close enough to acceptable behavior. After testing, 60 as a magic number seemed to bring satisfying results.
+
+
+Moving on, the workflow for the guestbook is designed.
+The user can move to the right any time in the list. Whether there is an immediate screen change with an corresponding animation to a guest book entry, or a popup that first asks if the user really wants to finish up, is still WIP.
+In the new screen, the user is presented with various input prompts, like: Name, Email and Institution they belong to. A disclaimer at the bottom tells the user that none of those inputs have to be made and are completely voluntary. A button in the lower right then serves as a finishing button to commit inputs to the database, if there are any. There might be another "Thank you" screen following after.
+To inform the user of the input possibility, a label on the side with some arrows can tell the user to move to the side to finish.
+The arrows were intended to be simple UTF symbols to simplify the resources used. However, the default font did not support those, the font for this had to be DejaVuSans, as it supports those symbols.
+Next was the rotation of the label. This surprisingly proved to be rather difficult, as kivy has no native rotation implementation of widgets. The first version simply tried to rotate the canvas, which made the text disappear. The second version used a Scatter Widget, which had native rotation support, and seemed to be rather promising. Yet, it became difficult to use it in both windowed and fullscreen mode, the positioning seemed to be calculated differently. 
+As a last resort, a custom rotatedLabel widget class was created, using the first approach of a rotated canvas with necessary update functions that are bound to position and size changes. Using this, the label is positioned correctly and scales properly when switching to fullscreen mode.
+
+
+Here it was decided to modularize all screen and custom widgets used in the explorer app, as it has become difficult to navigate it. Some improvements were made on the searchBar class, which now supports custom hint text and callback functions
