@@ -73,6 +73,8 @@ class TopicListScreen(Screen):
         self.ts=ts
         self.cs=cs
         
+        self.selection_index=0
+        
         main_layout = FloatLayout()
         
         # Set background
@@ -144,7 +146,7 @@ class TopicListScreen(Screen):
         self.manager.current = 'topic_detail'
         Clock.unschedule(self.check_joystick_events)
 
-    def on_enter(self):
+    def on_pre_enter(self):
         """Triggers button update with all topics in the chosen category"""
         category = self.cs.get_for_angle(self.angle)
         self.title_label.text = category.title
@@ -152,13 +154,14 @@ class TopicListScreen(Screen):
         topics = self.ts.list_by_category(category)
         
         self.update_buttons(topics)
+
         
-        self.selection_index=0
+        
+        
+    
+    def on_enter(self):
         if self.js:
-            Clock.schedule_interval(self.check_joystick_events, 0.1)
-        
-        #Clock.schedule_once(self.debug, 0)
-            
+            Clock.schedule_interval(self.check_joystick_events, 0.1)                
             
     def on_search(self, keyword: str):
         """Triggers button update with topics that match the keyword in the title"""
@@ -219,16 +222,16 @@ class TopicListScreen(Screen):
         visible_items = len(self.rv.children[0].children)-1  # Approximate number of items visible at once
         
         
-        if self.selection_index < 2:
+        if self.selection_index < 2 or (total_items <6):
             # Near the top - scroll to show from beginning
             target_scroll_y = 1.0
-        elif self.selection_index >= total_items - 2 and total_items >6:
+        elif ((self.selection_index >= total_items - 2)):
             # Near the bottom - scroll to show end
             target_scroll_y = 0.0
         else:
             # Middle items - center the selection in viewport
             # Calculate relative position (0.0 = bottom, 1.0 = top)
-            relative_position = (total_items - 1 - self.selection_index) / max(1, total_items - visible_items) #TODO FIX
+            relative_position = (total_items - 1 - self.selection_index) / max(1, total_items - visible_items)
             target_scroll_y = max(0.0, min(1.0, relative_position))
         
         self.animate_scroll_to(target_scroll_y)
