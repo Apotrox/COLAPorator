@@ -142,6 +142,7 @@ class TopicListScreen(Screen):
         topic = self.ts.get(topic_id)
         detail_screen = self.manager.get_screen('topic_detail')
         detail_screen.display_topic(topic.description)
+        detail_screen.db_id=topic_id # to lay the groundwork for tracking/usage history
         self.manager.transition = SlideTransition()
         self.manager.current = 'topic_detail'
         Clock.unschedule(self.check_joystick_events)
@@ -154,11 +155,14 @@ class TopicListScreen(Screen):
         topics = self.ts.list_by_category(category)
         
         self.update_buttons(topics)
+        
+        # very hacky and not pretty but by god it works 
+        (_,size_y)=self.rv.size
+        if(len(self.rv.data)>round(size_y/60)):
+            Clock.schedule_once(lambda dt: self.animate_scroll_to(0.0, 0.2),0)
+            Clock.schedule_once(lambda dt: self.animate_scroll_to(1.0, 0.2),1)
 
-        
-        
-        
-    
+  
     def on_enter(self):
         if self.js:
             Clock.schedule_interval(self.check_joystick_events, 0.1)                
@@ -220,9 +224,9 @@ class TopicListScreen(Screen):
     def scroll_with_selection(self):
         total_items=len(self.rv.data)
         visible_items = len(self.rv.children[0].children)-1  # Approximate number of items visible at once
+        (_,size_y)=self.rv.size
         
-        
-        if self.selection_index < 2 or (total_items <6):
+        if self.selection_index < 2 or (total_items <= round(size_y/60)):
             # Near the top - scroll to show from beginning
             target_scroll_y = 1.0
         elif ((self.selection_index >= total_items - 2)):
@@ -236,15 +240,16 @@ class TopicListScreen(Screen):
         
         self.animate_scroll_to(target_scroll_y)
         
-    def animate_scroll_to(self, target_y):
+    def animate_scroll_to(self, target_y, duration= 0.2):
         """Smoothly animate scroll to target position"""
+        
         from kivy.animation import Animation
         
         # Cancel any existing scroll animation
         Animation.cancel_all(self.rv)
         
         # Animate to target position
-        anim = Animation(scroll_y=target_y, duration=0.2, transition='out_quart')
+        anim = Animation(scroll_y=target_y, duration=duration, transition='out_quart')
         anim.start(self.rv)
          
                 
@@ -260,6 +265,8 @@ class TopicListScreen(Screen):
 
 
 class TopicDetailScreen(Screen):
+    db_id = NumericProperty(None) #to be used for tracking/usage history
+    
     def __init__(self, js:Joystick, **kwargs):
         super().__init__(**kwargs)
 
