@@ -6,7 +6,10 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen, FallOutTransition, RiseInTransition, SlideTransition
 from kivy.core.window import Window
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.graphics import Color, Rectangle
+from kivy.uix.scatter import Scatter
 from kivy.metrics import dp
 from kivy.properties import ObjectProperty, NumericProperty
 from kivy.uix.textinput import TextInput
@@ -23,6 +26,7 @@ from hardware.tlv493d import TLV493D
 from hardware.JoystickManager import Joystick, Intent
 from ui.SelectableButton import SelectableButton
 from ui.HoverableButton import HoverableButton
+from ui.RotatedLabel import RotatedLabel
 
 from kivy.clock import Clock
 import threading, time
@@ -119,6 +123,18 @@ class TopicListScreen(Screen):
             parent_screen = self
         )
         
+        finish_layout=FloatLayout(pos_hint={"center_x":0.96, "center_y":0.5}, size_hint=(0.2,0.8))
+        
+        arrow=dict(text=("\u27A7"), font_size="40sp", color=(0.5,0.5,0.5,1), font_name="./DejaVuSans.ttf")
+        
+        finish_layout.add_widget(Label(**arrow, pos_hint={"right":1, "center_y":1}))
+        finish_layout.add_widget(Label(**arrow,pos_hint={"right":1, "center_y":0.0}))
+        
+        finish_layout.add_widget(RotatedLabel(text="Move to the side to finish!", angle=90, font_size="20sp", pos_hint={"right":1, "center_y":0.5}))
+        
+        main_layout.add_widget(finish_layout)
+        
+        
         self.rv.add_widget(recycle_layout)
         self.rv.viewclass = 'AppSelectableButton'
         
@@ -143,7 +159,7 @@ class TopicListScreen(Screen):
         detail_screen = self.manager.get_screen('topic_detail')
         detail_screen.display_topic(topic.description)
         detail_screen.db_id=topic_id # to lay the groundwork for tracking/usage history
-        self.manager.transition = SlideTransition()
+        self.manager.transition = SlideTransition(direction="right")
         self.manager.current = 'topic_detail'
         Clock.unschedule(self.check_joystick_events)
 
@@ -324,6 +340,7 @@ class TopicDetailScreen(Screen):
             Clock.schedule_interval(self.check_joystick_events, 0.1)
 
     def go_back(self, *_):
+        self.manager.transition = SlideTransition(direction="left")
         self.manager.current = 'topic_list'
         
     def check_joystick_events(self, *_):
@@ -358,6 +375,7 @@ class StartupScreen(Screen):
         self.bind(pos=self.update_bg, size=self.update_bg)
         
         self.add_widget(self.startup_label)
+        
         
         if self.js:
             Clock.schedule_interval(self.check_joystick_events, 0.1)
@@ -432,6 +450,8 @@ class ColapsExplorerApp(App):
         
         #periodically check for movement
         Clock.schedule_interval(self.check_movement, 0.5)
+        
+        Window.fullscreen = True
 
         return self.sm
 
