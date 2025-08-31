@@ -1,0 +1,92 @@
+\chapter{Methodology}
+\label{sec:Methodology}
+
+(Generally, i'd leave all of this as is, put the implementation in the results section and discuss at the end in "Discussion" the limitations of this project and why things basically did not go at all like i outlined here. Good idea?)\\\\
+
+In this section, I will outline the iterative design-implementation-evaluation approach employed, to develop an interactive paper poster system using Raspberry Pi as the central microcontroller. The methodology is rooted in user-centered design principles, emphasizing collaboration with stakeholders, iterative refinement, and evidence-based evaluation to ensure the system meets its intended purposes.
+
+The primary goal of this methodology is to create a system that integrates seamlessly with paper-based media while leveraging Raspberry Pi's versatility to control peripheral devices such as servos, LEDs, and screens. The system must balance technical functionality with usability, visual appeal, and ease of integration into various contexts, such as education, exhibitions, or public spaces.
+
+My approach begins with identifying key stakeholders and eliciting requirements through interviews and contextual inquiries. These requirements guide the creation of initial design mockups, which visualize the interaction concepts and serve as a foundation for stakeholder feedback. Based on these designs, prototypes are developed incrementally, with each iteration refining the system's hardware, software, and user experience.
+
+Each prototype undergoes systematic evaluation, combining qualitative and quantitative methods to assess its technical performance, usability, and alignment with stakeholder needs. The insights gained from these evaluations inform subsequent iterations, fostering continuous improvement and innovation.
+
+By following this methodology, I aim to ensure the final system not only meets technical and aesthetic expectations but also achieves its intended impact, creating a versatile, interactive platform that bridges the gap between traditional and digital media.
+
+\section{Identifying Stakeholders}
+In the development of this project, it is crucial to identify and engage the right stakeholders to ensure the system meets their diverse needs and expectations. Depending on who they are, the course of the entire project might change, thus this must be done as the very first step.
+\begin{itemize}
+	\item End Users (General Audience): The primary users of the interactive paper poster will be individuals who engage with the poster in various environments, such as conferences or public exhibitions. These users could interact with the poster through buttons (capacitive or tactile) or sensors, triggering visual or mechanical responses (e.g. lighting, moving parts, screen display). Their experience with this system will be central to its success. As such, their feedback on usability, engagement, and overall experience is critical for shaping the design and functionality.
+	\item  Research group: On the other side of the poster presentations are the presenters themselves, the research group \emph{colaps}. They will be the ones showcasing the poster and presenting their research using it. As such, not only does the system need to be reliable and easy to use, but it also needs to complement the content presented.
+\end{itemize}
+
+\section{Eliciting Requirements}
+The process of eliciting requirements will be carried out to ensure that the interactive paper poster meets the needs of its primary stakeholders. This phase will involve gathering information about the expectations, preferences, technical constraints, and contextual constraints, that would shape the design and functionality of the poster.
+This could be done by interviewing the team of the research group to get a grasp on the factors mentioned, as well as collecting and surveying the necessary research material that is desired to be presented.
+When starting the prototyping process, designing mockups, and implementing various features, a strong feedback loop with the research group should be established to guarantee that no unnecessary features will be implemented or important features will be left out.
+
+
+\section{Prototyping and Evaluating}
+In the process of prototyping, mockups of the poster will be made, to test certain features and to obtain feedback on their implementation. This might start with a random assortment of data (graphs, pictures, text, etc.) for a proof of concept but later evolve into prototypes using actual data from the research that is to be presented. Each prototype will then be evaluated according to the abovementioned fundamental requirements, the functionality of the feature(s) implemented, and the impressions and feedback of the research group.
+
+\section{Potential Integrations}
+The actual list of features will be developed in cooperation with the group itself when surveying the research material, but the following can be set as the foundation:
+\begin{itemize}
+	\item Technical reliability
+	\item Portability
+	\item Modular design
+	\item Sturdy construction
+\end{itemize}
+In this short section, I'd like to outline some feature ideas I have for this project. This does not mean that all or even any of them will be implemented. Their usefulness, as stated before, strongly depends on the material that's supposed to be presented with this poster and the time constraints of this project. This is just to offer some ideas.
+\begin{itemize}
+	\item Servos or small motors for moving parts, e.g.: A bar chart that "animates" its bars or changes their length depending on different contexts
+	\item LEDs, e.g. to highlight certain elements or lead the viewer around the poster
+	\item Speakers to offer audio playback
+	\item 3D-printed parts for rigidity, robustness, and customization
+	\item LCD Display(s), e.g. to show complex animations
+	\item Buttons and capacitive touch sensors for user interaction
+	\item Thermochromic ink: The idea behind PaperPixels fascinated me. Though it is highly likely, as that project in itself was made in the scope of a paper, that trying to implement similar technology will completely overload the scope of this project.
+	\item Electric circuits: electric circuits could be embedded into the poster to create button-like features on the paper itself by completing a circuit with one's finger when touching an area. Similar to Interactive Paper.
+\end{itemize}
+As a Raspberry Pi only has limited GPIO available, additional microcontrollers like Raspberry Pi Pico or ESP32 could be used to modularize certain features and expand the IO capacity of the main controller.
+
+\section{Participants}
+The participants of this project consist of me and the team of the research group. Additionally, some colleagues with a background in education might be asked to provide feedback on certain design choices.
+
+\section{Materials}
+At the most fundamental level, a Raspberry Pi SBC or similar will be required for this project. For this, I propose using a Raspberry Pi 4 2GB. The reason for this is that, compared to the Pi 3 B+ for example, the Pi 4 offers two Micro HDMI and USB 3 ports, offering great expansion capabilities in terms of screens and IO. Its more powerful processor and ample RAM provide a more reliable basis for computing without the risk of running into any potential bottlenecks.
+Similarly, paper posters are required for the mockups and prototypes.
+
+\section{Procedures}
+To summarize the procedures outlined in the previous sections, first, the requirements of the poster and additional stakeholders will be identified. Secondly, a list of desired features will be compiled and evaluated. Following this, the prototyping process will start as outlined previously. Each prototype will then be evaluated periodically.
+
+\section{Risk Assessment Plan}
+
+The development of the interactive paper poster system may involve several risks that need to be identified and managed to ensure the project stays on track. The table below outlines the primary risks that can be identified at this point in time, as well as mitigation strategies.
+
+\begin{table}[h!]
+	\centering
+	\caption{Risk Assessment Plan}
+	\begin{tabular}{|p{4cm}|p{8cm}|}
+		\hline
+		\textbf{Risk} & \textbf{Mitigation Strategy} \\
+		\hline
+		\textbf{Stakeholder Miscommunication} & Establish clear communication channels (e.g., regular meetings, documented feedback) and maintain a feedback loop with stakeholders throughout the project. \\
+		\hline
+		\textbf{Hardware Failures or Delays} & Maintain spare components for critical hardware (e.g., Raspberry Pi, sensors, and peripherals) and plan for alternatives in case of supply chain issues. \\
+		\hline
+		\textbf{Technical Integration Challenges} & Adopt a modular design approach to minimize dependencies between components, allowing easier troubleshooting and replacement of individual parts. \\
+		\hline
+		\textbf{Time Overruns Due to Feature Creep} & Strictly prioritize features based on stakeholder requirements and time constraints; establish a clear Minimum Viable Product (MVP). \\
+		\hline
+		\textbf{Insufficient Usability Feedback} & Conduct frequent usability testing with diverse stakeholders at every iteration to ensure feedback is gathered systematically. \\
+		\hline
+		\textbf{Software Bugs or System Instability} & Implement version control (e.g., Git) and perform continuous integration and testing to catch and resolve bugs early. \\
+		\hline
+		\textbf{Power or Portability Issues} & Test power requirements early in the prototyping phase and optimize for efficient power consumption. Use battery packs or alternative power sources as backups. \\
+		\hline
+		\textbf{Unfamiliarity with Certain Technologies} & Allocate time for researching and experimenting with new technologies (e.g., advanced sensors or peripherals) during the early phases of the project. Seek guidance from experts if needed. \\
+		\hline
+	\end{tabular}
+	\label{tab:risk-assessment}
+\end{table}

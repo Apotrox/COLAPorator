@@ -1,0 +1,62 @@
+\chapter{Results}
+\label{sec:results}
+\section{Eliciting Requirements}
+Here i would outline the interview we had when i compiled the list of questions.
+\section{Initial Proof-of-Concept}
+Outlining the initial design process, the thoughts that went into certain choices as well as our meeting where i presented this to you. Would include the design document with explanations.
+\section{CAD and Materials}
+Small section on the creation of the CAD model and material choices/tests
+\section{Early Prototyping}
+Even before our meeting, when the design i wanted to go for was finalized, i made a small 3d printed prototype to test the sensor and get a hardware proof-of-concept (i actually based the CAD design of the large poster on this one). I'd rather put this here for consistency. It'll probably be a small section but there are actually some problems i faced that i would like to outline here (particularly magnet orientation with the sensor). I later also tried to continue using this prototype before i got the hardware but it proved impossible to use the small SPI screen with the frontend framework i chose simply because i couldn't get the display driver to load correctly and had to write image as bytes manually to the display buffer. Could be interesting to mention too.
+\section{GUI Design and Creation}
+I made \textit{some} Layout drawings for the tools and the application. While those were based on nothing but what i thought would make sense and be usable, might be interesting to include them here while explaining why i did what i did.
+Also would include a short paragraph on the frontend framework choice as this one wasn't as straightforward.
+\section{Logic Implementation}
+Here i'd put \textbf{everthing} i did before refactoring the codebase. This includes everything from the documentation until half of 12.8., like:
+\begin{itemize}
+	\item Initial Database design
+	\item Making the prototype configuration tool on the 3D Prototype with all it's logic 
+	\item Later moving it to Kivy (with the problems that came with that)
+	\item Creation of the first Application Window and it's expansions
+	\item Implementation of the Content Manager tool
+	\item Database Redesign (and outlining the risk of SQL Injections which was later fixed)
+\end{itemize}
+
+While this list is somewhat chronological, i'm not sure if it makes sense to keep it that way. While during this time, i was mostly focused on finishing one program before starting another, i'm sure there was \textit{some} jumping around, which would make more sense to just keep in its "subcategory" (like Content Manager tool implementation).
+
+\section{Refactoring}
+
+This might be the most interesting section as the learning curve of application development really took it's toll on the program up until this point and things became quite the spaghetti code, which was just unmaintainable and impossible to work with at this point, even for me.
+
+I'd outline what the issue was, give some explanations on why this was happening and propose the plan i drafted up (and implemented) to mitigate this.
+
+Some POI would be the management layers for topics and categories, the expansion of the database wrapper, and object management in code.
+
+Obviously this all caused some issues after implementation with things i couldn't test at the time, but they were rather minor, so if i include them, i'd probably do it briefly.
+
+Here i also fixed the SQL Injections.
+
+\section{Expanding Capabilities}
+
+This would include...
+
+\begin{itemize}
+	\item the implementation of the searchbar
+	\item naming categories in the configuration tool
+	\item expanding the configuration tool with the ability to rename recorded categories
+	\item expanding the category management layer with the necessary functions to facilitate the above and then some (namely creation and deletion)
+\end{itemize}
+
+These, too would include thoughts behind certain decisions and problems that were encountered and are worth mentioning (if any).
+
+\section{HID Integration}
+
+Implementing the Joystick controls was also pretty interesting, as it required some reverse engineering (if you could call that) of the communication with the library i chose.
+There was also some special design choices i made that i'd like to outline (e.g. using ENUMs to assign inputs).
+There's also one problem that i'd like to explain because it also led to an unusual but necessary choice in behavior.\\\\\\\\
+
+
+As you can tell, there might be things missing. Namely the Guestbook, NFC reader, LEDS, Feedback mechanism and Multimedia support.
+This is obviously dependent on whether or not there will be another (albeit short) phase of development, where i might be able to finish one of these features. Which is also dependent on how much of the exposé i can reuse, as rewriting this in it's entirety would take up all the time i have left for this thesis.
+
+I have written a paragraph about this in my documentation, which i would later include in the limitations section.

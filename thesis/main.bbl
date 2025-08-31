@@ -1,0 +1,2141 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{interactivepaper}{online}{}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeldatesource}{nodate}
+      \verb{urlraw}
+      \verb https://www.interactivepaper.com/
+      \endverb
+      \verb{url}
+      \verb https://www.interactivepaper.com/
+      \endverb
+    \endentry
+    \entry{Arslan}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=c095472a6c67d80a72b3ed0f35c3c877}{%
+           family={Arslan},
+           familyi={A\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d119b119398e52dbb43faa09240d3e03}{%
+           family={Koca},
+           familyi={K\bibinitperiod},
+           given={T},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4af6ac2f178ed793e2f1fd74fcc5d73}{%
+           family={Tastekin},
+           familyi={T\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b35cd3f5de04b4ffb04ce505ddc4d21}{%
+           family={Basaran},
+           familyi={B\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1990ebdf507d0097da3f4077d07ce622}{%
+           family={Bozcuk},
+           familyi={B\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{97033cd85c067ad9df7cff153e40ff69}
+      \strng{fullhash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{fullhashraw}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{bibnamehash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{authorbibnamehash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{authornamehash}{97033cd85c067ad9df7cff153e40ff69}
+      \strng{authorfullhash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{authorfullhashraw}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{18}
+      \field{journaltitle}{Asian Pacific journal of cancer prevention : APJCP}
+      \field{title}{Impact of poster presentations on academic knowledge transfer from the oncologist perspective in Turkey}
+      \field{volume}{15}
+      \field{year}{2014}
+      \field{pages}{7707\bibrangedash 7711}
+      \range{pages}{5}
+      \verb{doi}
+      \verb https://doi.org/10.7314/apjcp.2014.15.18.7707
+      \endverb
+    \endentry
+    \entry{Dale}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=2c23f10fb04136b9833b589030ddef4e}{%
+           family={Dale},
+           familyi={D\bibinitperiod},
+           given={Virginia\bibnamedelima H.},
+           giveni={V\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a12ea3373829cb3e0e530f407c330cc}{%
+           family={Kline},
+           familyi={K\bibinitperiod},
+           given={Keith\bibnamedelima L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{fullhash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{fullhashraw}{869612eccf1010ae0b23730287ace9c8}
+      \strng{bibnamehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authorbibnamehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authornamehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authorfullhash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authorfullhashraw}{869612eccf1010ae0b23730287ace9c8}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biofuels, Bioproducts and Biorefining}
+      \field{number}{2}
+      \field{title}{Interactive posters: A valuable means of enhancing communication and learning about productive paths toward sustainable bioenergy}
+      \field{volume}{11}
+      \field{year}{2017}
+      \field{pages}{243\bibrangedash 246}
+      \range{pages}{4}
+      \verb{doi}
+      \verb https://doi.org/10.1002/bbb.1753
+      \endverb
+      \verb{eprint}
+      \verb https://scijournals.onlinelibrary.wiley.com/doi/pdf/10.1002/bbb.1753
+      \endverb
+      \verb{urlraw}
+      \verb https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/bbb.1753
+      \endverb
+      \verb{url}
+      \verb https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/bbb.1753
+      \endverb
+    \endentry
+    \entry{Angelo}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f57ca112a4864bdfdb8585534de93452}{%
+           family={D’Angelo},
+           familyi={D\bibinitperiod},
+           given={Larissa},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{fullhash}{56d61110489e0262e6e357c414fa2288}
+      \strng{fullhashraw}{56d61110489e0262e6e357c414fa2288}
+      \strng{bibnamehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authorbibnamehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authornamehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authorfullhash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authorfullhashraw}{56d61110489e0262e6e357c414fa2288}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Language}
+      \field{title}{From posters to e-posters: the evolution of a genre}
+      \field{volume}{4}
+      \field{year}{2012}
+      \field{pages}{46\bibrangedash 54}
+      \range{pages}{9}
+      \verb{urlraw}
+      \verb https://www.reading.ac.uk/elal/-/media/project/uor-main/schools-departments/elal/lswp/lswp-4/elal_lswp_vol_4_dangelo1.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.reading.ac.uk/elal/-/media/project/uor-main/schools-departments/elal/lswp/lswp-4/elal_lswp_vol_4_dangelo1.pdf
+      \endverb
+    \endentry
+    \entry{Simone.2001}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=add26a183f8cf14772ed342bbd71971f}{%
+           family={Simone},
+           familyi={S\bibinitperiod},
+           given={Raffaele},
+           giveni={R\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=9f5eeadc93620aa671387f89675aa0ba}{%
+           family={Rodrian},
+           familyi={R\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9cdf433c518c0a0265eb21e57b083a70}{%
+           family={Osswald},
+           familyi={O\bibinitperiod},
+           given={Brigitte},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=71b3fdaf9536bde0d504acdbffd2f651}{%
+           family={Sack},
+           familyi={S\bibinitperiod},
+           given={Falk-Udo},
+           giveni={F\bibinithyphendelim U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=99a23c20b7228f5e4fcf59e8732052c0}{%
+           family={Simone},
+           familyi={S\bibinitperiod},
+           given={Eliana},
+           giveni={E\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=92a8dbbd6eb010ac29ef5e5bdf1be878}{%
+           family={Hagl},
+           familyi={H\bibinitperiod},
+           given={Siegfried},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{baabd5f523b386091bc1090040703cb0}
+      \strng{fullhash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{fullhashraw}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{bibnamehash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{authorbibnamehash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{authornamehash}{baabd5f523b386091bc1090040703cb0}
+      \strng{authorfullhash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{authorfullhashraw}{fe116db8e06df5dbb5ed4945a7c15444}
+      \field{sortinit}{d}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1010-7940}
+      \field{journaltitle}{European Journal of Cardio-Thoracic Surgery}
+      \field{number}{6}
+      \field{title}{Initial experience with a new communication tool: the `Digital Interactive Poster Presentation'}
+      \field{volume}{19}
+      \field{year}{2001}
+      \field{pages}{953\bibrangedash 955}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1016/S1010-7940(01)00694-7
+      \endverb
+    \endentry
+    \entry{Erren}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=eac2c9a478d1e197fa927e8b7b2e9fe4}{%
+           family={Erren},
+           familyi={E\bibinitperiod},
+           given={Thomas\bibnamedelima C},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e8f011b361a44c99e0b3cd105b7553dc}{%
+           family={Bourne},
+           familyi={B\bibinitperiod},
+           given={Philip\bibnamedelima E},
+           giveni={P\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Public Library of Science}%
+      }
+      \strng{namehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{fullhash}{1d3334aab042da4b88825022ab44c722}
+      \strng{fullhashraw}{1d3334aab042da4b88825022ab44c722}
+      \strng{bibnamehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authorbibnamehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authornamehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authorfullhash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authorfullhashraw}{1d3334aab042da4b88825022ab44c722}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{null}
+      \field{journaltitle}{PLOS Computational Biology}
+      \field{month}{05}
+      \field{number}{5}
+      \field{title}{Ten Simple Rules for a Good Poster Presentation}
+      \field{volume}{3}
+      \field{year}{2007}
+      \field{pages}{1\bibrangedash 2}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1371/journal.pcbi.0030102
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1371/journal.pcbi.0030102
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1371/journal.pcbi.0030102
+      \endverb
+    \endentry
+    \entry{goodhand}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=063b9d00ec5132423e02a988ece9df5f}{%
+           family={Goodhand},
+           familyi={G\bibinitperiod},
+           given={JR},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fda501c19421f87c306b18c51f750cda}{%
+           family={Giles},
+           familyi={G\bibinitperiod},
+           given={CL},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c65db7480f48be097cf90c4be2f96ac5}{%
+           family={Wahed},
+           familyi={W\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=48da6bd16281b9f7acce64dd410057bd}{%
+           family={Irving},
+           familyi={I\bibinitperiod},
+           given={PM},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=213f174b2ce21131271a657ef5240c7a}{%
+           family={Langmead},
+           familyi={L\bibinitperiod},
+           given={L},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2b4d25b263d70befad496761a5bebd5b}{%
+           family={Rampton},
+           familyi={R\bibinitperiod},
+           given={DS},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f1f20015766f45cc4443293d58361eda}
+      \strng{fullhash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{fullhashraw}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{bibnamehash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{authorbibnamehash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{authornamehash}{f1f20015766f45cc4443293d58361eda}
+      \strng{authorfullhash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{authorfullhashraw}{f0b37d2d571e6ceb962f1f35ea125406}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1470-2118}
+      \field{journaltitle}{Clinical Medicine}
+      \field{number}{2}
+      \field{title}{Poster presentations at medical conferences: an effective way of disseminating research?}
+      \field{volume}{11}
+      \field{year}{2011}
+      \field{pages}{138\bibrangedash 141}
+      \range{pages}{4}
+      \verb{doi}
+      \verb https://doi.org/10.7861/clinmedicine.11-2-138
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1470211824053624
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1470211824053624
+      \endverb
+    \endentry
+    \entry{Groccia}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=864d73f635ecf2fc78695d8403f5e80e}{%
+           family={Groccia},
+           familyi={G\bibinitperiod},
+           given={James\bibnamedelima E.},
+           giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{fullhash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{fullhashraw}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{bibnamehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authorbibnamehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authornamehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authorfullhash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authorfullhashraw}{864d73f635ecf2fc78695d8403f5e80e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract This chapter reviews the history and various definitions of student engagement and proposes a multidimensional model from which one can develop a variety of engagement opportunities that lead to a rich and challenging higher education experience.}
+      \field{journaltitle}{New Directions for Teaching and Learning}
+      \field{number}{154}
+      \field{title}{What Is Student Engagement?}
+      \field{volume}{2018}
+      \field{year}{2018}
+      \field{pages}{11\bibrangedash 20}
+      \range{pages}{10}
+      \verb{doi}
+      \verb https://doi.org/10.1002/tl.20287
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/tl.20287
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/tl.20287
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/tl.20287
+      \endverb
+    \endentry
+    \entry{IlicRowe1}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f7bd1ab01d7cde6921a007b5379318fb}{%
+           family={Ilic},
+           familyi={I\bibinitperiod},
+           given={Dragan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{fullhash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{fullhashraw}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{bibnamehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authorbibnamehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authornamehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authorfullhash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authorfullhashraw}{c3438da288f5e40e8c9e00b671f6be2c}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Health Information and Libraries Journal}
+      \field{title}{What is the evidence that poster presentations are effective in promoting knowledge transfer? A state of the art review}
+      \field{volume}{30}
+      \field{year}{2013}
+      \field{pages}{4\bibrangedash 12}
+      \range{pages}{9}
+      \verb{doi}
+      \verb https://onlinelibrary.wiley.com/doi/10.1111/hir.12015
+      \endverb
+    \endentry
+    \entry{illumipaper}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=e94cb6154b62d5cffd74c14b25ebcd7b}{%
+           family={Klamka},
+           familyi={K\bibinitperiod},
+           given={Konstantin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=909bcbaa875a05caefc094c453d1ca94}{%
+           family={Dachselt},
+           familyi={D\bibinitperiod},
+           given={Raimund},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Denver, Colorado, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{fullhash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{fullhashraw}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{bibnamehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authorbibnamehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authornamehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authorfullhash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authorfullhashraw}{6fc857eefb74cf871d02b6f13f235d02}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450346559}
+      \field{journaltitle}{Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems}
+      \field{series}{CHI '17}
+      \field{title}{IllumiPaper: Illuminated Interactive Paper}
+      \field{year}{2017}
+      \field{pages}{5605\bibrangedash 5618}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1145/3025453.3025525
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3025453.3025525
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3025453.3025525
+      \endverb
+      \keyw{visual feedback,thin-film display,pen interaction,electro-luminescence,digital pen and paper,augmented paper,anoto}
+    \endentry
+    \entry{Mabrouk}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b4956525f910f2d1d9e8326ed6fe12e9}{%
+           family={Mabrouk},
+           familyi={M\bibinitperiod},
+           given={Patricia\bibnamedelima Ann},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9be6b14a2e13818d1a6e3f987f37070c}{%
+           family={Schelble},
+           familyi={S\bibinitperiod},
+           given={Susan\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{fullhash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{fullhashraw}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{bibnamehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authorbibnamehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authornamehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authorfullhash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authorfullhashraw}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Chemical Education}
+      \field{number}{6}
+      \field{title}{Interactive Poster Survey Study of ACS Members’ Knowledge and Needs on Research Ethics}
+      \field{volume}{95}
+      \field{year}{2018}
+      \field{pages}{954\bibrangedash 961}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1021/acs.jchemed.7b00867
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.jchemed.7b00867
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.jchemed.7b00867
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.jchemed.7b00867
+      \endverb
+    \endentry
+    \entry{Newsom.2021}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=564f75d3f5680c3a35327752f43079c5}{%
+           family={Newsom},
+           familyi={N\bibinitperiod},
+           given={Lydia\bibnamedelima C.},
+           giveni={L\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1a95937c5719f19186d07a7151df40c8}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Susan\bibnamedelima W.},
+           giveni={S\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=74b79dd02f568edc2b16d35597e7f207}{%
+           family={Chesson},
+           familyi={C\bibinitperiod},
+           given={Melissa},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{92dd28942ea951799ec4efad74c69d32}
+      \strng{fullhash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{fullhashraw}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{bibnamehash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{authorbibnamehash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{authornamehash}{92dd28942ea951799ec4efad74c69d32}
+      \strng{authorfullhash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{authorfullhashraw}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0002-9459}
+      \field{journaltitle}{American Journal of Pharmaceutical Education}
+      \field{number}{6}
+      \field{title}{Use of Digital vs Printed Posters for Teaching and Learning in Pharmacy Education}
+      \field{volume}{85}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.5688/ajpe8307
+      \endverb
+    \endentry
+    \entry{paperpixels}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=5aa6ed500bf90d2c31250c54de072ba8}{%
+           family={Peiris},
+           familyi={P\bibinitperiod},
+           given={Roshan\bibnamedelima Lalintha},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a50a81f51a245460c8bcf344909bd475}{%
+           family={Nanayakkara},
+           familyi={N\bibinitperiod},
+           given={Suranga},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Sydney, New South Wales, Australia}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{fullhash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{fullhashraw}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{bibnamehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authorbibnamehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authornamehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authorfullhash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authorfullhashraw}{43813e605e5b99aa65c9b7771bf3d058}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450306539}
+      \field{journaltitle}{Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: The Future of Design}
+      \field{series}{OzCHI '14}
+      \field{title}{PaperPixels: a toolkit to create paper-based displays}
+      \field{year}{2014}
+      \field{pages}{498\bibrangedash 504}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1145/2686612.2686691
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/2686612.2686691
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/2686612.2686691
+      \endverb
+      \keyw{DIY,paper display,peltier,thermochromic,toolkit}
+    \endentry
+    \entry{Rowe}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{fullhash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{fullhashraw}{471a848abe764f41fe600f524da6f3c4}
+      \strng{bibnamehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authorbibnamehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authornamehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authorfullhash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authorfullhashraw}{471a848abe764f41fe600f524da6f3c4}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{05}
+      \field{title}{Hyper-linking Academic Posters: delivering the MediaPoster}
+      \field{year}{2009}
+    \endentry
+    \entry{IlicRowe4}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f7bd1ab01d7cde6921a007b5379318fb}{%
+           family={Ilic},
+           familyi={I\bibinitperiod},
+           given={Dragan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{bibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorbibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authornamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \field{extraname}{1}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{BMC medical education}
+      \field{title}{What impact do posters have on academic knowledge transfer? A pilot survey on author attitudes and experiences}
+      \field{volume}{9}
+      \field{year}{2009}
+      \field{pages}{71}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1186/1472-6920-9-71
+      \endverb
+    \endentry
+    \entry{IlicRowe3}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f7bd1ab01d7cde6921a007b5379318fb}{%
+           family={Ilic},
+           familyi={I\bibinitperiod},
+           given={Dragan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{bibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorbibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authornamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \field{extraname}{2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Paediatric respiratory reviews}
+      \field{number}{3}
+      \field{title}{Poster presentation - a visual medium for academic and scientific meetings}
+      \field{volume}{12}
+      \field{year}{2011}
+      \field{pages}{208\bibrangedash 213}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1016/j.prrv.2011.01.011
+      \endverb
+    \endentry
+    \entry{Sahronih}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e5aa198a0c8accf1abfba1da5b434f25}{%
+           family={Sahronih},
+           familyi={S\bibinitperiod},
+           given={Siti},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b8b2a78e1c06d4964056469b6169a2a}{%
+           family={Purwanto},
+           familyi={P\bibinitperiod},
+           given={Agung},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eca7389fe602a667a49721f3b502f08d}{%
+           family={Sumantri},
+           familyi={S\bibinitperiod},
+           given={M.\bibnamedelimi Syarif},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Aizu-Wakamatsu, Japan}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{fullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{fullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{bibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorbibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authornamehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{authorfullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorfullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450366397}
+      \field{journaltitle}{Proceedings of the 2019 7th International Conference on Information and Education Technology}
+      \field{series}{ICIET 2019}
+      \field{title}{The Effect of Interactive Learning Media on Students' Science Learning Outcomes}
+      \field{year}{2019}
+      \field{pages}{20\bibrangedash 24}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1145/3323771.3323797
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3323771.3323797
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3323771.3323797
+      \endverb
+      \keyw{Science Learning Outcomes,Interactive Learning Media,Effect Size}
+    \endentry
+    \entry{Sahronih2}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e5aa198a0c8accf1abfba1da5b434f25}{%
+           family={Sahronih},
+           familyi={S\bibinitperiod},
+           given={Siti},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b8b2a78e1c06d4964056469b6169a2a}{%
+           family={Purwanto},
+           familyi={P\bibinitperiod},
+           given={Agung},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eca7389fe602a667a49721f3b502f08d}{%
+           family={Sumantri},
+           familyi={S\bibinitperiod},
+           given={M\bibnamedelima Syarif},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{fullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{fullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{bibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorbibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authornamehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{authorfullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorfullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal for Educational and Vocational Studies}
+      \field{number}{3}
+      \field{title}{The effect of use interactive learning media environment-based and learning motivation on science learning outcomes}
+      \field{volume}{2}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+    \endentry
+    \entry{Soon}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=fe69c5514c4a4cc67650420c34040f3c}{%
+           family={Soon},
+           familyi={S\bibinitperiod},
+           given={Charlene\bibnamedelimb S.\bibnamedelimi L.},
+           giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=99d51731b6db8533ddf344313c11f6c2}{%
+           family={{Tudor Car}},
+           familyi={T\bibinitperiod},
+           given={Lorainne},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=af3ad759cd254fd8fb0db2efd3daf3b7}{%
+           family={Ng},
+           familyi={N\bibinitperiod},
+           given={Chirk\bibnamedelima Jenn},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2325dedd9e2452ba0889eb5b13d3e9cb}{%
+           family={Tan},
+           familyi={T\bibinitperiod},
+           given={Ngiap\bibnamedelima Chuan},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=be1cc0f325fbcb2813434ed7d73d7e71}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Helen},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7752a80d7dadf628c3a7ca0abb549e87}
+      \strng{fullhash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{fullhashraw}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{bibnamehash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{authorbibnamehash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{authornamehash}{7752a80d7dadf628c3a7ca0abb549e87}
+      \strng{authorfullhash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{authorfullhashraw}{65b6eb1f72b337aa099bd061326ea0d1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Medical science educator}
+      \field{number}{6}
+      \field{title}{What Is the Utility of Posters? Qualitative Study of Participants at a Regional Primary Healthcare Conference in Asia}
+      \field{volume}{32}
+      \field{year}{2022}
+      \field{pages}{1405\bibrangedash 1412}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1007/s40670-022-01657-z
+      \endverb
+    \endentry
+    \entry{Sumantri}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=3e60471798b315e68a6e281e899386f2}{%
+           family={Sumantri},
+           familyi={S\bibinitperiod},
+           given={Pulung},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=30a9fc7f3aa5dd2d77f626fd3ea9f8ac}{%
+           family={Nababan},
+           familyi={N\bibinitperiod},
+           given={Suya},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=10814f17d4310226e2e1ffa124cf2f45}{%
+           family={Sumanti},
+           familyi={S\bibinitperiod},
+           given={Solihah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=16eb20ea0ce7c520a48a4f79c72b00c3}{%
+           family={Tanjung},
+           familyi={T\bibinitperiod},
+           given={Yushar},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6d3cf2ec1a95c7d06feec1455fa81ae5}{%
+           family={Jali},
+           familyi={J\bibinitperiod},
+           given={Jafalizan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{36abc796d5ebc1b3454774c5e5ad4ddf}
+      \strng{fullhash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{fullhashraw}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{bibnamehash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{authorbibnamehash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{authornamehash}{36abc796d5ebc1b3454774c5e5ad4ddf}
+      \strng{authorfullhash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{authorfullhashraw}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Jurnal Ilmu Pendidikan}
+      \field{month}{06}
+      \field{title}{Effectiveness Of Use Of Interactive E-Poster History Learning Media In Increasing History Awareness}
+      \field{volume}{30}
+      \field{year}{2024}
+      \field{pages}{41}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.17977/um048v30i1p40-47
+      \endverb
+    \endentry
+    \entry{Venkatesan.2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b68b8270c8cfef64f58abeef01a46e33}{%
+           family={Venkatesan},
+           familyi={V\bibinitperiod},
+           given={Mythreye},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fb039a7b18222fdeeed7dab9f15f72f1}{%
+           family={Coskun},
+           familyi={C\bibinitperiod},
+           given={Ahmet\bibnamedelima F.},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{fullhash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{fullhashraw}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{bibnamehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authorbibnamehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authornamehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authorfullhash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authorfullhashraw}{50d87ddb9d35f431fc0545bb04c730a8}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2399-3642}
+      \field{journaltitle}{Communications biology}
+      \field{title}{Digital posters for interactive cellular media and bioengineering education}
+      \field{volume}{2}
+      \field{year}{2019}
+      \field{pages}{455}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s42003-019-0702-1
+      \endverb
+    \endentry
+    \entry{Steinert}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=693d338688c3a412ba533376d2b656f0}{%
+           family={Yvonne\bibnamedelima Steinert},
+           familyi={Y\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Linda\bibnamedelimb S.\bibnamedelimi Snell},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{fullhash}{693d338688c3a412ba533376d2b656f0}
+      \strng{fullhashraw}{693d338688c3a412ba533376d2b656f0}
+      \strng{bibnamehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authorbibnamehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authornamehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authorfullhash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authorfullhashraw}{693d338688c3a412ba533376d2b656f0}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Medical Teacher}
+      \field{number}{1}
+      \field{title}{Interactive lecturing: strategies for increasing participation in large group presentations}
+      \field{volume}{21}
+      \field{year}{1999}
+      \field{pages}{37\bibrangedash 42}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1080/01421599980011
+      \endverb
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global/global}
+    \entry{interactivepaper}{online}{}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeldatesource}{nodate}
+      \verb{urlraw}
+      \verb https://www.interactivepaper.com/
+      \endverb
+      \verb{url}
+      \verb https://www.interactivepaper.com/
+      \endverb
+    \endentry
+    \entry{Arslan}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=c095472a6c67d80a72b3ed0f35c3c877}{%
+           family={Arslan},
+           familyi={A\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d119b119398e52dbb43faa09240d3e03}{%
+           family={Koca},
+           familyi={K\bibinitperiod},
+           given={T},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4af6ac2f178ed793e2f1fd74fcc5d73}{%
+           family={Tastekin},
+           familyi={T\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b35cd3f5de04b4ffb04ce505ddc4d21}{%
+           family={Basaran},
+           familyi={B\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1990ebdf507d0097da3f4077d07ce622}{%
+           family={Bozcuk},
+           familyi={B\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{97033cd85c067ad9df7cff153e40ff69}
+      \strng{fullhash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{fullhashraw}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{bibnamehash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{authorbibnamehash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{authornamehash}{97033cd85c067ad9df7cff153e40ff69}
+      \strng{authorfullhash}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \strng{authorfullhashraw}{d6b2cee617d0dc6ce4add8de0bb4644b}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{18}
+      \field{journaltitle}{Asian Pacific journal of cancer prevention : APJCP}
+      \field{title}{Impact of poster presentations on academic knowledge transfer from the oncologist perspective in Turkey}
+      \field{volume}{15}
+      \field{year}{2014}
+      \field{pages}{7707\bibrangedash 7711}
+      \range{pages}{5}
+      \verb{doi}
+      \verb https://doi.org/10.7314/apjcp.2014.15.18.7707
+      \endverb
+    \endentry
+    \entry{Dale}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=2c23f10fb04136b9833b589030ddef4e}{%
+           family={Dale},
+           familyi={D\bibinitperiod},
+           given={Virginia\bibnamedelima H.},
+           giveni={V\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a12ea3373829cb3e0e530f407c330cc}{%
+           family={Kline},
+           familyi={K\bibinitperiod},
+           given={Keith\bibnamedelima L.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{fullhash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{fullhashraw}{869612eccf1010ae0b23730287ace9c8}
+      \strng{bibnamehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authorbibnamehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authornamehash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authorfullhash}{869612eccf1010ae0b23730287ace9c8}
+      \strng{authorfullhashraw}{869612eccf1010ae0b23730287ace9c8}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biofuels, Bioproducts and Biorefining}
+      \field{number}{2}
+      \field{title}{Interactive posters: A valuable means of enhancing communication and learning about productive paths toward sustainable bioenergy}
+      \field{volume}{11}
+      \field{year}{2017}
+      \field{pages}{243\bibrangedash 246}
+      \range{pages}{4}
+      \verb{doi}
+      \verb https://doi.org/10.1002/bbb.1753
+      \endverb
+      \verb{eprint}
+      \verb https://scijournals.onlinelibrary.wiley.com/doi/pdf/10.1002/bbb.1753
+      \endverb
+      \verb{urlraw}
+      \verb https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/bbb.1753
+      \endverb
+      \verb{url}
+      \verb https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/bbb.1753
+      \endverb
+    \endentry
+    \entry{Angelo}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f57ca112a4864bdfdb8585534de93452}{%
+           family={D’Angelo},
+           familyi={D\bibinitperiod},
+           given={Larissa},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{fullhash}{56d61110489e0262e6e357c414fa2288}
+      \strng{fullhashraw}{56d61110489e0262e6e357c414fa2288}
+      \strng{bibnamehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authorbibnamehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authornamehash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authorfullhash}{56d61110489e0262e6e357c414fa2288}
+      \strng{authorfullhashraw}{56d61110489e0262e6e357c414fa2288}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Language}
+      \field{title}{From posters to e-posters: the evolution of a genre}
+      \field{volume}{4}
+      \field{year}{2012}
+      \field{pages}{46\bibrangedash 54}
+      \range{pages}{9}
+      \verb{urlraw}
+      \verb https://www.reading.ac.uk/elal/-/media/project/uor-main/schools-departments/elal/lswp/lswp-4/elal_lswp_vol_4_dangelo1.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.reading.ac.uk/elal/-/media/project/uor-main/schools-departments/elal/lswp/lswp-4/elal_lswp_vol_4_dangelo1.pdf
+      \endverb
+    \endentry
+    \entry{Simone.2001}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=add26a183f8cf14772ed342bbd71971f}{%
+           family={Simone},
+           familyi={S\bibinitperiod},
+           given={Raffaele},
+           giveni={R\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=9f5eeadc93620aa671387f89675aa0ba}{%
+           family={Rodrian},
+           familyi={R\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9cdf433c518c0a0265eb21e57b083a70}{%
+           family={Osswald},
+           familyi={O\bibinitperiod},
+           given={Brigitte},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=71b3fdaf9536bde0d504acdbffd2f651}{%
+           family={Sack},
+           familyi={S\bibinitperiod},
+           given={Falk-Udo},
+           giveni={F\bibinithyphendelim U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=99a23c20b7228f5e4fcf59e8732052c0}{%
+           family={Simone},
+           familyi={S\bibinitperiod},
+           given={Eliana},
+           giveni={E\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=92a8dbbd6eb010ac29ef5e5bdf1be878}{%
+           family={Hagl},
+           familyi={H\bibinitperiod},
+           given={Siegfried},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{baabd5f523b386091bc1090040703cb0}
+      \strng{fullhash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{fullhashraw}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{bibnamehash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{authorbibnamehash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{authornamehash}{baabd5f523b386091bc1090040703cb0}
+      \strng{authorfullhash}{fe116db8e06df5dbb5ed4945a7c15444}
+      \strng{authorfullhashraw}{fe116db8e06df5dbb5ed4945a7c15444}
+      \field{sortinit}{d}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1010-7940}
+      \field{journaltitle}{European Journal of Cardio-Thoracic Surgery}
+      \field{number}{6}
+      \field{title}{Initial experience with a new communication tool: the `Digital Interactive Poster Presentation'}
+      \field{volume}{19}
+      \field{year}{2001}
+      \field{pages}{953\bibrangedash 955}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1016/S1010-7940(01)00694-7
+      \endverb
+    \endentry
+    \entry{Erren}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=eac2c9a478d1e197fa927e8b7b2e9fe4}{%
+           family={Erren},
+           familyi={E\bibinitperiod},
+           given={Thomas\bibnamedelima C},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e8f011b361a44c99e0b3cd105b7553dc}{%
+           family={Bourne},
+           familyi={B\bibinitperiod},
+           given={Philip\bibnamedelima E},
+           giveni={P\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Public Library of Science}%
+      }
+      \strng{namehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{fullhash}{1d3334aab042da4b88825022ab44c722}
+      \strng{fullhashraw}{1d3334aab042da4b88825022ab44c722}
+      \strng{bibnamehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authorbibnamehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authornamehash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authorfullhash}{1d3334aab042da4b88825022ab44c722}
+      \strng{authorfullhashraw}{1d3334aab042da4b88825022ab44c722}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{null}
+      \field{journaltitle}{PLOS Computational Biology}
+      \field{month}{05}
+      \field{number}{5}
+      \field{title}{Ten Simple Rules for a Good Poster Presentation}
+      \field{volume}{3}
+      \field{year}{2007}
+      \field{pages}{1\bibrangedash 2}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1371/journal.pcbi.0030102
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1371/journal.pcbi.0030102
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1371/journal.pcbi.0030102
+      \endverb
+    \endentry
+    \entry{goodhand}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=063b9d00ec5132423e02a988ece9df5f}{%
+           family={Goodhand},
+           familyi={G\bibinitperiod},
+           given={JR},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fda501c19421f87c306b18c51f750cda}{%
+           family={Giles},
+           familyi={G\bibinitperiod},
+           given={CL},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c65db7480f48be097cf90c4be2f96ac5}{%
+           family={Wahed},
+           familyi={W\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=48da6bd16281b9f7acce64dd410057bd}{%
+           family={Irving},
+           familyi={I\bibinitperiod},
+           given={PM},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=213f174b2ce21131271a657ef5240c7a}{%
+           family={Langmead},
+           familyi={L\bibinitperiod},
+           given={L},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2b4d25b263d70befad496761a5bebd5b}{%
+           family={Rampton},
+           familyi={R\bibinitperiod},
+           given={DS},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f1f20015766f45cc4443293d58361eda}
+      \strng{fullhash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{fullhashraw}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{bibnamehash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{authorbibnamehash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{authornamehash}{f1f20015766f45cc4443293d58361eda}
+      \strng{authorfullhash}{f0b37d2d571e6ceb962f1f35ea125406}
+      \strng{authorfullhashraw}{f0b37d2d571e6ceb962f1f35ea125406}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1470-2118}
+      \field{journaltitle}{Clinical Medicine}
+      \field{number}{2}
+      \field{title}{Poster presentations at medical conferences: an effective way of disseminating research?}
+      \field{volume}{11}
+      \field{year}{2011}
+      \field{pages}{138\bibrangedash 141}
+      \range{pages}{4}
+      \verb{doi}
+      \verb https://doi.org/10.7861/clinmedicine.11-2-138
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1470211824053624
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1470211824053624
+      \endverb
+    \endentry
+    \entry{Groccia}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=864d73f635ecf2fc78695d8403f5e80e}{%
+           family={Groccia},
+           familyi={G\bibinitperiod},
+           given={James\bibnamedelima E.},
+           giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{fullhash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{fullhashraw}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{bibnamehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authorbibnamehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authornamehash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authorfullhash}{864d73f635ecf2fc78695d8403f5e80e}
+      \strng{authorfullhashraw}{864d73f635ecf2fc78695d8403f5e80e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract This chapter reviews the history and various definitions of student engagement and proposes a multidimensional model from which one can develop a variety of engagement opportunities that lead to a rich and challenging higher education experience.}
+      \field{journaltitle}{New Directions for Teaching and Learning}
+      \field{number}{154}
+      \field{title}{What Is Student Engagement?}
+      \field{volume}{2018}
+      \field{year}{2018}
+      \field{pages}{11\bibrangedash 20}
+      \range{pages}{10}
+      \verb{doi}
+      \verb https://doi.org/10.1002/tl.20287
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/tl.20287
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/tl.20287
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/tl.20287
+      \endverb
+    \endentry
+    \entry{IlicRowe1}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f7bd1ab01d7cde6921a007b5379318fb}{%
+           family={Ilic},
+           familyi={I\bibinitperiod},
+           given={Dragan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{fullhash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{fullhashraw}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{bibnamehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authorbibnamehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authornamehash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authorfullhash}{c3438da288f5e40e8c9e00b671f6be2c}
+      \strng{authorfullhashraw}{c3438da288f5e40e8c9e00b671f6be2c}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Health Information and Libraries Journal}
+      \field{title}{What is the evidence that poster presentations are effective in promoting knowledge transfer? A state of the art review}
+      \field{volume}{30}
+      \field{year}{2013}
+      \field{pages}{4\bibrangedash 12}
+      \range{pages}{9}
+      \verb{doi}
+      \verb https://onlinelibrary.wiley.com/doi/10.1111/hir.12015
+      \endverb
+    \endentry
+    \entry{illumipaper}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=e94cb6154b62d5cffd74c14b25ebcd7b}{%
+           family={Klamka},
+           familyi={K\bibinitperiod},
+           given={Konstantin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=909bcbaa875a05caefc094c453d1ca94}{%
+           family={Dachselt},
+           familyi={D\bibinitperiod},
+           given={Raimund},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Denver, Colorado, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{fullhash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{fullhashraw}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{bibnamehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authorbibnamehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authornamehash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authorfullhash}{6fc857eefb74cf871d02b6f13f235d02}
+      \strng{authorfullhashraw}{6fc857eefb74cf871d02b6f13f235d02}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450346559}
+      \field{journaltitle}{Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems}
+      \field{series}{CHI '17}
+      \field{title}{IllumiPaper: Illuminated Interactive Paper}
+      \field{year}{2017}
+      \field{pages}{5605\bibrangedash 5618}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1145/3025453.3025525
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3025453.3025525
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3025453.3025525
+      \endverb
+      \keyw{visual feedback,thin-film display,pen interaction,electro-luminescence,digital pen and paper,augmented paper,anoto}
+    \endentry
+    \entry{Mabrouk}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b4956525f910f2d1d9e8326ed6fe12e9}{%
+           family={Mabrouk},
+           familyi={M\bibinitperiod},
+           given={Patricia\bibnamedelima Ann},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9be6b14a2e13818d1a6e3f987f37070c}{%
+           family={Schelble},
+           familyi={S\bibinitperiod},
+           given={Susan\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{fullhash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{fullhashraw}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{bibnamehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authorbibnamehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authornamehash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authorfullhash}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \strng{authorfullhashraw}{b96c1aadf0c375464e13d1a0a0f11d75}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Chemical Education}
+      \field{number}{6}
+      \field{title}{Interactive Poster Survey Study of ACS Members’ Knowledge and Needs on Research Ethics}
+      \field{volume}{95}
+      \field{year}{2018}
+      \field{pages}{954\bibrangedash 961}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1021/acs.jchemed.7b00867
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.jchemed.7b00867
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.jchemed.7b00867
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.jchemed.7b00867
+      \endverb
+    \endentry
+    \entry{Newsom.2021}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=564f75d3f5680c3a35327752f43079c5}{%
+           family={Newsom},
+           familyi={N\bibinitperiod},
+           given={Lydia\bibnamedelima C.},
+           giveni={L\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1a95937c5719f19186d07a7151df40c8}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Susan\bibnamedelima W.},
+           giveni={S\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=74b79dd02f568edc2b16d35597e7f207}{%
+           family={Chesson},
+           familyi={C\bibinitperiod},
+           given={Melissa},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{92dd28942ea951799ec4efad74c69d32}
+      \strng{fullhash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{fullhashraw}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{bibnamehash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{authorbibnamehash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{authornamehash}{92dd28942ea951799ec4efad74c69d32}
+      \strng{authorfullhash}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \strng{authorfullhashraw}{603d74fff9b1a8a6f9a132bcc2541ca5}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0002-9459}
+      \field{journaltitle}{American Journal of Pharmaceutical Education}
+      \field{number}{6}
+      \field{title}{Use of Digital vs Printed Posters for Teaching and Learning in Pharmacy Education}
+      \field{volume}{85}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.5688/ajpe8307
+      \endverb
+    \endentry
+    \entry{paperpixels}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=5aa6ed500bf90d2c31250c54de072ba8}{%
+           family={Peiris},
+           familyi={P\bibinitperiod},
+           given={Roshan\bibnamedelima Lalintha},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a50a81f51a245460c8bcf344909bd475}{%
+           family={Nanayakkara},
+           familyi={N\bibinitperiod},
+           given={Suranga},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Sydney, New South Wales, Australia}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{fullhash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{fullhashraw}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{bibnamehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authorbibnamehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authornamehash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authorfullhash}{43813e605e5b99aa65c9b7771bf3d058}
+      \strng{authorfullhashraw}{43813e605e5b99aa65c9b7771bf3d058}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450306539}
+      \field{journaltitle}{Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: The Future of Design}
+      \field{series}{OzCHI '14}
+      \field{title}{PaperPixels: a toolkit to create paper-based displays}
+      \field{year}{2014}
+      \field{pages}{498\bibrangedash 504}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1145/2686612.2686691
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/2686612.2686691
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/2686612.2686691
+      \endverb
+      \keyw{DIY,paper display,peltier,thermochromic,toolkit}
+    \endentry
+    \entry{Rowe}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{fullhash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{fullhashraw}{471a848abe764f41fe600f524da6f3c4}
+      \strng{bibnamehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authorbibnamehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authornamehash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authorfullhash}{471a848abe764f41fe600f524da6f3c4}
+      \strng{authorfullhashraw}{471a848abe764f41fe600f524da6f3c4}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{05}
+      \field{title}{Hyper-linking Academic Posters: delivering the MediaPoster}
+      \field{year}{2009}
+    \endentry
+    \entry{IlicRowe4}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f7bd1ab01d7cde6921a007b5379318fb}{%
+           family={Ilic},
+           familyi={I\bibinitperiod},
+           given={Dragan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{bibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorbibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authornamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \field{extraname}{1}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{BMC medical education}
+      \field{title}{What impact do posters have on academic knowledge transfer? A pilot survey on author attitudes and experiences}
+      \field{volume}{9}
+      \field{year}{2009}
+      \field{pages}{71}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1186/1472-6920-9-71
+      \endverb
+    \endentry
+    \entry{IlicRowe3}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=471a848abe764f41fe600f524da6f3c4}{%
+           family={Rowe},
+           familyi={R\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f7bd1ab01d7cde6921a007b5379318fb}{%
+           family={Ilic},
+           familyi={I\bibinitperiod},
+           given={Dragan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{fullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{bibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorbibnamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authornamehash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhash}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \strng{authorfullhashraw}{f5f6298973fa63fbb2850e9b10e6d0dd}
+      \field{extraname}{2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Paediatric respiratory reviews}
+      \field{number}{3}
+      \field{title}{Poster presentation - a visual medium for academic and scientific meetings}
+      \field{volume}{12}
+      \field{year}{2011}
+      \field{pages}{208\bibrangedash 213}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1016/j.prrv.2011.01.011
+      \endverb
+    \endentry
+    \entry{Sahronih}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e5aa198a0c8accf1abfba1da5b434f25}{%
+           family={Sahronih},
+           familyi={S\bibinitperiod},
+           given={Siti},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b8b2a78e1c06d4964056469b6169a2a}{%
+           family={Purwanto},
+           familyi={P\bibinitperiod},
+           given={Agung},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eca7389fe602a667a49721f3b502f08d}{%
+           family={Sumantri},
+           familyi={S\bibinitperiod},
+           given={M.\bibnamedelimi Syarif},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Aizu-Wakamatsu, Japan}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{fullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{fullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{bibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorbibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authornamehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{authorfullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorfullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781450366397}
+      \field{journaltitle}{Proceedings of the 2019 7th International Conference on Information and Education Technology}
+      \field{series}{ICIET 2019}
+      \field{title}{The Effect of Interactive Learning Media on Students' Science Learning Outcomes}
+      \field{year}{2019}
+      \field{pages}{20\bibrangedash 24}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1145/3323771.3323797
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3323771.3323797
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3323771.3323797
+      \endverb
+      \keyw{Science Learning Outcomes,Interactive Learning Media,Effect Size}
+    \endentry
+    \entry{Sahronih2}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e5aa198a0c8accf1abfba1da5b434f25}{%
+           family={Sahronih},
+           familyi={S\bibinitperiod},
+           given={Siti},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b8b2a78e1c06d4964056469b6169a2a}{%
+           family={Purwanto},
+           familyi={P\bibinitperiod},
+           given={Agung},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eca7389fe602a667a49721f3b502f08d}{%
+           family={Sumantri},
+           familyi={S\bibinitperiod},
+           given={M\bibnamedelima Syarif},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{fullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{fullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{bibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorbibnamehash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authornamehash}{17a302f812d6b256b1b3f8cffef1fd37}
+      \strng{authorfullhash}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \strng{authorfullhashraw}{f66fc3c3951db4a96b01fb8b5fceb792}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal for Educational and Vocational Studies}
+      \field{number}{3}
+      \field{title}{The effect of use interactive learning media environment-based and learning motivation on science learning outcomes}
+      \field{volume}{2}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+    \endentry
+    \entry{Soon}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=fe69c5514c4a4cc67650420c34040f3c}{%
+           family={Soon},
+           familyi={S\bibinitperiod},
+           given={Charlene\bibnamedelimb S.\bibnamedelimi L.},
+           giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=99d51731b6db8533ddf344313c11f6c2}{%
+           family={{Tudor Car}},
+           familyi={T\bibinitperiod},
+           given={Lorainne},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=af3ad759cd254fd8fb0db2efd3daf3b7}{%
+           family={Ng},
+           familyi={N\bibinitperiod},
+           given={Chirk\bibnamedelima Jenn},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2325dedd9e2452ba0889eb5b13d3e9cb}{%
+           family={Tan},
+           familyi={T\bibinitperiod},
+           given={Ngiap\bibnamedelima Chuan},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=be1cc0f325fbcb2813434ed7d73d7e71}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Helen},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7752a80d7dadf628c3a7ca0abb549e87}
+      \strng{fullhash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{fullhashraw}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{bibnamehash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{authorbibnamehash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{authornamehash}{7752a80d7dadf628c3a7ca0abb549e87}
+      \strng{authorfullhash}{65b6eb1f72b337aa099bd061326ea0d1}
+      \strng{authorfullhashraw}{65b6eb1f72b337aa099bd061326ea0d1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Medical science educator}
+      \field{number}{6}
+      \field{title}{What Is the Utility of Posters? Qualitative Study of Participants at a Regional Primary Healthcare Conference in Asia}
+      \field{volume}{32}
+      \field{year}{2022}
+      \field{pages}{1405\bibrangedash 1412}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1007/s40670-022-01657-z
+      \endverb
+    \endentry
+    \entry{Sumantri}{article}{}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=3e60471798b315e68a6e281e899386f2}{%
+           family={Sumantri},
+           familyi={S\bibinitperiod},
+           given={Pulung},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=30a9fc7f3aa5dd2d77f626fd3ea9f8ac}{%
+           family={Nababan},
+           familyi={N\bibinitperiod},
+           given={Suya},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=10814f17d4310226e2e1ffa124cf2f45}{%
+           family={Sumanti},
+           familyi={S\bibinitperiod},
+           given={Solihah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=16eb20ea0ce7c520a48a4f79c72b00c3}{%
+           family={Tanjung},
+           familyi={T\bibinitperiod},
+           given={Yushar},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6d3cf2ec1a95c7d06feec1455fa81ae5}{%
+           family={Jali},
+           familyi={J\bibinitperiod},
+           given={Jafalizan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{36abc796d5ebc1b3454774c5e5ad4ddf}
+      \strng{fullhash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{fullhashraw}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{bibnamehash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{authorbibnamehash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{authornamehash}{36abc796d5ebc1b3454774c5e5ad4ddf}
+      \strng{authorfullhash}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \strng{authorfullhashraw}{9127f90cfffa52ec8f03b5d4a15b34cb}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Jurnal Ilmu Pendidikan}
+      \field{month}{06}
+      \field{title}{Effectiveness Of Use Of Interactive E-Poster History Learning Media In Increasing History Awareness}
+      \field{volume}{30}
+      \field{year}{2024}
+      \field{pages}{41}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.17977/um048v30i1p40-47
+      \endverb
+    \endentry
+    \entry{Venkatesan.2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b68b8270c8cfef64f58abeef01a46e33}{%
+           family={Venkatesan},
+           familyi={V\bibinitperiod},
+           given={Mythreye},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fb039a7b18222fdeeed7dab9f15f72f1}{%
+           family={Coskun},
+           familyi={C\bibinitperiod},
+           given={Ahmet\bibnamedelima F.},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{fullhash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{fullhashraw}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{bibnamehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authorbibnamehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authornamehash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authorfullhash}{50d87ddb9d35f431fc0545bb04c730a8}
+      \strng{authorfullhashraw}{50d87ddb9d35f431fc0545bb04c730a8}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2399-3642}
+      \field{journaltitle}{Communications biology}
+      \field{title}{Digital posters for interactive cellular media and bioengineering education}
+      \field{volume}{2}
+      \field{year}{2019}
+      \field{pages}{455}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s42003-019-0702-1
+      \endverb
+    \endentry
+    \entry{Steinert}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=693d338688c3a412ba533376d2b656f0}{%
+           family={Yvonne\bibnamedelima Steinert},
+           familyi={Y\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Linda\bibnamedelimb S.\bibnamedelimi Snell},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{fullhash}{693d338688c3a412ba533376d2b656f0}
+      \strng{fullhashraw}{693d338688c3a412ba533376d2b656f0}
+      \strng{bibnamehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authorbibnamehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authornamehash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authorfullhash}{693d338688c3a412ba533376d2b656f0}
+      \strng{authorfullhashraw}{693d338688c3a412ba533376d2b656f0}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Medical Teacher}
+      \field{number}{1}
+      \field{title}{Interactive lecturing: strategies for increasing participation in large group presentations}
+      \field{volume}{21}
+      \field{year}{1999}
+      \field{pages}{37\bibrangedash 42}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1080/01421599980011
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

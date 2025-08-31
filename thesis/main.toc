@@ -1,0 +1,31 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Literature Review}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Background and Limitations of Traditional Posters}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Evolution Toward Interactive Posters}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Paper Posters}{4}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Digital Posters}{5}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Technological Foundations for Enhanced Interactivity}{6}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Electric Circuits and Other Responsive Media}{6}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Interactive Media in Education}{7}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Methodology}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Identifying Stakeholders}{10}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Eliciting Requirements}{10}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Prototyping and Evaluating}{10}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Potential Integrations}{11}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Participants}{12}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Materials}{12}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Procedures}{12}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Risk Assessment Plan}{12}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Results}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Eliciting Requirements}{14}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Initial Proof-of-Concept}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}CAD and Materials}{14}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Early Prototyping}{14}{section.4.4}%
+\contentsline {section}{\numberline {4.5}GUI Design and Creation}{15}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Logic Implementation}{15}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Refactoring}{15}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Expanding Capabilities}{16}{section.4.8}%
+\contentsline {section}{\numberline {4.9}HID Integration}{16}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Conclusion}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Limitations}{17}{section.5.1}%
