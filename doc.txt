@@ -217,3 +217,23 @@ As a last resort, a custom rotatedLabel widget class was created, using the firs
 
 
 Here it was decided to modularize all screen and custom widgets used in the explorer app, as it has become difficult to navigate it. Some improvements were made on the searchBar class, which now supports custom hint text and callback functions
+
+
+1.9.
+
+The issue of the scroll loading behavior triggering on every screen change was fixed by assigning a new "current_category" attribute to the ListScreen, which gets then checked on each pre_enter loop whether or not it is the same as the one that is getting fetched. If yes, this also skips updating the buttons.
+
+Moving on with the Guestbook, it's purpose needs to be decided. What is it for? Networking? Feedback? Analytics? This is something only the stakeholders can answer.
+Thus, the first itteration is designed with the following inputs: Name, institution, role, purpose of visit.
+It might be useful to give users the ability to add other input fields from a list of possible ones, if they'd like. However, this exceeds the scope of this thesis and honestly my knowledge.
+
+A database update was in order to implement those decisions, as the guest table was just set up with arbitrary columns. Thus, the table design was adjusted, and a date column was added.
+
+The guestbook screen was set up with the necessary input field and labels, as well as a hoverable button for confirmation.
+To continue the architecture this project follows, a data class for Guests as well as a service layer was created. At this point, python dataclasses were discovered, which led to the other two data classes being ported to use this native implementation. No functional difference was observed, and the port did not cause any problems. However, this enabled the use of dataclass asdict and astuple functions, which returned the data of a dataclass as a dict or tuple. While the implementation couldve been done manually, a native implementation was deemed to be more reliable.
+
+The Guest dataclass contained the values explained above, while the GuestService class only has the functionality to add entries with the current date into the database.
+
+A confirmation function was bound to the button. This read the input fields into variables, checked if any of them are filled and if yes, adds those values to the database with the GuestService.
+A popup then thanks the user, which can be either auto dismissed by user input or automatically dismisses after 3 seconds. On dismiss, the application starts anew.
+An implementation of the on_pre_enter function was created to clear inputs of the input fields. This was done to prevent inputs carrying over new user sessions.
