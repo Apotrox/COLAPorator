@@ -6,17 +6,19 @@ from kivy.uix.label import Label
 from kivy.graphics import Color, Rectangle
 from kivy.uix.popup import Popup
 from kivy.clock import Clock
-from kivy.uix.screenmanager import FadeTransition
+from kivy.uix.screenmanager import FadeTransition, SlideTransition
 
 
 from ui.HoverableButton import HoverableButton
 from data.Guest import Guest
 from services.GuestService import GuestService
+from hardware.JoystickManager import Joystick, Intent
 
 class GuestBookScreen(Screen):
-    def __init__(self, gs:GuestService,**kw):
+    def __init__(self, gs:GuestService, js: Joystick, **kw):
         super().__init__(**kw)
         self.gs=gs
+        self.js=js
         
         main_layout = FloatLayout()
         
@@ -31,7 +33,7 @@ class GuestBookScreen(Screen):
         # Update background when layout changes
         main_layout.bind(pos=self.update_bg, size=self.update_bg)
         
-        form_layout= BoxLayout(orientation="vertical", size_hint=(0.8,0.8), pos_hint={"x":0.05,"top":0.95})
+        form_layout= BoxLayout(orientation="vertical", size_hint=(0.8,0.8), pos_hint={"x":0.05,"top":0.98})
         
         self.name_input=TextInput(hint_text="Name", font_size="20sp", size_hint=(0.6,1))
         self.inst_input=TextInput(hint_text="Institution", font_size="20sp", size_hint=(0.6,1))
@@ -74,9 +76,16 @@ class GuestBookScreen(Screen):
         
         disclaimer.bind(size=lambda l, _: setattr(l, 'text_size', (l.width*0.2, None)))        
         
-        save_button = HoverableButton(text="Confirm", size_hint=(0.2, 0.1), pos_hint={"x":0.75, "y":0.05})
+        save_button = HoverableButton(text="Confirm", size_hint=(0.2, 0.1), pos_hint={"x":0.75, "y":0.03})
         save_button.bind(on_press=self.confirm)
         main_layout.add_widget(save_button)
+        
+        self.back_button = HoverableButton(text="Back", size_hint=(0.2, 0.1), pos_hint={"x":0.05, "y":0.03})
+        self.back_button.hovered=True
+        self.back_button.bind(on_press=self.go_back)
+        main_layout.add_widget(self.back_button)
+        
+        
         main_layout.add_widget(disclaimer)  
         self.add_widget(main_layout)
     
@@ -111,6 +120,30 @@ class GuestBookScreen(Screen):
     def dismiss(self, *_):
         self.manager.transition=FadeTransition()
         self.manager.current="startup"
+    
+    def go_back(self, *_):
+        self.manager.transition = SlideTransition(direction="right")
+        self.manager.current = 'topic_list'
+        
+    def on_enter(self):
+        if self.js:
+            Clock.schedule_interval(self.check_joystick_events, 0.1)    
+    
+    
+    def check_joystick_events(self, *_):
+        if self.manager.current=='guest':
+            intent= self.js.get() #don't need to be here if it isnt the active screen
+            if intent:
+                self.handle_joystick_intents(intent)
+    
+    def handle_joystick_intents(self, intent:Intent):
+        match intent:
+            case Intent.SELECT:
+                if(self.back_button.hovered):
+                    Clock.unschedule(self.check_joystick_events) 
+                    self.go_back()    
+            case _:
+                return
         
         
             

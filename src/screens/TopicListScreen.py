@@ -147,8 +147,11 @@ class TopicListScreen(Screen):
     def on_search(self, keyword: str):
         """Triggers button update with topics that match the keyword in the title"""
         results=self.ts.search(keyword) #returns list of IDs
-        topics = self.ts.get_many(results) #returns list of Topics
-        self.update_buttons(topics)
+        if(results):
+            topics = self.ts.get_many(results) #returns list of Topics
+            self.update_buttons(topics)
+        else:
+            self.rv.data={}
         
         
     def update_buttons(self, topics: List[Topic]):
@@ -188,8 +191,9 @@ class TopicListScreen(Screen):
                     topic_id=self.rv.data[self.selection_index]['topic_id']
                     self.handle_choose(topic_id)
                 case Intent.RIGHT:
+                    Clock.unschedule(self.check_joystick_events)
                     self.manager.transition = SlideTransition(direction="left")
-                    self.manager.current="guest"              
+                    self.manager.current="guest"             
                 case _:
                     return
 

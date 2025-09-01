@@ -43,7 +43,7 @@ class ColapsExplorerApp(App):
         waiting_screen= WaitingScreen(name="waiting")
         self.topic_list_screen = TopicListScreen(name='topic_list', ts=ts, cs=cs, js=self.joystick)
         detail_screen = TopicDetailScreen(name='topic_detail', js=self.joystick)
-        guest_book_screen=GuestBookScreen(name='guest',gs=gs)
+        guest_book_screen=GuestBookScreen(name='guest',gs=gs, js=self.joystick)
         
         
         self.sm.add_widget(startup_screen)
