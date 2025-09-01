@@ -1,10 +1,9 @@
 from kivy.app import App
 
-from kivy.uix.screenmanager import ScreenManager, FallOutTransition, RiseInTransition, SlideTransition
+from kivy.uix.screenmanager import ScreenManager, FallOutTransition, RiseInTransition
 
 from topics.TopicService import TopicService
 from categories.CategoryService import CategoryService
-
 
 from database.database_manager import Manager
 
@@ -55,6 +54,7 @@ class ColapsExplorerApp(App):
 
         return self.sm
 
+    # centralized movement checks
     def check_movement(self, *_):
         if not self.tlv.get_moving():
             return True #not moving yet, continue checking

@@ -13,6 +13,7 @@ from topics.TopicService import TopicService
 from categories.CategoryService import CategoryService
 from topics.Topic import Topic
 from hardware.JoystickManager import Joystick, Intent
+
 from ui.RotatedLabel import RotatedLabel
 from ui.TopicListButton import AppSelectableButton
 from ui.SearchBar import SearchBar
@@ -29,6 +30,8 @@ class TopicListScreen(Screen):
         self.cs=cs
         
         self.selection_index=0
+        
+        self.current_category=None
         
         main_layout = FloatLayout()
         
@@ -117,8 +120,14 @@ class TopicListScreen(Screen):
 
     def on_pre_enter(self):
         """Triggers button update with all topics in the chosen category"""
-        category = self.cs.get_for_angle(self.angle)
+        category = self.cs.get_for_angle(self.angle) #angle is obtained from the ExplorerApp once the wheel stopped moving
         self.title_label.text = category.title
+        
+        if(self.current_category == category):
+            print("same category")
+            return
+        
+        self.current_category=category
 
         topics = self.ts.list_by_category(category)
         
@@ -127,8 +136,8 @@ class TopicListScreen(Screen):
         # very hacky and not pretty but by god it works 
         (_,size_y)=self.rv.size
         if(len(self.rv.data)>round(size_y/60)):
-            Clock.schedule_once(lambda dt: self.animate_scroll_to(0.0, 0.2),0)
-            Clock.schedule_once(lambda dt: self.animate_scroll_to(1.0, 0.2),1)
+            Clock.schedule_once(lambda dt: setattr(self.rv, "scroll_y", 0),0)
+            Clock.schedule_once(lambda dt: self.animate_scroll_to(1.0, 0.5),0.2)
 
   
     def on_enter(self):
