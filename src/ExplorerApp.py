@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager, FallOutTransition, RiseInTrans
 
 from topics.TopicService import TopicService
 from categories.CategoryService import CategoryService
+from guests.GuestService import GuestService
 
 from database.database_manager import Manager
 
@@ -14,7 +15,7 @@ from screens.TopicListScreen import TopicListScreen
 from screens.TopicDetailScreen import TopicDetailScreen
 from screens.StartupScreen import StartupScreen
 from screens.WaitingScreen import WaitingScreen
-
+from screens.GuestBookScreen import GuestBookScreen
 
 from kivy.clock import Clock
 import threading
@@ -30,6 +31,7 @@ class ColapsExplorerApp(App):
         
         ts=TopicService(db)
         cs=CategoryService(db)
+        gs=GuestService(db)
         
         self.joystick = Joystick()
         if self.joystick:
@@ -41,11 +43,14 @@ class ColapsExplorerApp(App):
         waiting_screen= WaitingScreen(name="waiting")
         self.topic_list_screen = TopicListScreen(name='topic_list', ts=ts, cs=cs, js=self.joystick)
         detail_screen = TopicDetailScreen(name='topic_detail', js=self.joystick)
+        guest_book_screen=GuestBookScreen(name='guest',gs=gs)
+        
         
         self.sm.add_widget(startup_screen)
         self.sm.add_widget(waiting_screen)
         self.sm.add_widget(self.topic_list_screen)
         self.sm.add_widget(detail_screen)
+        self.sm.add_widget(guest_book_screen)
         
         #periodically check for movement
         Clock.schedule_interval(self.check_movement, 0.5)
