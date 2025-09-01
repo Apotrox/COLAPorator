@@ -84,6 +84,12 @@ class GuestBookScreen(Screen):
     def update_bg(self, instance, _):
         self.bg_rect.pos = instance.pos
         self.bg_rect.size = instance.size
+        
+    def on_pre_enter(self):
+        self.name_input.text=""
+        self.role_input.text=""
+        self.inst_input.text=""
+        self.pov_input.text=""
 
 
     def confirm(self, *_):
@@ -92,15 +98,14 @@ class GuestBookScreen(Screen):
         inst=self.inst_input.text
         pov=self.pov_input.text
         
-        if(not(name or role or inst or pov)):
-            #if everything is empty, do nothing
-            return
-        self.gs.add_entry(Guest(name,inst, role,pov))
+        if((name or role or inst or pov)):
+            self.gs.add_entry(Guest(name,inst, role,pov))
+
         
         popup=Popup(title="Thank You!",
                     content=Label(text="Thank You for your participation!", font_size="30sp"), size_hint=(None,None), size=(500,150), auto_dismiss=True)
         popup.bind(on_dismiss=self.dismiss)
-        Clock.schedule_once(popup.dismiss, 4)
+        Clock.schedule_once(popup.dismiss, 3)
         popup.open()
     
     def dismiss(self, *_):
