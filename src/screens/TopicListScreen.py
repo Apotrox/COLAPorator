@@ -9,9 +9,9 @@ from kivy.metrics import dp
 from typing import List
 
 
-from topics.TopicService import TopicService
-from categories.CategoryService import CategoryService
-from topics.Topic import Topic
+from services.TopicService import TopicService
+from services.CategoryService import CategoryService
+from data.Topic import Topic
 from hardware.JoystickManager import Joystick, Intent
 
 from ui.RotatedLabel import RotatedLabel

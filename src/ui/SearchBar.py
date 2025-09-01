@@ -1,5 +1,5 @@
 from kivy.uix.textinput import TextInput
-from topics.TopicService import TopicService
+from services.TopicService import TopicService
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 

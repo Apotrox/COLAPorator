@@ -2,9 +2,9 @@ from kivy.app import App
 
 from kivy.uix.screenmanager import ScreenManager, FallOutTransition, RiseInTransition
 
-from topics.TopicService import TopicService
-from categories.CategoryService import CategoryService
-from guests.GuestService import GuestService
+from services.TopicService import TopicService
+from services.CategoryService import CategoryService
+from services.GuestService import GuestService
 
 from database.database_manager import Manager
 

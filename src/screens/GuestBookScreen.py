@@ -10,8 +10,8 @@ from kivy.uix.screenmanager import FadeTransition
 
 
 from ui.HoverableButton import HoverableButton
-from guests.Guest import Guest
-from guests.GuestService import GuestService
+from data.Guest import Guest
+from services.GuestService import GuestService
 
 class GuestBookScreen(Screen):
     def __init__(self, gs:GuestService,**kw):

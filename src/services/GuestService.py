@@ -1,4 +1,4 @@
-from .Guest import Guest
+from data.Guest import Guest
 from database.database_manager import Manager
 from dataclasses import astuple
 from datetime import datetime

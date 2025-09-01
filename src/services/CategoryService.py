@@ -1,5 +1,5 @@
 from typing import List
-from .Category import Category
+from data.Category import Category
 from database.database_manager import Manager #just adding this for pylance purposes to make debugging a tiny bit easier
 
 class CategoryService:

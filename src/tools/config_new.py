@@ -14,8 +14,8 @@ from kivy.properties import NumericProperty
 import math, threading
 from hardware.tlv493d import TLV493D
 from database.database_manager import Manager
-from categories.CategoryService import CategoryService
-from categories.Category import Category
+from services.CategoryService import CategoryService
+from data.Category import Category
 
 class AngleDisplay(FloatLayout):
     def __init__(self, tlv, **kwargs):

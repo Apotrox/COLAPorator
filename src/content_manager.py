@@ -20,8 +20,8 @@ from kivy.uix.popup import Popup
 import time
 
 from database.database_manager import Manager
-from categories.CategoryService import CategoryService
-from topics.TopicService import TopicService
+from services.CategoryService import CategoryService
+from services.TopicService import TopicService
 
 from ui.SelectableButton import SelectableButton 
 from ui.LabeledCheckbox import LabeledCheckbox

@@ -1,7 +1,7 @@
 import sqlite3
 from typing import List
-from .Topic import Topic
-from categories.Category import Category
+from data.Topic import Topic
+from data.Category import Category
 from database.database_manager import Manager
 
 class TopicService:
