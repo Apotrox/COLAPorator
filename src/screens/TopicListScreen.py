@@ -187,6 +187,9 @@ class TopicListScreen(Screen):
                 case Intent.SELECT:
                     topic_id=self.rv.data[self.selection_index]['topic_id']
                     self.handle_choose(topic_id)
+                case Intent.RIGHT:
+                    self.manager.transition = SlideTransition(direction="left")
+                    self.manager.current="guest"              
                 case _:
                     return
 
