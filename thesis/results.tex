@@ -1,9 +1,84 @@
 \chapter{Results}
 \label{sec:results}
-\section{Eliciting Requirements}
-Here i would outline the interview we had when i compiled the list of questions.
+\section{Stakeholders and Requirements}
+To ensure that the interactive poster would address the actual needs of its intended audience, the first step in the implementation process was to identify the relevant stakeholders and elicit concrete requirements. This process provided the foundation for the design decisions described in the subsequent sections.
+
+\subsection{Identify stakeholders}
+%Present who the stakeholders are and why they matter. For example:
+%The professor and research group (owners/beneficiaries of the poster).
+%External researchers (intended users).
+%Possibly technical staff or students (who may need to maintain or update the system).
+%You don’t need to make this exhaustive, but it helps to show that you considered different perspectives.
+
+
+The stakeholders in this project were defined as all individuals or groups with a direct interest in the functionality, presentation, or long-term use of the poster. As such, the following groups were identified:
+\begin{itemize}
+	\item The head of the COLAPS research group, Irene-Angelica Chounta, who initiated the project and acted as the primary source of requirements regarding content and functionality.
+	\item The other members of the COLAPS research group, whose publications and research topics constitute the content of the poster and who have a stake in how their work is represented.
+	\item End-users such as external researchers or students, who are expected to interact with the poster and whose needs for clarity, usability, and engagement shaped the design choices.
+\end{itemize}
+
+\subsection{Elicitation Method}
+%Describe the elicitation method
+%Explain that you prepared guiding questions and conducted an interview with your professor to clarify the main goals and constraints of the system. Mention why this method was appropriate (the professor has the clearest vision of how the poster should represent the group and what message it should convey).
+
+To clarify the needs and constraints of the identified stakeholders, I prepared a set of guiding questions and conducted an interview with the supervising professor, who both initiated the project and represents its primary beneficiary. The questions were structured around themes such as physical constraints, intended goals and audience, content and structure, interaction design, accessibility, maintenance, and success criteria. At this stage, the interview was conducted exclusively with the supervising professor, as she holds the clearest vision of how the poster should represent the research group and how it should be used in practice.
+
+\subsection{Key Requirements}
+%Instead of dumping a raw list, structure them into categories:
+%Functional requirements (e.g., allow users to browse publications by research category, simple interaction).
+%Non-functional requirements (e.g., playful/engaging design, robustness, ease of maintenance).
+%Constraints (e.g., available budget, poster size, materials).
+
+From this elicitation process, a set of functional and non-functional requirements emerged, which served as the foundation for subsequent design and implementation decisions.\\
+
+The system shall...
+\subsubsection{Functional Requirements}
+\begin{itemize}
+	\item ... allow users to browse a wide range of content produced by the research group, including publications, seminars, lectures, projects, and thesis topics. 
+	\item ... provide a simple and straightforward interaction design. 
+	\item ... allow users to manually search for specific content. 
+	\item ... support the replacement and editing of data, even if such updates are expected to be infrequent. 
+	\item ... consider audio narration as an accessibility feature. 
+	\item ... support the scanning of QR codes and NFC tags (e.g., from business cards) for integration into a digital guestbook. 
+	\item ... allow the user to take a picture of themselves for the guestbook.
+\end{itemize}
+
+\subsubsection{Non-Functional Requirements}
+\begin{itemize}
+	\item ... be lightweight yet sturdy, ensuring portability by no more than two people. 
+	\item ... feature a playful and engaging design that encourages exploration and interaction. 
+\end{itemize}
+
+\subsubsection{Constraints}
+\begin{itemize}
+	\item ... have a maximum size between A1 and A0 format. 
+	\item ... be developed within a reasonable budget. 
+\end{itemize}
+
+
 \section{Initial Proof-of-Concept}
-Outlining the initial design process, the thoughts that went into certain choices as well as our meeting where i presented this to you. Would include the design document with explanations.
+%Outlining the initial design process, the thoughts that went into certain choices as well as our meeting where i presented this to you. Would include the design document with explanations.
+
+The initial proof-of-concept phase focused on transforming early design ideas into tangible prototypes, with particular emphasis on the ‘lucky wheel’ metaphor suggested during stakeholder discussions. This metaphor was selected as it provided a recognizable and intuitive interaction model, reducing the need for extensive instruction and encouraging playful engagement.
+
+To quickly visualize the idea and make it into something tangible, a rough paper sketch was made, illustrating the key design points: A spinning wheel to select categories, a screen to browse the content for each category, and a keyboard for user inputs. Additionally, Camera placement for the QR-Code and Guestbook image was also illustrated. \\
+
+Two alternative input devices were considered: an oversized trackball, intended to emphasize playfulness and accessibility, and a retro joystick, valued for its simplicity and iconic status. While the trackball offered unique interaction qualities, it would have required custom development. The joystick, by contrast, was commercially available, familiar to users, and limited in input complexity, making it the more practical choice. Ultimately, the Atari joystick was selected for its minimal design and robustness against both accidental and intentional misuse.\\
+
+Comparing those two ideas, the joystick was ultimately decided to be the better choice. Joysticks were an already established platform/hardware, that could readily be bought at a reasonable price, while the trackball solution would've required extensive development from myself, which would put extra strain on my ability to complete this project in time. They're well known, and it's intuitive nature makes the system more inviting.
+Specifically, the Atari joystick was chosen as the input device, due to it originally only having one button and the joystick, thereby minimizing both accidental and intentional misuse.\\ 
+\textbf{Provide image of sketch}
+
+A WebApp was created based on the paper sketch to serve as a mockup and simulation for the interaction, as a way to "experience" the idea rather than seeing it just as a flat sketch. The original sketch already considered to use LED signs, which were designed in this step with the help of OpenAI's ChatGPT image generation.\\
+\textbf{Provide image of webapp}
+
+The accompanying design document detailed each feature and design choice, while also proposing alternative implementation paths, such as material options for the wheel and housing. By sketching out the workflow of the system at this stage, potential oversights could be identified early, ensuring alignment between interaction concept and technical feasibility.\\
+\textbf{provide design document}
+
+The Web App was subsequently presented to the professor, who offered additional feedback and requirements. 
+In summary, the proof-of-concept validated the core interaction model of a spinning wheel controlled via joystick, confirmed its feasibility for playful yet robust user engagement, and highlighted specific areas (such as the guestbook feature) requiring refinement. This provided a clear foundation for subsequent CAD modeling and early prototyping.\\
+
 \section{CAD and Materials}
 Small section on the creation of the CAD model and material choices/tests
 \section{Early Prototyping}
@@ -56,7 +131,7 @@ There was also some special design choices i made that i'd like to outline (e.g.
 There's also one problem that i'd like to explain because it also led to an unusual but necessary choice in behavior.\\\\\\\\
 
 
-As you can tell, there might be things missing. Namely the Guestbook, NFC reader, LEDS, Feedback mechanism and Multimedia support.
+As you can tell, there might be things missing. Namely the NFC reader, LEDS, Feedback mechanism and Multimedia support.
 This is obviously dependent on whether or not there will be another (albeit short) phase of development, where i might be able to finish one of these features. Which is also dependent on how much of the exposé i can reuse, as rewriting this in it's entirety would take up all the time i have left for this thesis.
 
 I have written a paragraph about this in my documentation, which i would later include in the limitations section.
