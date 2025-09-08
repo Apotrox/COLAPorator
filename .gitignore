@@ -6,3 +6,7 @@ src/.vscode/settings.json
 src/test.db-journal
 src/tester.py
 src/activate.sh
+*.aux
+*.aux
+*.log
+*.out
