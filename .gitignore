@@ -10,3 +10,4 @@ src/activate.sh
 *.aux
 *.log
 *.out
+*.bcf
