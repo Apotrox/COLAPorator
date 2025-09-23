@@ -146,12 +146,16 @@ class TopicListScreen(Screen):
             
     def on_search(self, keyword: str):
         """Triggers button update with topics that match the keyword in the title"""
-        results=self.ts.search(keyword) #returns list of IDs
-        if(results):
-            topics = self.ts.get_many(results) #returns list of Topics
-            self.update_buttons(topics)
+        if(keyword):
+            results=self.ts.search(keyword) #returns list of IDs
+            if(results):
+                topics = self.ts.get_many(results) #returns list of Topics
+                self.update_buttons(topics)
+            else:
+                self.rv.data={}
         else:
-            self.rv.data={}
+            topics = self.ts.list_by_category(self.current_category)
+            self.update_buttons(topics)
         
         
     def update_buttons(self, topics: List[Topic]):
