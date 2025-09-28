@@ -364,7 +364,7 @@ class ContentManager(FloatLayout):
             self.add_widget(self.list_selector)
 
             #menu bar
-            menu_bar = MenuBar(size_hint=(1, None), pos_hint={'y':0.82}, ts=self.topic_service, cs=self.category_service, cm=self)
+            menu_bar = MenuBar(size_hint=(1, None), pos_hint={'top':0.97}, ts=self.topic_service, cs=self.category_service, cm=self)
             self.add_widget(menu_bar)
             
             #EditingBlock with input fields
