@@ -80,7 +80,18 @@ The Web App was subsequently presented to the professor, who offered additional 
 In summary, the proof-of-concept validated the core interaction model of a spinning wheel controlled via joystick, confirmed its feasibility for playful yet robust user engagement, and highlighted specific areas (such as the guestbook feature) requiring refinement. This provided a clear foundation for subsequent CAD modeling and early prototyping.\\
 
 \section{CAD and Materials}
-Small section on the creation of the CAD model and material choices/tests
+To assist in the planning of the project, a CAD model was developed. The objective of this phase was to ascertain the dimensions and proportions of the project, determine the necessary materials, simulate the placement and dimensions of the screen, and identify mounting issues in an early stage. 
+In this context, the CAD model did not function as an engineering blueprint with precise tolerances, but rather as a tool for planning and ensuring that the project aligns with stakeholder requirements.
+
+Although the design document and WebApp mockup had previously established the general proportions, it was necessary to relate these to physical dimensions and components. This ensured that users could interact with each element in a satisfactory manner.
+Determining the screen placement and size in the early stages of design facilitates the selection of an appropriate screen during the procurement of construction components. This principle also pertains to the project's proportions, as the screen must be appropriately sized to the poster, and vice versa. A screen too large would increase the weight and thus decrease stability of the poster, a screen too small would make user interaction more challenging.
+The necessity of material estimation is predicated on the objective of ensuring the project's adherence to the stipulated budgetary constraints. This estimation facilitates the generation of a bill of materials, a process that necessitates the measurement of the poster.
+
+
+\textbf{PLEASE REDO AND CONTINUE}
+
+
+
  
 \section{Early Prototyping}
 %Even before our meeting, when the design i wanted to go for was finalized, i made a small 3d printed prototype to test the sensor and get a hardware proof-of-concept (i actually based the CAD design of the large poster on this one). I'd rather put this here for consistency. It'll probably be a small section but there are actually some problems i faced that i would like to outline here (particularly magnet orientation with the sensor). I later also tried to continue using this prototype before i got the hardware but it proved impossible to use the small SPI screen with the frontend framework i chose simply because i couldn't get the display driver to load correctly and had to write image as bytes manually to the display buffer. Could be interesting to mention too.
@@ -98,15 +109,14 @@ Small section on the creation of the CAD model and material choices/tests
 	
 	\subsection{Electrical Integration}
 	The breakout board simplified wiring by providing pre-routed connections and mounting holes. This modularity allowed easy replacement if the sensor failed or the design was modified. Electrically, the TLV493D was connected to the Raspberry Pi via I²C, using pins 3 and 5 for communication and pins 1 (3.3 V) and 9 (ground) for power.
-	
+		
 	\subsection{Software Integration}
 	The initialization of the sensor was largely uncomplicated, primarily due to the presence of an usage example in the library documentation. However, the conversion of the sensor data to degrees and/or radians necessitated the calculation of the arc tangent for the y/x values from the sensor output, followed by the modulo operation with 360 to obtain values ranging from 0 to 360 instead of -180 to 180. The function responsible for reading and calculating the sensor data was delegated to a separate thread, enabling its execution in parallel with the application's other components. 
 	
 	During the testing phase of the implementation, it was noted that there was minimal change in the values reported by the sensor. These findings were independent of the proximity of the magnet to the sensor, as well as the velocity with which the magnet was rotated. A thorough investigation into the matter revealed that the magnet in question did not possess a magnetic field with the poles divided into two equal segments along the central axis (resulting in each pole representing half of the circular shape). Instead, the poles were positioned on the two opposing large faces of the magnet. Consequently, the magnetic field remained virtually unchanged, with only the pole rotating along its own axis on top of the sensor. Subsequent to orienting the magnet in a perpendicular position relative to the sensor, quantifiable values were obtained, and the calculations were confirmed to be operational.
-	
 	%Later analysis revealed that the sensor output was found to be quite noisy, thus necessitating the implementation of filtering and/or smoothing techniques to mitigate the impact of noise. The selection of a moving average algorithm was predicated on its simplicity in terms of implementation, its resilience to outliers, and its capacity to provide substantial smoothing. However, the selection and testing of the number of values utilized for the moving average required careful consideration, as an excessive number of values could introduce excess latency to the sensor output, while an insufficient number might not adequately reduce noise. Eventually, the moving average comprised eight values, thereby offering acceptable latency and adequate noise stability.
-	The sensor output, however, was noisy. To address this, a moving average filter was implemented. Eight samples per window were found to offer a good compromise between latency and stability, smoothing out spurious fluctuations while maintaining responsiveness.
 	
+	The sensor output, however, was noisy. To address this, a moving average filter was implemented. Eight samples per window were found to offer a good compromise between latency and stability, smoothing out spurious fluctuations while maintaining responsiveness.
 	\subsection{Display Integration and Limitations}
 	The incorporation of a display was imperative for the subsequent visualization of the magnets' position in this prototype. The selection of a generic 1.8-inch ST7735 SPI TFT display was made on the basis of its wide availability, diminutive size, and reasonably high resolution for its size. An external Python library had already been developed for this display, which was also one of the primary concerns with this prototype. The display was wired to the Raspberry Pi via standard SPI pins (MOSI, SCLK, CE0) and GPIO pins 24 and 25 for reset and data control.
 	The process of displaying images on the display interface was found to be somewhat challenging, though not overly intricate. The library documentation provided an ample array of examples for reference. However, it was not specified that the width and height values could not be interchanged to "simulate" a 90-degree rotation. In order to accomplish this, it is necessary to employ the rotation parameter.
@@ -120,8 +130,26 @@ Small section on the creation of the CAD model and material choices/tests
 
 
 \section{GUI Design and Creation}
-I made \textit{some} Layout drawings for the tools and the application. While those were based on nothing but what i thought would make sense and be usable, might be interesting to include them here while explaining why i did what i did.
-Also would include a short paragraph on the frontend framework choice as this one wasn't as straightforward.
+%I made \textit{some} Layout drawings for the tools and the application. While those were based on nothing but what i thought would make sense and be usable, might be interesting to include them here while explaining why i did what i did.
+%Also would include a short paragraph on the frontend framework choice as this one wasn't as straightforward.
+
+The graphical user interface (GUI) was a central component of the interactive poster, as it served as the medium through which users engaged with the system's content. Its design had to balance ease of use and conciseness while remaining technically feasible within the constraints of the Raspberry Pi environment. \textbf{Why?}
+
+\subsection{Graphical User Interface Design}
+The graphical user interface (GUI) constitutes the primary point of interaction between users and the interactive poster. Its design therefore emphasized clarity and immediacy, ensuring that the available topics could be understood and navigated with minimal instruction. To achieve this, a scrollable list view was implemented, presenting topics in the form of buttons. Selecting a button directs the user to a detail screen, which provides the title and description of the chosen topic as well as a navigation element for returning to the list view. This layout was selected for its simplicity, intuitive use, and suitability for both touch and joystick-based navigation.
+In addition, lateral navigation with the joystick grants access to a guestbook screen. This interface allows visitors to enter personal information into input fields, if desired, and submit the entry through a dedicated button. Upon saving an entry (whether completed or left blank), the application is visually reset, thereby preparing the system for a subsequent user session.
+
+In contrast to the end-user interface, the content management interface was designed exclusively for administrators. The main priorities in this case were efficiency and clarity of interaction. The interface consolidates management tasks into a single window, enabling the creation, modification, and removal of topics and categories. Navigation between categories and topics is facilitated by toggle buttons, whose background color changes to indicate the current selection. A scrollable list displays all entries of the selected type, and selecting an entry loads its data into the main body of the application. Here, administrators are provided with input fields to modify text content. For topics, the interface additionally displays the associated categories in a scrollable list of checkboxes, allowing their assignment to be edited with minimal effort.
+
+The configuration tool, also intended solely for administrative use, was implemented with a more utilitarian interface, as it is only required during the initial setup of the category slices. Upon startup, administrators are prompted to choose between automatic and manual configuration through a pair of buttons. Both modes share a nearly identical layout: the right side of the screen displays a compass, derived from the initial prototype, providing real-time sensor feedback, while the left side presents instructions accompanied either by an input field (in the automatic configuration mode) or by a recording button (in the manual mode). Following the instructions initiates the creation of configuration entries, which are subsequently listed in a table beneath the main interface. This table enables administrators to review and verify all recorded or generated inputs before finalizing the configuration process.
+
+
+\subsection{Framework Selection}
+During the early stages of development, the user interface was implemented through manually rendered primitives. However, this approach proved unsustainable, and a dedicated framework was required to ensure maintainability, extensibility, and development efficiency. The selection process was guided by several criteria: acceptable performance on a single-board computer such as the Raspberry Pi, straightforward integration with external sensors and human–machine interfaces, maturity and stability of the framework, and ease of development.
+
+Several Python-based frameworks were considered. Web-based solutions such as Flask combined with Dash, or Django, were deemed unsuitable due to the overhead introduced by server deployment and the limited benefit for a stand-alone application. Streamlit was excluded on the basis of insufficient performance on the Raspberry Pi as well as inadequate support for external input devices. PyQt5 and PyQt6 offered promising functionality and relatively low resource demands, but practical difficulties during installation and deployment rendered them infeasible in the given context. Ultimately, Kivy was selected as the most appropriate solution. It combined ease of use with a declarative structure familiar from PyQt, provided efficient execution on the target hardware, and natively supported integration with a variety of input devices, including joysticks.
+
+
 
 \section{Logic Implementation}
 Here i'd put \textbf{everthing} i did before refactoring the codebase. This includes everything from the documentation until half of 12.8., like:

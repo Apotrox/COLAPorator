@@ -1,10 +1,16 @@
 \documentclass[11pt, a4paper, oneside]{book}
-\usepackage[utf8]{inputenc}
-\usepackage[backend=biber, style=apa]{biblatex}
+\usepackage[backend=biber, style=ieee]{biblatex}
 
 \addbibresource{references.bib} %Imports bibliography file
 
-\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+
+
+
+\usepackage[T1]{fontenc} % Remove for thesis final
+\usepackage{lmodern} % Remove for thesis final
+\usepackage[protrusion=true,expansion=true]{microtype}  % Remove for thesis final
+
 
 \usepackage[english]{babel}
 %Includes "References" in the table of contents
@@ -28,28 +34,29 @@
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \usepackage{booktabs}
-\usepackage{float}
 
 
 %\linespread{0.4}
 
-\def\whatIsIt{Bachelor Thesis Application}
-\def\title{Implementation of an interactive poster using Raspberry Pi and traditional crafting materials}
+\def\whatIsIt{Bachelor Thesis}
+\def\title{Title Here}
 \def\fakultaet{Faculty of Computer Science}
 
-\def\author{Klaus-Robin Hempel}
+\def\author{Author Name}
 %\def\addrLineEins{Thesis Time Period}
-\def\addrLineZwei{Angewandte Informatik}
-\def\matrikelNr{3107853}
+\def\addrLineZwei{Study Program}
+\def\matrikelNr{1234567890}
 
 \def\location{Duisburg}
-\def\date{January, 2025}
+\def\date{Month, Year}
 
 \def\betreuer{Prof. Dr. Irene-Angelica Chounta}
-\def\ersterGutachter{}
+\def\ersterGutachter{Prof. Dr. Name}
 \def\dept{Department for Human-centered Computing and Cognitive Science (HCCS)} 
 \def\researchgroup{Computational Methods in Modeling and Analysis of Learning Processes} 
 %\def\semester{Insert Semester and Academic Year}
+
+
 
 \begin{document}
 	
@@ -59,8 +66,11 @@
 	
 	\cleardoublepage
 	\pagestyle{empty}
+	\include{erklaerung}
+	\pagestyle{empty}
 	
 	\thispagestyle{plain}
+	%\input{abstract}
 	
 	\tableofcontents
 	
@@ -75,6 +85,20 @@
 	\include{Methodology}
 	\include{Results}
 	\include{Conclusion}
+	
+	%Figures, tables and references
+	\cleardoublepage
+	\listoffigures
+	\listoftables
+	
+	%\bibliographystyle{acm}
+	%   \bibliography{references}
 	\printbibliography      
+	%appendices    
+	
+	\cleardoublepage
+	\pagenumbering{roman}
+	\appendix
+	\include{appendix}
 	
 \end{document}

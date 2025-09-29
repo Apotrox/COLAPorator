@@ -11,3 +11,5 @@ src/activate.sh
 *.log
 *.out
 *.bcf
+*.lof
+*.lot
