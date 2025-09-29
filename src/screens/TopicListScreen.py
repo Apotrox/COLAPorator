@@ -78,6 +78,9 @@ class TopicListScreen(Screen):
             callback=self.on_search
         )
         
+        self.no_res_label=Label(text="No results", font_size=dp(20), color=(0,0,0,1), size_hint=(0.6, 0.2), pos_hint={'center_x':0.5, 'top':0.8})
+        
+        
         finish_layout=FloatLayout(pos_hint={"center_x":0.96, "center_y":0.5}, size_hint=(0.2,0.8))
         
         arrow=dict(text=("\u27A7"), font_size="40sp", color=(0.5,0.5,0.5,1), font_name="./DejaVuSans.ttf")
@@ -98,6 +101,8 @@ class TopicListScreen(Screen):
         main_layout.add_widget(self.rv)
         
         main_layout.add_widget(searchbar)
+        main_layout.add_widget(self.no_res_label)
+        self.show_no_results(False)
         
         self.add_widget(main_layout)
         
@@ -153,7 +158,9 @@ class TopicListScreen(Screen):
                 self.update_buttons(topics)
             else:
                 self.rv.data={}
+                self.show_no_results(True)
         else:
+            self.show_no_results(False)
             topics = self.ts.list_by_category(self.current_category)
             self.update_buttons(topics)
         
@@ -166,7 +173,14 @@ class TopicListScreen(Screen):
                 'topic_id': t.id,
                 'on_choose': self.handle_choose
             } for t in topics]
-        
+    
+    def show_no_results(self, show:bool):
+        if (not show): #no reason just switched it around at first and am too lazy to change it
+            self.no_res_label.color=(0,0,0,0)
+            self.no_res_label.size_hint=(0,0) #setting size to 0 just to be sure it cant be interacted with
+        else:
+            self.no_res_label.color=(0,0,0,1)
+            self.no_res_label.size_hint=(0.6,0.2)
 
     #---Joystick input handling
     
