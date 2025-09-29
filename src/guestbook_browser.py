@@ -73,29 +73,19 @@ class TextBlock(GridLayout):
 
         self.bind(pos=self.update_bg, size=self.update_bg)
         
-        guest = {"Name:": "",
-                 "Institution:": "",
-                 "Role:": "",
-                 "Purpose of Visit:": "",
-                 "Date:": ""}
-        for key in guest.keys():
-            # Left label (key) - right aligned
-            left_label = Label(text=key, font_size="20sp", color=(0,0,0,1), halign='right', valign='middle')
-            left_label.bind(size=lambda label, size: setattr(label, 'text_size', size))
-            self.add_widget(left_label)
-            
-            # Right label (value) - left aligned
-            right_label = Label(text=guest.get(key), font_size="20sp", color=(0,0,0,1), halign='left', valign='middle')
-            right_label.bind(size=lambda label, size: setattr(label, 'text_size', size))
-            self.add_widget(right_label)
+        self.load_item_content(-1)
                  
         
     def load_item_content(self, item_id):
         """Loads content for given item_id and type"""
         self.clear_widgets()
-                                                   
-        guest = self.guest_service.get_for_id(item_id)
         
+        if(item_id>=0):                                           
+            guest = self.guest_service.get_for_id(item_id)
+        else:
+            guest = ("","","","","","") #just for init
+            
+            
         _,name,inst,role,pov,date = guest
         
         guest = {"Name:": name,
