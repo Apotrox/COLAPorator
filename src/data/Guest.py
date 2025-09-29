@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date
 
 @dataclass
 class Guest:
@@ -8,9 +9,10 @@ class Guest:
     institution:str
     role: str
     purpose_of_visit:str
+    date: date|None
     
     def __iter__(self):
-        return iter((self.id, self.name, self.institution, self.role, self.purpose_of_visit))
+        return iter((self.id, self.name, self.institution, self.role, self.purpose_of_visit, self.date))
     
     # def __init__(self, name:str, institution:str, role: str, purpose_of_visit:str):
     #     self.name = name

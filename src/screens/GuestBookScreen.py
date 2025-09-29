@@ -108,7 +108,7 @@ class GuestBookScreen(Screen):
         pov=self.pov_input.text
         
         if((name or role or inst or pov)):
-            self.gs.add_entry(Guest(None,name,inst, role,pov))
+            self.gs.add_entry(Guest(None,name,inst, role,pov,None))
 
         
         popup=Popup(title="Thank You!",
