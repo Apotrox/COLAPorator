@@ -34,7 +34,7 @@ class ColapsExplorerApp(App):
         gs=GuestService(db)
         
         self.joystick = Joystick()
-        if self.joystick:
+        if self.joystick.device:
             self.joystick.start() 
         
         

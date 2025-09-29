@@ -17,6 +17,7 @@ class Joystick:
             self.device = InputDevice('/dev/input/by-id/usb-Retro_Games_LTD_THECXSTICK-event-joystick')
         except Exception as e:
             print (e)
+            self.device = None
             return None #just escape if binding fails
         
         self._stop_event=threading.Event()
