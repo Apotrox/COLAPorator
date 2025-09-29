@@ -8,6 +8,7 @@ from kivy.uix.popup import Popup
 from kivy.clock import Clock
 from kivy.uix.screenmanager import FadeTransition, SlideTransition
 from kivy.uix.slider import Slider
+from kivy.metrics import dp, sp
 
 from ui.HoverableButton import HoverableButton
 from data.Guest import Guest
@@ -43,11 +44,13 @@ class GuestBookScreen(Screen):
                                   value=0, 
                                   orientation="horizontal", 
                                   value_track=True, 
-                                  value_track_color=(1,0,0,1), 
+                                  value_track_color=(1,0,0,1),
+                                  step=1, 
                                   size_hint=(0.6,1))
         
         name=Label(text="Name:", color=(0,0,0,1), font_size="30sp", halign="left")
-        name.bind(size=lambda l, _: setattr(l, 'text_size', (l.width, None))) #for some reason i have to set the text size like this to have the labels align themselves properly
+        name.bind(size=lambda l, _: setattr(l, 'text_size', (l.width, None))) 
+        #for some reason i have to set the text size like this to have the labels align themselves properly
         
         inst= Label(text="Institution:", color=(0,0,0,1), font_size="30sp", halign="left")
         inst.bind(size=lambda l, _: setattr(l, 'text_size', (l.width, None)))
@@ -69,7 +72,7 @@ class GuestBookScreen(Screen):
         form_layout.add_widget(self.role_input)
         
         form_layout.add_widget(pov)
-        form_layout.add_widget(self.pov_input)
+        form_layout.add_widget(self.rating_slider)
         
         main_layout.add_widget(form_layout)
         
@@ -77,7 +80,7 @@ class GuestBookScreen(Screen):
                             Your responses will be stored in a secure database and may be reviewed and processed by the COLAPS group for analysis purposes.\
                             By entering your data, you consent to the storage and processing of your responses in accordance with these terms.",
                             color=(0,0,0,1),
-                            font_size="14sp",
+                            font_size=sp(15),
                             pos_hint={"right":1.35,"top": 1.2})
         
         disclaimer.bind(size=lambda l, _: setattr(l, 'text_size', (l.width*0.2, None)))        
@@ -104,17 +107,17 @@ class GuestBookScreen(Screen):
         self.name_input.text=""
         self.role_input.text=""
         self.inst_input.text=""
-        self.pov_input.text=""
+        self.rating_slider.value=0
 
 
     def confirm(self, *_):
         name=self.name_input.text
         role=self.role_input.text
         inst=self.inst_input.text
-        pov=self.pov_input.text
+        rating=self.rating_slider.value
         
-        if((name or role or inst or pov)):
-            self.gs.add_entry(Guest(None,name,inst, role,pov,None))
+        if((name or role or inst or rating)):
+            self.gs.add_entry(Guest(None,name,inst, role,rating,None))
 
         
         popup=Popup(title="Thank You!",
