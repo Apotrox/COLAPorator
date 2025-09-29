@@ -34,7 +34,7 @@ class Manager:
                             "name": "TEXT",
                             "institution": "TEXT",
                             "role" : "TEXT",
-                            "purpose_of_visit":"TEXT",
+                            "rating":"INTEGER",
                             "date":"TEXT"},
                 "topicAssignment" : {   "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
                                         "topic_id": "INTEGER NOT NULL",

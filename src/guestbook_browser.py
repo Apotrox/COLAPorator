@@ -2,17 +2,11 @@ from kivy.app import App
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.metrics import dp
-from kivy.uix.button import Button
 from kivy.core.window import Window
-from kivy.graphics import Color, Rectangle, Line
-from kivy.properties import StringProperty, NumericProperty
-from kivy.uix.floatlayout import FloatLayout
+from kivy.graphics import Color, Rectangle
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from kivy.uix.popup import Popup
-
-import time
 
 from database.database_manager import Manager
 from services.GuestService import GuestService
@@ -86,12 +80,12 @@ class TextBlock(GridLayout):
             guest = ("","","","","","") #just for init
             
             
-        _,name,inst,role,pov,date = guest
+        _,name,inst,role,rate,date = guest
         
         guest = {"Name:": name,
                  "Institution:": inst,
                  "Role:": role,
-                 "Purpose of Visit:": pov,
+                 "Rating:": rate + "%s"%("/5" if rate else""), 
                  "Date:": date}
         
         for key in guest.keys():

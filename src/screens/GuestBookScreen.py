@@ -7,7 +7,7 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.popup import Popup
 from kivy.clock import Clock
 from kivy.uix.screenmanager import FadeTransition, SlideTransition
-
+from kivy.uix.slider import Slider
 
 from ui.HoverableButton import HoverableButton
 from data.Guest import Guest
@@ -38,7 +38,13 @@ class GuestBookScreen(Screen):
         self.name_input=TextInput(hint_text="Name", font_size="20sp", size_hint=(0.6,1))
         self.inst_input=TextInput(hint_text="Institution", font_size="20sp", size_hint=(0.6,1))
         self.role_input=TextInput(hint_text="Role", font_size="20sp", size_hint=(0.6,1))
-        self.pov_input=TextInput(hint_text="Purpose of Visit", font_size="20sp", size_hint=(0.6,1))
+        self.rating_slider=Slider(min=0, 
+                                  max=5, 
+                                  value=0, 
+                                  orientation="horizontal", 
+                                  value_track=True, 
+                                  value_track_color=(1,0,0,1), 
+                                  size_hint=(0.6,1))
         
         name=Label(text="Name:", color=(0,0,0,1), font_size="30sp", halign="left")
         name.bind(size=lambda l, _: setattr(l, 'text_size', (l.width, None))) #for some reason i have to set the text size like this to have the labels align themselves properly
@@ -49,7 +55,7 @@ class GuestBookScreen(Screen):
         role= Label(text="Role:", color=(0,0,0,1), font_size="30sp", halign="left")
         role.bind(size=lambda l, _: setattr(l, 'text_size', (l.width, None)))
         
-        pov=Label(text="Purpose of visit:", color=(0,0,0,1), font_size="30sp", halign="left")
+        pov=Label(text="Rating:", color=(0,0,0,1), font_size="30sp", halign="left")
         pov.bind(size=lambda l, _: setattr(l, 'text_size', (l.width, None)))
 
         
