@@ -114,7 +114,7 @@ class TopicListScreen(Screen):
     def handle_choose(self, topic_id):
         topic = self.ts.get(topic_id)
         detail_screen = self.manager.get_screen('topic_detail')
-        detail_screen.display_topic(topic.description)
+        detail_screen.display_topic(topic.description, topic.source)
         detail_screen.db_id=topic_id # to lay the groundwork for tracking/usage history
         self.manager.transition = SlideTransition(direction="right")
         self.manager.current = 'topic_detail'

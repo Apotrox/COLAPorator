@@ -18,7 +18,7 @@ class TopicService:
         if isinstance(category_id, Category):
             category_id = category_id.id
         
-        query = self.db.execute("SELECT topics.id, topics.title, topics.description from topics \
+        query = self.db.execute("SELECT topics.id, topics.title, topics.description, topics.source from topics \
                                 INNER JOIN topicAssignment as TA on topics.id = ta.topic_id \
                                 WHERE ta.category_id=?", (category_id,)).fetchall()
         return sorted([Topic(id, title, desc, source) for (id, title, desc, source) in query], key = lambda x: x.id)
