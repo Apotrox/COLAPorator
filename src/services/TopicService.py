@@ -11,7 +11,7 @@ class TopicService:
     def list_all(self) -> List[Topic]:
         """Returns list of all topics sorted ASC by ID"""
         query = self.db.execute("SELECT * from topics").fetchall()
-        return sorted([Topic(id, title, desc) for (id, title, desc) in query], key = lambda x: x.id)
+        return sorted([Topic(id, title, desc, source) for (id, title, desc, source) in query], key = lambda x: x.id)
     
     def list_by_category(self, category_id: int | Category) -> List[Topic]:
         """Returns list of all Topics of a specific category sorted ASC by ID"""
@@ -21,13 +21,13 @@ class TopicService:
         query = self.db.execute("SELECT topics.id, topics.title, topics.description from topics \
                                 INNER JOIN topicAssignment as TA on topics.id = ta.topic_id \
                                 WHERE ta.category_id=?", (category_id,)).fetchall()
-        return sorted([Topic(id, title, desc) for (id, title, desc) in query], key = lambda x: x.id)
+        return sorted([Topic(id, title, desc, source) for (id, title, desc, source) in query], key = lambda x: x.id)
 
     def get(self, topic_id: int) -> Topic | None:
         """Returns single topic based on integer ID provided"""
         query = self.db.execute("SELECT * from topics WHERE id=?", (topic_id,)).fetchone()
-        id, title, desc = query
-        return Topic(id, title,desc)
+        id, title, desc, source = query
+        return Topic(id, title,desc, source)
     
     def get_many(self, topic_ids: List[int]) -> List[Topic] | None:
         """Returns list of topics based on IDs provided"""
@@ -35,25 +35,21 @@ class TopicService:
         #sqlite library does not provide a way to query with lists, so i have to join enough placeholders together for each entry in the list
         
         query = self.db.execute(sql, topic_ids).fetchall()
-        return [Topic(id,title,desc) for (id, title, desc) in query]
+        return [Topic(id,title,desc, source) for (id, title, desc, source) in query]
             
     def update(self, id: Topic | int, new_title: str | None = None, new_desc: str|None = None, new_source: str|None = None):
-        """Updates Values for topics. If values are NoneType / have been left empty, the old value is used"""
+        """Updates Values for topics. If values are NoneType / have been left empty, the old value is used. EXCEPT WITH THE SOURCE LINK THIS WILL REMAIN EMPTY"""
         if isinstance(id, Topic):
             if not new_title:
                 new_title=id.title
             if not new_desc:
                 new_desc=id.description
-            if not new_source:
-                new_source=id.source
             id=id.id
             
         if not new_title:
             new_title = self.get(id).title
         if not new_desc:
-            new_desc = self.get(id).description
-        if not new_source:
-            new_source = self.get(id).source    
+            new_desc = self.get(id).description  
             
         # makes it a lot simpler than having to construct custom queries for each case 
         self.db.execute("UPDATE topics SET title=?, description=?, source=? WHERE id=?", (new_title, new_desc,new_source, id))
