@@ -8,10 +8,15 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior):
     db_id = NumericProperty(0) #give the button an id to store the DB id's in
 
     def __init__(self, **kwargs):
+        has_size_hint_x = ('size_hint_x' in kwargs) or ('size_hint' in kwargs)
+        has_pos_hint     = 'pos_hint' in kwargs
+
         super().__init__(**kwargs)
-        
-        self.size_hint_x = 0.95
-        self.pos_hint = {"center_x": 0.5}
+
+        if not has_size_hint_x:
+            self.size_hint_x = 0.95
+        if not has_pos_hint:
+            self.pos_hint = {"center_x": 0.5}
 
     def refresh_view_attrs(self, rv, index, data):
         super().refresh_view_attrs(rv, index, data)
@@ -19,7 +24,7 @@ class SelectableButton(HoverableButton, FocusBehavior, RecycleDataViewBehavior):
         
     
     def __str__(self):
-        return f"({self.db_id}: {super().__str__()})"
+        return f"(Button {self.db_id}: {super().__str__()})"
     
     def __repr__(self):
-        return f"({self.db_id}: {super().__repr__()})\n"
+        return f"(Button: {self.db_id}: {super().__repr__()})\n"
