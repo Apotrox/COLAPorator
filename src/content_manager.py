@@ -276,11 +276,14 @@ class EditingBlock(FloatLayout):
         self.category_service=cs
         
         #input for title box
-        self.title_input = TextInput(text="",font_size="20sp", size_hint=(1, 0.08), pos_hint={'x': 0, 'y': 0.92})
+        self.title_input = TextInput(text="", hint_text="Topic title", font_size="20sp", size_hint=(0.98, 0.08), pos_hint={'x': 0, 'y': 0.92})
         self.add_widget(self.title_input)
         
-        self.desc_input = TextInput(text="", font_size="20sp", size_hint=(0.7, 0.7), pos_hint={'x':0, 'y': 0.2})
+        self.desc_input = TextInput(text="", hint_text="Description for the topic", font_size="20sp", size_hint=(0.98, 0.6), pos_hint={'x':0, 'y': 0.3})
         self.add_widget(self.desc_input)
+        
+        self.link_input= TextInput(text="", hint_text="Source URL for QR code goes here", font_size="20sp", size_hint=(0.98, 0.08), pos_hint={'x':0, 'y': 0.2})
+        self.add_widget(self.link_input)
         
         #category list was too large, required a scrollview
         scroll_view = ScrollView(
