@@ -16,9 +16,16 @@ class StartupScreen(Screen):
         self.js=js
         
         self.startup_label = Label(
-            text='Spin the wheel to start',
-            font_size=26,
-            color=(0.2, 0.2, 0.2, 1)
+            text='Spin the wheel to start or press the Select button',
+            font_size="26sp",
+            color=(0.2, 0.2, 0.2, 1),
+            pos_hint={"center_x":0.5, "center_y":0.5}
+        )
+        hint_label = Label(
+            text="Hint: You can spin the wheel at any point to reselect the category!",
+            font_size="22sp",
+            color=(0.3,0.3,0.3,1),
+            pos_hint={"center_x":0.5, "center_y":0.3}
         )
         
         with self.canvas.before:
@@ -28,7 +35,7 @@ class StartupScreen(Screen):
         self.bind(pos=self.update_bg, size=self.update_bg)
         
         self.add_widget(self.startup_label)
-        
+        self.add_widget(hint_label)        
         
         if self.js:
             Clock.schedule_interval(self.check_joystick_events, 0.1)
