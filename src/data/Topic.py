@@ -5,6 +5,7 @@ class Topic:
     id:int 
     title: str
     description: str
+    source: str
     # def __init__(self, id:int , title: str, description: str):
     #     self.id = id
     #     self.title = title

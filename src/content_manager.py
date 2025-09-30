@@ -282,8 +282,8 @@ class EditingBlock(FloatLayout):
         self.desc_input = TextInput(text="", hint_text="Description for the topic", font_size="20sp", size_hint=(0.98, 0.6), pos_hint={'x':0, 'y': 0.3})
         self.add_widget(self.desc_input)
         
-        self.link_input= TextInput(text="", hint_text="Source URL for QR code goes here", font_size="20sp", size_hint=(0.98, 0.08), pos_hint={'x':0, 'y': 0.2})
-        self.add_widget(self.link_input)
+        self.source_input= TextInput(text="", hint_text="Source URL for QR code goes here", font_size="20sp", size_hint=(0.98, 0.08), pos_hint={'x':0, 'y': 0.2})
+        self.add_widget(self.source_input)
         
         #category list was too large, required a scrollview
         scroll_view = ScrollView(
@@ -314,12 +314,13 @@ class EditingBlock(FloatLayout):
         """Handles basic data processing for the services to save to DB"""
         title = self.title_input.text
         desc = self.desc_input.text
+        source = self.source_input.text
         category_selection=[checkbox.category_id for checkbox in self.category_box.children if checkbox.checked]
         
         if self.content_type=="categories":
             self.category_service.rename(self.db_id, title)
         elif self.content_type=="topics":
-            self.topic_service.update(self.db_id, title, desc)
+            self.topic_service.update(self.db_id, title, desc, source)
             self.topic_service.set_assignment(self.db_id, category_selection)
         
     

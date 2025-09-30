@@ -37,22 +37,26 @@ class TopicService:
         query = self.db.execute(sql, topic_ids).fetchall()
         return [Topic(id,title,desc) for (id, title, desc) in query]
             
-    def update(self, id: Topic | int, new_title: str | None = None, new_desc: str|None = None):
+    def update(self, id: Topic | int, new_title: str | None = None, new_desc: str|None = None, new_source: str|None = None):
         """Updates Values for topics. If values are NoneType / have been left empty, the old value is used"""
         if isinstance(id, Topic):
             if not new_title:
                 new_title=id.title
             if not new_desc:
                 new_desc=id.description
+            if not new_source:
+                new_source=id.source
             id=id.id
             
         if not new_title:
             new_title = self.get(id).title
-        
         if not new_desc:
             new_desc = self.get(id).description
+        if not new_source:
+            new_source = self.get(id).source    
+            
         # makes it a lot simpler than having to construct custom queries for each case 
-        self.db.execute("UPDATE topics SET title=?, description=? WHERE id=?", (new_title, new_desc, id))
+        self.db.execute("UPDATE topics SET title=?, description=?, source=? WHERE id=?", (new_title, new_desc,new_source, id))
         self.db.commit_changes()
 
     def get_assignments(self, topic_id: int) -> List[int]:
@@ -69,7 +73,7 @@ class TopicService:
     def add_topic(self):
         nt_amount = self.db.execute("SELECT id from topics where title LIKE 'New Topic'").fetchall()
         topic_name = f"New Topic {len(nt_amount) +1}"
-        self.db.execute("INSERT INTO topics (title, description) VALUES (?, 'Placeholder Description')", (topic_name,))
+        self.db.execute("INSERT INTO topics (title, description,source) VALUES (?, 'Placeholder Description', '')", (topic_name,))
         self.db.commit_changes()
     
     def remove_topic(self, topic_id: int | Topic):

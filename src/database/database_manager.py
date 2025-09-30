@@ -24,7 +24,8 @@ class Manager:
             tables = {
                 "topics": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
                             "title" : "TEXT UNIQUE",
-                            "description": "TEXT"
+                            "description": "TEXT",
+                            "source":"TEXT"
                             },
                 "categories": { "id": "INTEGER PRIMARY KEY AUTOINCREMENT", #slices
                             "title": "TEXT UNIQUE",
