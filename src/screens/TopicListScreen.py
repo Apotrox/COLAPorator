@@ -56,7 +56,7 @@ class TopicListScreen(Screen):
             bar_width=10,
             scroll_type=['bars', 'content'],
             pos_hint={'center_x': 0.5, 'top':0.8},
-            size_hint=(0.85,0.75)
+            size_hint=(0.85,0.7)
         )
         
         recycle_layout = RecycleBoxLayout(
@@ -81,16 +81,13 @@ class TopicListScreen(Screen):
         self.no_res_label=Label(text="No results", font_size=dp(20), color=(0,0,0,1), size_hint=(0.6, 0.2), pos_hint={'center_x':0.5, 'top':0.8})
         
         
-        finish_layout=FloatLayout(pos_hint={"center_x":0.96, "center_y":0.5}, size_hint=(0.2,0.8))
         
         arrow=dict(text=("\u27A7"), font_size="40sp", color=(0.5,0.5,0.5,1), font_name="./DejaVuSans.ttf")
         
-        finish_layout.add_widget(Label(**arrow, pos_hint={"right":1, "center_y":1}))
-        finish_layout.add_widget(Label(**arrow,pos_hint={"right":1, "center_y":0.0}))
+        main_layout.add_widget(Label(**arrow, pos_hint={"center_x":0.8, "center_y":0.05}))
+        main_layout.add_widget(Label(**arrow,pos_hint={"center_x":0.2, "center_y":0.05}))
         
-        finish_layout.add_widget(RotatedLabel(text="Move to the side to finish!", angle=90, font_size="20sp", pos_hint={"right":1, "center_y":0.5}))
-        
-        main_layout.add_widget(finish_layout)
+        main_layout.add_widget(Label(text="Move to the right to finish!", font_size="20sp", pos_hint={"center_x":0.5, "center_y":0.05}, color=(0.5,0.5,0.5,1)))
         
         
         self.rv.add_widget(recycle_layout)
@@ -211,7 +208,7 @@ class TopicListScreen(Screen):
                 case Intent.RIGHT:
                     Clock.unschedule(self.check_joystick_events)
                     self.manager.transition = SlideTransition(direction="left")
-                    self.manager.current="guest"             
+                    self.manager.current="finish"             
                 case _:
                     return
 
