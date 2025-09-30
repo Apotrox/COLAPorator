@@ -339,6 +339,7 @@ class EditingBlock(FloatLayout):
             topic = self.topic_service.get(item_id)
             self.title_input.text=topic.title
             self.desc_input.text=topic.description
+            self.source_input.text=topic.source
             
             for category in categories:
                 self.category_box.add_widget(LabeledCheckbox(text=category.title, category_id=category.id, checked=category.id in topic_in_category))
