@@ -23,6 +23,9 @@ import threading
 
 class ColapsExplorerApp(App):
     def build(self):
+        #to prevent loading libraries for the first time when entering topicdetailscreen 
+        self._warm_up_imaging()
+        
         # binding one global instance of the sensor to then give to the other screens that need it
         self.tlv = TLV493D()
         threading.Thread(target=self.tlv.start_reading, daemon=True).start()
@@ -88,6 +91,28 @@ class ColapsExplorerApp(App):
     def on_stop(self):
         self.tlv.stop_reading()
         self.joystick.stop()
+        
+    def _warm_up_imaging(self):
+        """Used to preload pillow plugins on application startup"""
+        # Preload Pillow core + common bits used by qrcode/png
+        from PIL import Image, ImageFont, ImageDraw, ImageOps  # pulls in a bunch of deps
+        import PIL.PngImagePlugin  # ensure PNG plugin is imported
+        import qrcode.image.pil    # ensure qrcode's PIL backend is registered
+        from io import BytesIO
+
+        Image.init()               # load Pillow’s plugin registry
+
+        # Touch the font loader once (often lazy):
+        try:
+            ImageFont.load_default()
+        except Exception:
+            pass
+
+        # Do a tiny in-memory PNG save to trigger encoder init
+        img = Image.new("RGBA", (1, 1), (0, 0, 0, 0))
+        buf = BytesIO()
+        img.save(buf, format="PNG")
+        buf.seek(0)
         
 
 

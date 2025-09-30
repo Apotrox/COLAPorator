@@ -43,7 +43,7 @@ class TopicDetailScreen(Screen):
         # Content label
         self.content_label = Label(
             text='Test',
-            font_size=18,
+            font_size="18sp",
             color=(0.1, 0.1, 0.1, 1),
             size_hint_y=0.7,
             text_size=(Window.width -60, None),
@@ -52,12 +52,9 @@ class TopicDetailScreen(Screen):
         )
         
         #making the qr code image transparent to have it not visible if no qr code is available
-        # Create the texture first with RGBA format (includes alpha channel)
-        self.default_texture = Texture.create(size=(100, 100), colorfmt='rgba')
-
-        # Fill with transparent pixels (RGBA: 0, 0, 0, 0)
+        self.default_texture = Texture.create(size=(10, 10), colorfmt='rgba')
         # Create a buffer of transparent pixels
-        transparent_pixels = b'\x00\x00\x00\x00' * (100 * 100)
+        transparent_pixels = b'\x00\x00\x00\x00' * (10 * 10)
         self.default_texture.blit_buffer(transparent_pixels, colorfmt='rgba', bufferfmt='ubyte')
         
         self.image=kiImage(size_hint=(0.3,0.3), pos_hint={"center_x":0.5}, texture=self.default_texture)
