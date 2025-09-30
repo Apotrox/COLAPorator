@@ -16,6 +16,7 @@ from screens.TopicDetailScreen import TopicDetailScreen
 from screens.StartupScreen import StartupScreen
 from screens.WaitingScreen import WaitingScreen
 from screens.GuestBookScreen import GuestBookScreen
+from screens.finish_screen import FinishScreen
 
 from kivy.clock import Clock
 import threading
@@ -44,12 +45,14 @@ class ColapsExplorerApp(App):
         self.topic_list_screen = TopicListScreen(name='topic_list', ts=ts, cs=cs, js=self.joystick)
         detail_screen = TopicDetailScreen(name='topic_detail', js=self.joystick)
         guest_book_screen=GuestBookScreen(name='guest',gs=gs, js=self.joystick)
+        finish_screen=FinishScreen(name="finish", js=self.joystick)
         
         
         self.sm.add_widget(startup_screen)
         self.sm.add_widget(waiting_screen)
         self.sm.add_widget(self.topic_list_screen)
         self.sm.add_widget(detail_screen)
+        self.sm.add_widget(finish_screen)
         self.sm.add_widget(guest_book_screen)
         
         #periodically check for movement
